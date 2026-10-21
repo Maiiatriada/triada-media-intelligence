@@ -119,6 +119,28 @@ class CollectorTests(unittest.TestCase):
         self.assertEqual(count, 0)
         self.assertFalse(confirmed)
 
+    def test_bing_rss_rejects_unrelated_article(self):
+        import xml.etree.ElementTree as ET
+        xml = ET.fromstring("<item><title>Drone technology</title><link>https://example.org/drone</link></item>")
+        with patch("collector.fetch_bing_rss", return_value=[xml]), patch(
+            "collector.fetch_alert_feeds", return_value=iter(())
+        ), patch("collector.read_publisher", return_value=("Other unrelated drones", "https://example.org/drone")):
+            confirmed = {}
+            count = collector.collect_web_rss(confirmed, {})
+        self.assertEqual(count, 0)
+        self.assertEqual(confirmed, {})
+
+    def test_bing_rss_accepts_verified_company_article(self):
+        import xml.etree.ElementTree as ET
+        xml = ET.fromstring("<item><title>Drone technology</title><link>https://example.org/drone</link></item>")
+        with patch("collector.fetch_bing_rss", return_value=[xml]), patch(
+            "collector.fetch_alert_feeds", return_value=iter(())
+        ), patch("collector.read_publisher", return_value=("Triada Robotics developed a drone", "https://example.org/drone")):
+            confirmed = {}
+            count = collector.collect_web_rss(confirmed, {})
+        self.assertEqual(count, 1)
+        self.assertEqual(next(iter(confirmed.values()))["categories"], ["Company"])
+
     def test_blocked_article_not_confirmed(self):
         with patch("collector.urllib.request.urlopen", side_effect=OSError("blocked")):
             self.assertEqual(collector.read_article("https://example.org"), ("", ""))
