@@ -8,12 +8,6 @@ on:
     paths:
       - 'collector.py'
       - '.github/workflows/main.yml'
-  push:
-    branches: [main]
-    paths:
-      - collector.py
-      - .github/workflows/main.yml
-
   schedule:
     - cron: '0 7 * * *'
 
