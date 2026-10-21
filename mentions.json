@@ -35,18 +35,6 @@
     "verification_method": "title"
   },
   {
-    "id": "fe2613eab09e6ec2d8fa24f9c54a3e0634a14a00dcf54798c48583a1d22b17bf",
-    "title": "Artem Veselov, Triada Robotics: “The market is moving away from expensive legacy systems” - Militär Aktuell",
-    "source": "Militär Aktuell",
-    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNnRRMlBBZ1JhNV9kZlBsMGxBaFVJQUpjTlptaE9MNDl1emYxMXZQZV9QN1lpaXdnTThkT1BxSjdlRGtQdFVSZVNGbGo1dUlBdlRKY242YVZUak1fTG45cDUtSk5HLXNZSFdUVFJBVjVFNHQtUHpqWDZxa0U5bDJkNzYxTFM1Z3RyVE1Dak9uMjd1b1dKWlF2cml6QnB5TXN4Uk90ekkyRHV4MXVEQndiYVpsdzNOaEk?oc=5",
-    "published_at": "2026-09-28T07:00:00+00:00",
-    "categories": [
-      "Company",
-      "CEO"
-    ],
-    "status": "relevant"
-  },
-  {
     "id": "d8cb9e298459a3256c23c877abd0ba1d1efa60ec26e9fd8f757ac8f3b752e2a7",
     "title": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia? - Militär Aktuell",
     "source": "Militär Aktuell",
@@ -81,18 +69,6 @@
     ],
     "matched_text": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia? - Militär Aktuell",
     "verification_method": "title"
-  },
-  {
-    "id": "40eda0489c4647eee63f6841ee8223d619afc7c89350faa6f80e939e64761049",
-    "title": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia? - Militär Aktuell",
-    "source": "Militär Aktuell",
-    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ZWkNvbDVZODkzTDNQVnMtRmV0ZGltX3hDTTlDaDVpTHY5bVBMeXJZelVCelQ2elEtUGt2REJXLWsxb3JXODk3WmlHSHYyNElnZ1RvTzBFRVgtWGdUN0RmUm5nSWZ4ODB1TG1SZnBkSUZ5MXFfd2VIYnZKMFBkXzQ?oc=5",
-    "published_at": "2026-08-05T07:00:00+00:00",
-    "categories": [
-      "Company",
-      "Products"
-    ],
-    "status": "relevant"
   },
   {
     "id": "be574ea01e39ae5227b297eb4b760f54c0ffe020cee9fdecf217a0f03318e008",
@@ -223,27 +199,5 @@
     "products": [],
     "matched_text": "Українська Triada Robotics розробляє діпстрайк на 2000 км. Яка стратегія розвитку компанії? - Defender Media",
     "verification_method": "title"
-  },
-  {
-    "id": "ce0cde8468e9d5c5dadb8bf88173746856de766d4f01a66287fce64739bb4928",
-    "title": "Ukraine’s Triada Robotics is developing a deep strike drone with a 2,000 km range. What is the company’s strategy? - Defender Media",
-    "source": "Defender Media",
-    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB1aVIySWJIbmh2RFZqa0R2bVZiZ255M0JWV2ZjQ0J5Nm4xQXBSSTVIY0xOejZOdWFmZEhuLUZQVkM4MjlXZGwtSUVrUnlWOU0yMVR2SmpzMG5VUWNVVnV2czV4Y0ZtX1VZVWhr?oc=5",
-    "published_at": "2026-06-23T07:00:00+00:00",
-    "categories": [
-      "Company"
-    ],
-    "status": "relevant"
-  },
-  {
-    "id": "7b5ed01c6655da4486072cf03a0fa9a3afd9d94ce68aa135b2768dff44480bb3",
-    "title": "Українська Triada Robotics розробляє діпстрайк на 2000 км. Яка стратегія розвитку компанії? - Defender Media",
-    "source": "Defender Media",
-    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE50enk2TWlfVWxVQ3M2MGJpU1NLT1Zqem9ZR1YtMmNLQmJaTmJoRWZUMUh6a1FvcXNKQUNib2lVZFJZcVc1VW15ZHdSWmFtbVdSa3B4QXNDUndwVDMweXZaVjdYaW5ub3pjbFlr?oc=5",
-    "published_at": "2026-06-23T07:00:00+00:00",
-    "categories": [
-      "Company"
-    ],
-    "status": "relevant"
   }
 ]
