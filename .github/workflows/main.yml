@@ -36,7 +36,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Google News publisher URL decoder
-        run: python -m pip install googlenewsdecoder==0.1.7
+        run: python -m pip install googlenewsdecoder
 
       - name: Run media monitoring
         env:
