@@ -2,6 +2,11 @@ name: TRIADA Media Monitoring
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - collector.py
+      - .github/workflows/main.yml
 
   schedule:
     - cron: '0 7 * * *'
