@@ -342,6 +342,75 @@ def match_publisher_feed(confirmed, pending, entries):
     return added
 
 
+
+def fetch_gdelt(query):
+    """GDELT DOC API: independent discovery with publisher URLs."""
+    params = urllib.parse.urlencode({
+        "query": query + " sourcelang:english",
+        "mode": "artlist",
+        "maxrecords": 100,
+        "format": "json",
+        "startdatetime": "20260601000000",
+        "sort": "datedesc",
+    })
+    request = urllib.request.Request(
+        "https://api.gdeltproject.org/api/v2/doc/doc?" + params,
+        headers={"User-Agent": "TRIADA-Media-Monitor/1.0"}
+    )
+    with urllib.request.urlopen(request, timeout=20) as response:
+        data = json.load(response)
+    return data.get("articles", [])
+
+
+def collect_gdelt(confirmed, pending):
+    """Publish only articles verified in the title or publisher body."""
+    added = 0
+    for query in ('"Triada Robotics"', '"Artem Veselov"', '"TriadaRobotics"'):
+        try:
+            articles = fetch_gdelt(query)
+        except Exception as error:
+            print(f"GDELT UNAVAILABLE {query}: {error}", flush=True)
+            continue
+        for article in articles:
+            title = html.unescape(article.get("title") or "").strip()
+            url = article.get("url") or ""
+            source = article.get("domain") or "GDELT"
+            date = article.get("seendate") or ""
+            if not (title and url and date):
+                continue
+            key = article_id(title, source)
+            if key in confirmed:
+                continue
+            # A GDELT query match alone is not evidence of a mention.
+            title_match = classify(title)
+            body, direct_url = read_article(url)
+            body_match = classify(body) if body else None
+            match = body_match or title_match
+            if not match:
+                continue
+            # GDELT dates are UTC YYYYMMDDTHHMMSSZ.
+            try:
+                published = __import__("datetime").datetime.strptime(
+                    date[:15], "%Y%m%dT%H%M%S"
+                ).replace(tzinfo=timezone.utc).isoformat()
+            except ValueError:
+                continue
+            if published[:10] < START_DATE:
+                continue
+            record = {
+                "id": key, "title": title, "source": source,
+                "url": direct_url or url, "direct_url": direct_url or url,
+                "published_at": published, "keyword": query,
+                "status": "relevant",
+                "verification_method": "gdelt_article_body" if body_match else "gdelt_title",
+            }
+            record.update(match)
+            confirmed[key] = record
+            pending.pop(key, None)
+            added += 1
+    return added
+
+
 def load(path):
     if not path.exists():
         return []
@@ -492,7 +561,7 @@ def main():
             time.sleep(1)
 
     if errors == len(QUERIES) * len(REGIONS):
-        raise RuntimeError("All discovery searches failed; databases unchanged")
+        print("Google News unavailable; continuing with publisher feeds and GDELT", flush=True)
 
     publisher_added = 0
     for source, feed in PUBLISHER_FEEDS:
@@ -501,6 +570,9 @@ def main():
             publisher_added += match_publisher_feed(confirmed, pending, entries)
         except Exception as error:
             print(f"FEED UNAVAILABLE {source}: {error}", flush=True)
+
+    gdelt_added = collect_gdelt(confirmed, pending)
+    print(f'Confirmed via GDELT: {gdelt_added}', flush=True)
 
     save(DATABASE, confirmed)
     save(REVIEW, pending)
