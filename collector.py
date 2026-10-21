@@ -1,3 +1,4 @@
+"""TRIADA media collector. Python 3.11+, standard library only."""
 import hashlib
 import json
 import re
@@ -5,545 +6,197 @@ import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
-
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
-
-# ==========================================
-# TRIADA MEDIA INTELLIGENCE
-# Automated Media Monitoring Collector
-# ==========================================
-
-START_DATE = "2026-06-01"
-DATABASE = Path("mentions.json")
-
-REQUEST_TIMEOUT = 15
-REQUEST_DELAY = 1
-
-
-# ==========================================
-# SEARCH QUERIES
-# ==========================================
-
-# Broad queries capture company and CEO mentions.
-# Product queries include context to reduce false positives.
-
-SEARCH_QUERIES = [
-
-    # COMPANY
-    '"Triada Robotics"',
-    '"TriadaRobotics"',
-    '"Тріада Роботікс"',
-    '"Триада Роботикс"',
-    '"Тріада Роботикс"',
-    '"Триада Роботікс"',
-
-    # COMPANY + PRODUCT
-    '"Triada Robotics" "BRAVO"',
-    '"Triada" "BRAVO" drone',
-    '"Triada" "BRAVO" UAV',
-    '"Тріада" "Браво" дрон',
-    '"Тріада" "Браво" БПЛА',
-    '"Триада" "Браво" беспилотник',
-
-    # PRODUCT
-    '"BRAVO" "deep strike" drone',
-    '"BRAVO" "deep strike" UAV',
-    '"BRAVO" "long-range drone" Ukraine',
-    '"BRAVO" "strike drone" Ukraine',
-    '"BRAVO" "UAV" "Triada"',
-
-    # CEO
-    '"Artem Veselov"',
-    '"Artem Veselow"',
-    '"Артем Веселов"',
-
-    # CEO + COMPANY
-    '"Artem Veselov" "Triada"',
-    '"Artem Veselow" "Triada"',
-    '"Артем Веселов" "Тріада"',
-
-    # CEO + PRODUCT
-    '"Artem Veselov" "BRAVO"',
-    '"Artem Veselow" "BRAVO"',
-    '"Артем Веселов" "Браво"',
+DATABASE = Path('mentions.json')
+START_DATE = '2026-06-01'
+QUERIES = [
+    '"Triada Robotics"', '"TriadaRobotics"', '"Тріада Роботікс"',
+    '"Триада Роботикс"', '"Тріада Роботикс"', '"Триада Роботікс"',
+    '"Triada Robotics" "BRAVO"', '"Triada" "BRAVO" drone',
+    '"Triada" "BRAVO" UAV', '"Тріада" "Браво" дрон',
+    '"Тріада" "Браво" БПЛА', '"Триада" "Браво" беспилотник',
+    '"BRAVO" "deep strike" drone', '"BRAVO" "deep strike" UAV',
+    '"BRAVO" "long-range drone" Ukraine', '"BRAVO" "strike drone" Ukraine',
+    '"BRAVO" "UAV" "Triada"', '"Artem Veselov"',
+    '"Artem Veselow"', '"Артем Веселов"',
+    '"Artem Veselov" "Triada"', '"Artem Veselow" "Triada"',
+    '"Артем Веселов" "Тріада"', '"Artem Veselov" "BRAVO"',
+    '"Artem Veselow" "BRAVO"', '"Артем Веселов" "Браво"',
 ]
+REGIONS = [('en', 'US', 'US:en'), ('uk', 'UA', 'UA:uk')]
 
 
-# ==========================================
-# GOOGLE NEWS REGIONS
-# ==========================================
-
-REGIONS = [
-    ("en", "US", "US:en"),
-    ("uk", "UA", "UA:uk"),
-]
+def norm(value):
+    return ' '.join(re.findall(r'\w+', str(value or '').casefold()))
 
 
-# ==========================================
-# NORMALIZATION
-# ==========================================
-
-def normalize_text(value):
-    value = value.casefold()
-    value = re.sub(r"[^\w\s]", " ", value)
-    value = re.sub(r"\s+", " ", value)
-    return value.strip()
+def article_id(record):
+    # Stable across old Google News GUID IDs and newer SHA256 IDs.
+    key = norm(record.get('title')) + '|' + norm(record.get('source'))
+    return hashlib.sha256(key.encode('utf-8')).hexdigest()
 
 
-def make_article_id(title, source):
-    key = (
-        normalize_text(title)
-        + "|"
-        + normalize_text(source)
-    )
-
-    return hashlib.sha256(
-        key.encode("utf-8")
-    ).hexdigest()
-
-
-# ==========================================
-# RELEVANCE CHECK
-# ==========================================
-
-def classify_mention(title):
-
-    text = normalize_text(title)
-
-    company_terms = [
-        "triada robotics",
-        "triadarobotics",
-        "тріада роботікс",
-        "тріада роботикс",
-        "триада роботикс",
-        "триада роботікс",
-    ]
-
-    ceo_terms = [
-        "artem veselov",
-        "artem veselow",
-        "артем веселов",
-    ]
-
-    product_terms = [
-        "bravo",
-        "браво",
-    ]
-
-    triada_terms = [
-        "triada",
-        "тріада",
-        "триада",
-    ]
-
-    drone_terms = [
-        "drone",
-        "uav",
-        "deep strike",
-        "long range",
-        "long range drone",
-        "безпілот",
-        "бпла",
-        "дрон",
-        "беспилот",
-    ]
-
-    company = any(
-        term in text for term in company_terms
-    )
-
-    ceo = any(
-        term in text for term in ceo_terms
-    )
-
-    product = any(
-        term in text for term in product_terms
-    )
-
-    triada = any(
-        term in text for term in triada_terms
-    )
-
-    drone_context = any(
-        term in text for term in drone_terms
-    )
-
+def classify(title):
+    t = norm(title)
+    company = any(x in t for x in (
+        'triada robotics', 'triadarobotics', 'тріада роботікс',
+        'тріада роботикс', 'триада роботикс', 'триада роботікс'))
+    ceo = any(x in t for x in ('artem veselov', 'artem veselow', 'артем веселов'))
+    bravo = bool(re.search(r'\b(bravo|браво)\b', t))
+    drone = any(x in t for x in (
+        'drone', 'uav', 'дрон', 'бпла', 'безпілот', 'беспилот',
+        'strike', 'удар', 'реактивн', 'дальност', 'дальніст'))
+    triada = any(x in t for x in ('triada', 'тріада', 'триада'))
     if company and ceo:
-        return "Both"
-
+        return 'relevant', 'Both'
     if company:
-        return "Triada Robotics"
-
+        return 'relevant', 'Triada Robotics'
     if ceo:
-        return "Artem Veselow"
+        return 'relevant', 'Artem Veselov'
+    if bravo and (triada or drone):
+        return 'review', 'BRAVO'  # BRAVO can name unrelated drones.
+    # Only unmistakably off-topic titles are rejected automatically.
+    unrelated = ('футбол', 'сборной испании', 'олимпиад', 'теннис',
+                 'football match', 'soccer', 'basketball', 'голу сборной')
+    if any(word in t for word in unrelated) and not (bravo or company or ceo):
+        return 'irrelevant', None
+    return 'review', None  # Google may match article body, not its title.
 
-    if product and triada:
-        return "BRAVO"
 
-    if product and drone_context:
-        return "BRAVO"
-
-    return None
+def unique(values):
+    return list(dict.fromkeys(v for v in values if v))
 
 
-# ==========================================
-# DATABASE
-# ==========================================
+def merge(old, new):
+    """Preserve metadata from both records, including old IDs and URLs."""
+    for field, list_field in [('id', 'legacy_ids'), ('url', 'urls'),
+                              ('keyword', 'keywords')]:
+        values = []
+        for item in (old, new):
+            values += item.get(list_field, [])
+            if item.get(field):
+                values.append(item[field])
+        old[list_field] = unique(values)
+    for key, value in new.items():
+        if key not in old or old[key] in (None, ''):
+            old[key] = value
+    old['first_seen_at'] = min(filter(None, [old.get('first_seen_at'),
+                                             new.get('first_seen_at')]), default='')
+    return old
 
-def load_database():
 
+def prepare(record):
+    record = dict(record)
+    record['id'] = article_id(record)
+    status, subject = classify(record.get('title', ''))
+    # Do not overwrite manual review decisions.
+    if record.get('status') not in ('approved', 'rejected'):
+        record['status'] = status
+    if subject:
+        record['subject'] = subject
+    record.setdefault('source_type', 'Online Media')
+    return record
+
+
+def load():
     if not DATABASE.exists():
-        print("No existing database found.")
-        return {}
-
-    with DATABASE.open(
-        "r",
-        encoding="utf-8"
-    ) as file:
-
-        records = json.load(file)
-
-    if not isinstance(records, list):
-        raise ValueError(
-            "mentions.json must contain a list"
-        )
-
-    mentions = {}
-
-    for record in records:
-
-        if not isinstance(record, dict):
-            continue
-
-        record_id = record.get("id")
-
-        if record_id:
-            mentions[record_id] = record
-
-    print(
-        f"Loaded {len(mentions)} existing mentions.",
-        flush=True
-    )
-
-    return mentions
+        return {}, 0
+    raw = json.loads(DATABASE.read_text(encoding='utf-8'))
+    if not isinstance(raw, list):
+        raise ValueError('mentions.json must be a JSON list')
+    result = {}
+    for item in raw:
+        if not isinstance(item, dict) or not item.get('title'):
+            raise ValueError('Invalid record in mentions.json; database left unchanged')
+        fixed = prepare(item)
+        # Preserve original ID before replacing it with stable one.
+        fixed['legacy_ids'] = unique(item.get('legacy_ids', []) + [item.get('id')])
+        key = fixed['id']
+        if key in result:
+            result[key] = merge(result[key], fixed)
+        else:
+            result[key] = fixed
+    return result, len(raw)
 
 
-def save_database(mentions):
-
-    records = sorted(
-        mentions.values(),
-        key=lambda x: x.get("published_at", ""),
-        reverse=True
-    )
-
-    temporary_file = Path("mentions.json.tmp")
-
-    with temporary_file.open(
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            records,
-            file,
-            ensure_ascii=False,
-            indent=2
-        )
-
-    temporary_file.replace(DATABASE)
-
-    print(
-        f"\nDatabase saved: {len(records)} mentions",
-        flush=True
-    )
-
-
-# ==========================================
-# GOOGLE NEWS SEARCH
-# ==========================================
-
-def fetch_articles(
-    query,
-    language,
-    country,
-    edition
-):
-
-    search_query = (
-        f"{query} after:2026-05-31"
-    )
-
+def fetch(query, region):
+    lang, country, edition = region
     params = urllib.parse.urlencode({
-        "q": search_query,
-        "hl": language,
-        "gl": country,
-        "ceid": edition,
-    })
-
-    url = (
-        "https://news.google.com/rss/search?"
-        + params
-    )
-
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0"
-        }
-    )
-
-    with urllib.request.urlopen(
-        request,
-        timeout=REQUEST_TIMEOUT
-    ) as response:
-
-        xml_data = response.read()
-
-    root = ET.fromstring(xml_data)
-
-    return root.findall("./channel/item")
+        'q': f'{query} after:2026-05-31', 'hl': lang,
+        'gl': country, 'ceid': edition})
+    req = urllib.request.Request('https://news.google.com/rss/search?' + params,
+                                 headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req, timeout=15) as response:
+        return ET.fromstring(response.read()).findall('./channel/item')
 
 
-# ==========================================
-# PARSE ARTICLES
-# ==========================================
-
-def parse_article(item, query):
-
-    title = item.findtext(
-        "title", ""
-    ).strip()
-
-    url = item.findtext(
-        "link", ""
-    ).strip()
-
-    published = item.findtext(
-        "pubDate", ""
-    ).strip()
-
-    source_element = item.find("source")
-
-    source = (
-        source_element.text.strip()
-        if source_element is not None
-        and source_element.text
-        else "Unknown"
-    )
-
-    if not title or not url or not published:
+def parse(item, query):
+    title = (item.findtext('title') or '').strip()
+    url = (item.findtext('link') or '').strip()
+    date_text = (item.findtext('pubDate') or '').strip()
+    if not (title and url and date_text):
         return None
-
     try:
-        publication_date = (
-            parsedate_to_datetime(published)
-            .astimezone(timezone.utc)
-        )
-
-    except (ValueError, TypeError):
+        published = parsedate_to_datetime(date_text).astimezone(timezone.utc)
+    except (ValueError, TypeError, OverflowError):
         return None
-
-    if (
-        publication_date.date().isoformat()
-        < START_DATE
-    ):
+    if published.date().isoformat() < START_DATE:
         return None
-
-    subject = classify_mention(title)
-
-    if subject is None:
-        return None
-
-    article_id = make_article_id(
-        title,
-        source
-    )
-
-    return {
-        "id": article_id,
-        "title": title,
-        "source": source,
-        "source_type": "Online Media",
-        "subject": subject,
-        "published_at": (
-            publication_date.isoformat()
-        ),
-        "url": url,
-        "keyword": query,
-        "first_seen_at": (
-            datetime.now(timezone.utc)
-            .isoformat()
-        ),
-        "status": "pending",
-    }
+    source = item.find('source')
+    source_name = (source.text or '').strip() if source is not None else 'Unknown'
+    record = {'title': title, 'source': source_name, 'url': url,
+              'published_at': published.isoformat(), 'keyword': query,
+              'first_seen_at': datetime.now(timezone.utc).isoformat()}
+    return prepare(record)
 
 
-# ==========================================
-# DISPLAY RESULTS
-# ==========================================
+def save(records):
+    ordered = sorted(records.values(),
+                     key=lambda r: r.get('published_at', ''), reverse=True)
+    tmp = DATABASE.with_suffix('.json.tmp')
+    tmp.write_text(json.dumps(ordered, ensure_ascii=False, indent=2) + '\n',
+                   encoding='utf-8')
+    tmp.replace(DATABASE)
 
-def display_mention(record):
-
-    print("\n" + "=" * 65)
-
-    print("NEW MEDIA MENTION")
-
-    print("=" * 65)
-
-    print(
-        f"Title: {record['title']}"
-    )
-
-    print(
-        f"Source: {record['source']}"
-    )
-
-    print(
-        f"Date: {record['published_at'][:10]}"
-    )
-
-    print(
-        f"Subject: {record['subject']}"
-    )
-
-    print(
-        f"Link: {record['url']}"
-    )
-
-    print("=" * 65, flush=True)
-
-
-# ==========================================
-# MAIN
-# ==========================================
 
 def main():
-
-    print("\nTRIADA MEDIA INTELLIGENCE")
-    print("=========================")
-
-    print(
-        f"Historical search from: {START_DATE}"
-    )
-
-    print(
-        f"Search queries: {len(SEARCH_QUERIES)}"
-    )
-
-    print(
-        f"Regions: {len(REGIONS)}"
-    )
-
-    mentions = load_database()
-
-    previous_count = len(mentions)
-
-    successful = 0
-    failed = 0
-    new_mentions = 0
-
+    records, before = load()
+    print(f'Loaded {before} records; unique after deduplication: {len(records)}', flush=True)
+    success = failed = added = 0
     try:
-
-        for query in SEARCH_QUERIES:
-
-            for language, country, edition in REGIONS:
-
-                print(
-                    f"\nSearching: {query} | {edition}",
-                    flush=True
-                )
-
+        for query in QUERIES:
+            for region in REGIONS:
                 try:
-
-                    articles = fetch_articles(
-                        query,
-                        language,
-                        country,
-                        edition
-                    )
-
-                    successful += 1
-
-                    print(
-                        f"Returned: {len(articles)}",
-                        flush=True
-                    )
-
-                    for item in articles:
-
-                        record = parse_article(
-                            item,
-                            query
-                        )
-
-                        if record is None:
+                    for item in fetch(query, region):
+                        entry = parse(item, query)
+                        if not entry:
                             continue
-
-                        if record["id"] in mentions:
-                            continue
-
-                        mentions[
-                            record["id"]
-                        ] = record
-
-                        new_mentions += 1
-
-                        display_mention(record)
-
-                except Exception as error:
-
+                        key = entry['id']
+                        if key in records:
+                            # Retain all matching search queries and URLs.
+                            records[key] = merge(records[key], entry)
+                        else:
+                            records[key] = entry
+                            added += 1
+                            print(f'NEW [{entry["status"]}]: {entry["title"]}', flush=True)
+                    success += 1
+                except Exception as exc:
                     failed += 1
-
-                    print(
-                        f"Search error: {error}",
-                        flush=True
-                    )
-
-                time.sleep(REQUEST_DELAY)
-
+                    print(f'ERROR {query} {region[2]}: {exc}', flush=True)
+                time.sleep(1)
     finally:
-
-        if successful > 0:
-            save_database(mentions)
-
-    print("\n================================")
-    print("TRIADA MEDIA MONITORING REPORT")
-    print("================================")
-
-    print(
-        f"Successful searches: {successful}"
-    )
-
-    print(
-        f"Failed searches: {failed}"
-    )
-
-    print(
-        f"Previously saved: {previous_count}"
-    )
-
-    print(
-        f"New mentions: {new_mentions}"
-    )
-
-    print(
-        f"Total mentions: {len(mentions)}"
-    )
-
-    print(
-        f"Database: {DATABASE}"
-    )
-
-    print("================================")
-
-    if successful == 0:
-        raise RuntimeError(
-            "All Google News requests failed."
-        )
+        # Existing records are safely migrated even if all RSS requests fail.
+        save(records)
+    counts = {status: sum(r.get('status') == status for r in records.values())
+              for status in ('relevant', 'review', 'irrelevant', 'approved', 'rejected')}
+    print(f'Searches: {success} successful, {failed} failed. '
+          f'New: {added}. Total: {len(records)}. Statuses: {counts}', flush=True)
+    if success == 0:
+        raise RuntimeError('All Google News requests failed')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
