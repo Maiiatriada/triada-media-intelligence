@@ -37,6 +37,19 @@ QUERIES = [
     '"KILO" "Triada Robotics"',
 ]
 
+# Publisher feeds supply direct article links that Google News RSS does not.
+# Inaccessible feeds are skipped without interrupting other discovery.
+PUBLISHER_FEEDS = [
+    ("Мілітарний", "https://militarnyi.com/uk/feed/"),
+    ("Militarnyi", "https://militarnyi.com/en/feed/"),
+    ("Defender Media", "https://thedefender.media/feed/"),
+    ("dev.ua", "https://dev.ua/rss"),
+    ("ITC.ua", "https://itc.ua/feed/"),
+    ("Euromaidan Press", "https://euromaidanpress.com/feed/"),
+    ("РБК-Україна", "https://www.rbc.ua/ukr/rss"),
+    ("UNITED24 Media", "https://united24media.com/rss"),
+]
+
 REGIONS = [
     ("en", "US", "US:en"),
     ("uk", "UA", "UA:uk"),
@@ -231,6 +244,54 @@ def fetch(query, region):
         return ET.fromstring(response.read()).findall("./channel/item")
 
 
+def fetch_publisher_feed(name, url):
+    """Return dated, direct-link feed entries without third-party libraries."""
+    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(request, timeout=12) as response:
+        root = ET.fromstring(response.read(2_000_000))
+    entries = []
+    for item in root.findall("./channel/item"):
+        title = (item.findtext("title") or "").strip()
+        link = (item.findtext("link") or "").strip()
+        date = item.findtext("pubDate")
+        if title and link and date:
+            try:
+                published = parsedate_to_datetime(date).astimezone(timezone.utc).isoformat()
+            except (ValueError, TypeError):
+                continue
+            if published[:10] >= START_DATE:
+                entries.append((title, link, published, name))
+    return entries
+
+
+def match_publisher_feed(confirmed, pending, entries):
+    """Verify direct article text, and upgrade matching Google News records."""
+    added = 0
+    existing = {article_id(x["title"], x["source"]): x
+                for x in list(confirmed.values()) + list(pending.values())}
+    for title, link, published, source in entries:
+        key = article_id(title, source)
+        record = existing.get(key)
+        if key in confirmed:
+            if not (urllib.parse.urlparse(confirmed[key].get("url", "")).hostname or "").endswith("news.google.com"):
+                continue
+        text, direct = read_article(link)
+        match = classify(title) or (classify(text) if text else None)
+        if not match:
+            continue
+        if record is None:
+            record = {"id": key, "title": title, "source": source,
+                      "published_at": published, "keyword": "publisher RSS"}
+        record.update(match)
+        record.update({"status": "relevant", "url": direct or link,
+                       "direct_url": direct or link,
+                       "verification_method": "publisher_feed"})
+        confirmed[key] = record
+        pending.pop(key, None)
+        added += 1
+    return added
+
+
 def load(path):
     if not path.exists():
         return []
@@ -383,10 +444,19 @@ def main():
     if errors == len(QUERIES) * len(REGIONS):
         raise RuntimeError("All discovery searches failed; databases unchanged")
 
+    publisher_added = 0
+    for source, feed in PUBLISHER_FEEDS:
+        try:
+            entries = fetch_publisher_feed(source, feed)
+            publisher_added += match_publisher_feed(confirmed, pending, entries)
+        except Exception as error:
+            print(f"FEED UNAVAILABLE {source}: {error}", flush=True)
+
     save(DATABASE, confirmed)
     save(REVIEW, pending)
 
-    print(f"New confirmed: {added}")
+    print(f"New confirmed from Google News: {added}")
+    print(f"Confirmed via publisher feeds: {publisher_added}")
     print(f"Total confirmed: {len(confirmed)}")
     print(f"Pending verification: {len(pending)}")
     print(f"Search errors: {errors}")
