@@ -346,7 +346,7 @@ def match_publisher_feed(confirmed, pending, entries):
 def fetch_gdelt(query):
     """GDELT DOC API: independent discovery with publisher URLs."""
     params = urllib.parse.urlencode({
-        "query": query + " sourcelang:english",
+        "query": query,
         "mode": "artlist",
         "maxrecords": 100,
         "format": "json",
