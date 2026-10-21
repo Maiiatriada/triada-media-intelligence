@@ -245,38 +245,82 @@ def fetch(query, region):
 
 
 def fetch_publisher_feed(name, url):
-    """Return dated, direct-link feed entries without third-party libraries."""
+    """Read RSS/Atom, including publisher-authored article content."""
     request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(request, timeout=12) as response:
         root = ET.fromstring(response.read(2_000_000))
+
     entries = []
-    for item in root.findall("./channel/item"):
-        title = (item.findtext("title") or "").strip()
-        link = (item.findtext("link") or "").strip()
-        date = item.findtext("pubDate")
-        if title and link and date:
+    atom = "{http://www.w3.org/2005/Atom}"
+    content_ns = "{http://purl.org/rss/1.0/modules/content/}"
+
+    if root.tag == atom + "feed":
+        items = root.findall(atom + "entry")
+        for item in items:
+            title = " ".join(item.findtext(atom + "title", default="").split())
+            link_element = next(
+                (x for x in item.findall(atom + "link")
+                 if x.get("rel", "alternate") == "alternate"), None
+            )
+            link = link_element.get("href", "") if link_element is not None else ""
+            date = item.findtext(atom + "published") or item.findtext(atom + "updated")
+            raw_body = (item.findtext(atom + "content") or
+                        item.findtext(atom + "summary") or "")
+            if not (title and link and date):
+                continue
+            try:
+                published = __import__("datetime").datetime.fromisoformat(
+                    date.replace("Z", "+00:00")
+                ).astimezone(timezone.utc).isoformat()
+            except (ValueError, TypeError):
+                continue
+            if published[:10] >= START_DATE:
+                entries.append((title, link, published, name, raw_body))
+    else:
+        for item in root.findall("./channel/item"):
+            title = " ".join((item.findtext("title") or "").split())
+            link = (item.findtext("link") or "").strip()
+            date = item.findtext("pubDate")
+            raw_body = (item.findtext(content_ns + "encoded") or
+                        item.findtext("description") or "")
+            if not (title and link and date):
+                continue
             try:
                 published = parsedate_to_datetime(date).astimezone(timezone.utc).isoformat()
             except (ValueError, TypeError):
                 continue
             if published[:10] >= START_DATE:
-                entries.append((title, link, published, name))
+                entries.append((title, link, published, name, raw_body))
     return entries
 
 
 def match_publisher_feed(confirmed, pending, entries):
-    """Verify direct article text, and upgrade matching Google News records."""
+    """Verify direct article text or publisher-authored RSS content."""
     added = 0
     existing = {article_id(x["title"], x["source"]): x
                 for x in list(confirmed.values()) + list(pending.values())}
-    for title, link, published, source in entries:
+    for entry in entries:
+        title, link, published, source = entry[:4]
+        feed_body = entry[4] if len(entry) > 4 else ""
         key = article_id(title, source)
         record = existing.get(key)
         if key in confirmed:
             if not (urllib.parse.urlparse(confirmed[key].get("url", "")).hostname or "").endswith("news.google.com"):
                 continue
-        text, direct = read_article(link)
-        match = classify(title) or (classify(text) if text else None)
+
+        # A publisher's own feed is trusted as the source, not Google snippets.
+        feed_text = extract_article(html.unescape(feed_body)) if feed_body else ""
+        title_match = classify(title)
+        feed_match = classify(feed_text) if feed_text else None
+        match = title_match or feed_match
+        verification_method = "publisher_feed_title" if title_match else "publisher_feed_body"
+
+        # Read the original article if the feed does not contain a relevant mention.
+        direct = ""
+        if not match:
+            text, direct = read_article(link)
+            match = classify(text) if text else None
+            verification_method = "publisher_article_body"
         if not match:
             continue
         if record is None:
@@ -285,7 +329,7 @@ def match_publisher_feed(confirmed, pending, entries):
         record.update(match)
         record.update({"status": "relevant", "url": direct or link,
                        "direct_url": direct or link,
-                       "verification_method": "publisher_feed"})
+                       "verification_method": verification_method})
         confirmed[key] = record
         pending.pop(key, None)
         added += 1
