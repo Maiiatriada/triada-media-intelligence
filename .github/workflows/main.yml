@@ -2,6 +2,7 @@ name: TRIADA Media Monitoring
 
 on:
   workflow_dispatch:
+
   schedule:
     - cron: '0 7 * * *'
 
@@ -15,29 +16,34 @@ concurrency:
 jobs:
   search-mentions:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
-      - name: Download repository
+
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Search Google News
+      - name: Run media monitoring
         run: python collector.py
 
       - name: Save mentions database
+        if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add mentions.json
 
           if ! git diff --cached --quiet; then
-            git commit -m "Update media mentions database"
-            git push
+            git commit -m "Update TRIADA media mentions"
+            git push origin HEAD:main
           else
             echo "No new mentions to save"
           fi
