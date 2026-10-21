@@ -682,6 +682,19 @@ def main():
     save(DATABASE, confirmed)
     save(REVIEW, pending)
     save(PUBLIC, confirmed)
+    report = {
+        "last_run_utc": __import__("datetime").datetime.now(timezone.utc).isoformat(),
+        "confirmed_total": len(confirmed),
+        "pending_internal": len(pending),
+        "google_news_added": added,
+        "publisher_feeds_added": publisher_added,
+        "gdelt_added": gdelt_added,
+        "bing_and_alerts_added": web_added,
+        "google_news_query_errors": errors,
+    }
+    Path("collector_status.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     print(f"New confirmed from Google News: {added}")
     print(f"Confirmed via publisher feeds: {publisher_added}")
