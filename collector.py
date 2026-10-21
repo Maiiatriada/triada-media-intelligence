@@ -1,6 +1,7 @@
 """TRIADA Media Intelligence — media monitoring."""
 
 import json
+import os
 import re
 import time
 import hashlib
@@ -178,9 +179,98 @@ def publisher_url_from_google(page):
     return ""
 
 
+
+def resolve_google_news(url):
+    """Decode Google News RSS links to original publishers when possible."""
+    if "news.google.com/" not in url:
+        return url
+    try:
+        from googlenewsdecoder import gnewsdecoder
+        result = gnewsdecoder(url, interval=0)
+        if result.get("status") and result.get("decoded_url"):
+            target = result["decoded_url"]
+            host = urllib.parse.urlparse(target).hostname or ""
+            if host and not host.endswith("google.com"):
+                return target
+    except Exception as error:
+        print(f"GOOGLE NEWS DECODE FAILED: {str(error)[:160]}", flush=True)
+    return url
+
+
+def fetch_bing_rss(query):
+    """Bing web search RSS gives a separate search index and direct links."""
+    url = "https://www.bing.com/search?" + urllib.parse.urlencode({
+        "q": query, "format": "rss", "count": 50
+    })
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "Mozilla/5.0"}
+    )
+    with urllib.request.urlopen(request, timeout=15) as response:
+        root = ET.fromstring(response.read(2_000_000))
+    return root.findall("./channel/item")
+
+
+def fetch_alert_feeds():
+    """Optional Google Alerts RSS URLs stored in a GitHub Actions secret."""
+    urls = [x.strip() for x in os.environ.get("GOOGLE_ALERTS_RSS", "").splitlines() if x.strip()]
+    for url in urls:
+        if not url.startswith("https://www.google.com/alerts/feeds/"):
+            continue
+        try:
+            for title, link, published, source, body in fetch_publisher_feed("Google Alerts", url):
+                yield title, link, published, source, body
+        except Exception as error:
+            print(f"ALERT FEED UNAVAILABLE: {error}", flush=True)
+
+
+def collect_web_rss(confirmed, pending):
+    """Verify Bing web search and user-configured Google Alerts against articles."""
+    added = 0
+    entries = list(fetch_alert_feeds())
+    for query in ('"Triada Robotics"', '"Artem Veselov"',
+                  '"Тріада Роботікс"', '"Артем Веселов"'):
+        try:
+            for item in fetch_bing_rss(query):
+                title = (item.findtext("title") or "").strip()
+                link = (item.findtext("link") or "").strip()
+                if title and link:
+                    entries.append((title, link, "", "Bing Search", ""))
+        except Exception as error:
+            print(f"BING RSS UNAVAILABLE {query}: {error}", flush=True)
+    for title, link, published, source, body in entries:
+        if not link.startswith(("http://", "https://")):
+            continue
+        resolved = resolve_google_news(link)
+        if "news.google.com/" in resolved:
+            continue
+        # Verify the *original article* rather than trusting search snippets.
+        text, direct = read_publisher(resolved)
+        title_match = classify(title)
+        body_match = classify(text) if text else None
+        match = body_match or (title_match if text else None)
+        if not match:
+            continue
+        key = article_id(title, source)
+        if key in confirmed:
+            continue
+        # Bing RSS may omit dates: use collection date only as fallback.
+        if not published:
+            published = __import__("datetime").datetime.now(timezone.utc).isoformat()
+        record = {"id": key, "title": title, "source": source,
+                  "published_at": published, "url": direct or resolved,
+                  "direct_url": direct or resolved, "keyword": source,
+                  "status": "relevant", "verification_method": "verified_web_article"}
+        record.update(match)
+        confirmed[key] = record
+        pending.pop(key, None)
+        added += 1
+    return added
+
+
 def read_article(url):
     """Only treat publisher HTML as verifiable article text."""
     try:
+        url = resolve_google_news(url)
         request = urllib.request.Request(
             url, headers={"User-Agent": "Mozilla/5.0"}
         )
@@ -462,6 +552,11 @@ def main():
         title_match = classify(record["title"])
 
         if title_match:
+            resolved_url = resolve_google_news(record.get("direct_url") or record["url"])
+            if "news.google.com/" in resolved_url:
+                continue
+            record["url"] = resolved_url
+            record["direct_url"] = resolved_url
             record.update(title_match)
             record["status"] = "relevant"
             record["verification_method"] = "title"
@@ -542,6 +637,13 @@ def main():
                     }
 
                     if match:
+                        resolved_url = resolve_google_news(url)
+                        if "news.google.com/" in resolved_url:
+                            record["status"] = "review"
+                            pending[key] = record
+                            continue
+                        record["url"] = direct_url or resolved_url
+                        record["direct_url"] = direct_url or resolved_url
                         record.update(match)
                         record["status"] = "relevant"
                         record["verification_method"] = verification_method
@@ -573,6 +675,9 @@ def main():
 
     gdelt_added = collect_gdelt(confirmed, pending)
     print(f'Confirmed via GDELT: {gdelt_added}', flush=True)
+
+    web_added = collect_web_rss(confirmed, pending)
+    print(f"Verified from Bing and Alerts: {web_added}", flush=True)
 
     save(DATABASE, confirmed)
     save(REVIEW, pending)
