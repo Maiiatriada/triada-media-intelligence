@@ -440,7 +440,7 @@ def fetch_gdelt(query):
         "mode": "artlist",
         "maxrecords": 100,
         "format": "json",
-        "startdatetime": "20260601000000",
+        "timespan": "3months",
         "sort": "datedesc",
     })
     request = urllib.request.Request(
@@ -570,7 +570,7 @@ def main():
 
         match = classify(text) if text else None
 
-        if match:
+        if match and direct_url and "news.google.com/" not in direct_url:
             record.update(match)
             record["status"] = "relevant"
             record["verification_method"] = "article_body"
