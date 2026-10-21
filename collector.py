@@ -4,6 +4,7 @@ import json
 import re
 import time
 import hashlib
+import html
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -25,11 +26,15 @@ QUERIES = [
     '"Artem Veselov"',
     '"Artem Veselow"',
     '"Артем Веселов"',
+    '"Артема Веселова"',
+    '"Artem Veselov" "drone"',
     '"Triada" "BRAVO"',
     '"Тріада" "Браво"',
     '"Триада" "Браво"',
     '"Triada" "KILO"',
     '"Тріада" "Кіло"',
+    '"BRAVO" "Triada Robotics"',
+    '"KILO" "Triada Robotics"',
 ]
 
 REGIONS = [
@@ -46,7 +51,7 @@ COMPANY = re.compile(
 
 CEO = re.compile(
     r"\bartem\s+vesel(?:ov|ow)\b|"
-    r"\bартем\s+веселов\b",
+    r"\bартем(?:а|ом|у)?\s+веселов(?:а|им|у|і)?\b",
     re.I
 )
 
@@ -101,52 +106,106 @@ def classify(text):
 
 
 class TextExtractor(HTMLParser):
+    """Extract article text without navigation, scripts, or site footers."""
+
+    SKIP = {"script", "style", "noscript", "nav", "footer", "header"}
+
     def __init__(self):
         super().__init__()
         self.parts = []
-        self.skip = 0
+        self.skipped = 0
+        self.article_depth = 0
+        self.article_parts = []
+        self.article_seen = False
 
     def handle_starttag(self, tag, attrs):
-        if tag in ("script", "style", "noscript"):
-            self.skip += 1
+        if tag in self.SKIP:
+            self.skipped += 1
+        if tag == "article":
+            self.article_depth += 1
+            self.article_seen = True
 
     def handle_endtag(self, tag):
-        if tag in ("script", "style", "noscript"):
-            self.skip = max(0, self.skip - 1)
+        if tag in self.SKIP:
+            self.skipped = max(0, self.skipped - 1)
+        if tag == "article":
+            self.article_depth = max(0, self.article_depth - 1)
 
     def handle_data(self, data):
-        if not self.skip:
+        if not self.skipped and data.strip():
             self.parts.append(data)
+            if self.article_depth:
+                self.article_parts.append(data)
+
+    def text(self):
+        # Prefer article text to prevent matches in "related articles" menus.
+        return " ".join(self.article_parts if self.article_parts else self.parts)
+
+
+def publisher_url_from_google(page):
+    """Use explicit publisher metadata, never an arbitrary external page link."""
+    patterns = (
+        r'<meta[^>]+(?:property|name)="og:url"[^>]+content="([^"]+)"',
+        r'<link[^>]+rel="canonical"[^>]+href="([^"]+)"',
+    )
+    for pattern in patterns:
+        for candidate in re.findall(pattern, page, re.I):
+            candidate = html.unescape(candidate)
+            host = urllib.parse.urlparse(candidate).hostname or ""
+            if host and not host.endswith(
+                ("google.com", "googleusercontent.com", "gstatic.com")
+            ):
+                return candidate
+    return ""
 
 
 def read_article(url):
+    """Only treat publisher HTML as verifiable article text."""
     try:
         request = urllib.request.Request(
-            url,
-            headers={"User-Agent": "Mozilla/5.0"}
+            url, headers={"User-Agent": "Mozilla/5.0"}
         )
-
-        with urllib.request.urlopen(request, timeout=10) as response:
+        with urllib.request.urlopen(request, timeout=12) as response:
             final_url = response.geturl()
-
-            if "news.google.com" in (
-                urllib.parse.urlparse(final_url).hostname or ""
-            ):
+            content_type = response.headers.get("Content-Type", "").lower()
+            if "html" not in content_type:
                 return "", ""
-
-            if "html" not in response.headers.get(
-                "Content-Type", ""
-            ).lower():
-                return "", ""
-
             raw = response.read(2_000_000)
             charset = response.headers.get_content_charset() or "utf-8"
+        page = raw.decode(charset, errors="replace")
+        host = urllib.parse.urlparse(final_url).hostname or ""
+        if host.endswith("news.google.com"):
+            publisher = publisher_url_from_google(page)
+            if publisher:
+                return read_publisher(publisher)
+            return "", ""
+        return extract_article(page), final_url
+    except Exception:
+        return "", ""
 
-        parser = TextExtractor()
-        parser.feed(raw.decode(charset, errors="replace"))
 
-        return " ".join(parser.parts), final_url
+def extract_article(page):
+    parser = TextExtractor()
+    parser.feed(page)
+    return html.unescape(parser.text())
 
+
+def read_publisher(url):
+    """Avoid recursive Google News redirects."""
+    host = urllib.parse.urlparse(url).hostname or ""
+    if host.endswith("google.com"):
+        return "", ""
+    try:
+        request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(request, timeout=12) as response:
+            final_url = response.geturl()
+            if (urllib.parse.urlparse(final_url).hostname or "").endswith("google.com"):
+                return "", ""
+            if "html" not in response.headers.get("Content-Type", "").lower():
+                return "", ""
+            raw = response.read(2_000_000)
+            charset = response.headers.get_content_charset() or "utf-8"
+        return extract_article(raw.decode(charset, errors="replace")), final_url
     except Exception:
         return "", ""
 
@@ -225,6 +284,7 @@ def main():
         if title_match:
             record.update(title_match)
             record["status"] = "relevant"
+            record["verification_method"] = "title"
             confirmed[key] = record
             del pending[key]
             continue
@@ -238,6 +298,7 @@ def main():
         if match:
             record.update(match)
             record["status"] = "relevant"
+            record["verification_method"] = "article_body"
 
             if direct_url:
                 record["direct_url"] = direct_url
@@ -284,9 +345,12 @@ def main():
                     match = classify(title)
                     direct_url = ""
 
+                    verification_method = "title" if match else ""
                     if not match:
                         text, direct_url = read_article(url)
                         match = classify(text) if text else None
+                        if match:
+                            verification_method = "article_body"
 
                     record = {
                         "id": key,
@@ -300,6 +364,7 @@ def main():
                     if match:
                         record.update(match)
                         record["status"] = "relevant"
+                        record["verification_method"] = verification_method
                         confirmed[key] = record
 
                         added += 1
@@ -314,6 +379,9 @@ def main():
                 print(f"ERROR {query}: {error}", flush=True)
 
             time.sleep(1)
+
+    if errors == len(QUERIES) * len(REGIONS):
+        raise RuntimeError("All discovery searches failed; databases unchanged")
 
     save(DATABASE, confirmed)
     save(REVIEW, pending)
