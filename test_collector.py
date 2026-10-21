@@ -95,6 +95,30 @@ class CollectorTests(unittest.TestCase):
         self.assertEqual(len(entries), 1)
         self.assertIn("Triada Robotics", entries[0][4])
 
+    def test_gdelt_verifies_body_before_publication(self):
+        article = {"title": "New drone capabilities",
+                   "url": "https://example.org/triada", "domain": "example.org",
+                   "seendate": "20261022T110000Z"}
+        with patch("collector.fetch_gdelt", return_value=[article]), patch(
+            "collector.read_article",
+            return_value=("Triada Robotics develops drones.", "https://example.org/triada")
+        ):
+            confirmed = {}
+            count = collector.collect_gdelt(confirmed, {})
+        self.assertEqual(count, 1)
+        self.assertEqual(len(confirmed), 1)
+
+    def test_gdelt_rejects_keyword_only_search_hit(self):
+        article = {"title": "Random drone news", "url": "https://example.org/random",
+                   "domain": "example.org", "seendate": "20261022T110000Z"}
+        with patch("collector.fetch_gdelt", return_value=[article]), patch(
+            "collector.read_article", return_value=("No company mention.", "https://example.org/random")
+        ):
+            confirmed = {}
+            count = collector.collect_gdelt(confirmed, {})
+        self.assertEqual(count, 0)
+        self.assertFalse(confirmed)
+
     def test_blocked_article_not_confirmed(self):
         with patch("collector.urllib.request.urlopen", side_effect=OSError("blocked")):
             self.assertEqual(collector.read_article("https://example.org"), ("", ""))
