@@ -58,6 +58,43 @@ class CollectorTests(unittest.TestCase):
         self.assertEqual(added, 0)
         self.assertEqual(confirmed, {})
 
+    def test_publisher_feed_content_verifies_body_without_fetch(self):
+        entries = [("New defence technology", "https://publisher.example/story",
+                    "2026-10-21T09:00:00+00:00", "Publisher",
+                    "<p>Artem Veselov of Triada Robotics spoke about drones.</p>")]
+        with patch("collector.read_article", side_effect=AssertionError("No fetch needed")):
+            confirmed = {}
+            added = collector.match_publisher_feed(confirmed, {}, entries)
+        self.assertEqual(added, 1)
+        self.assertEqual(next(iter(confirmed.values()))["verification_method"],
+                         "publisher_feed_body")
+
+    def test_publisher_feed_ignores_unrelated_content(self):
+        entries = [("Drone technology", "https://publisher.example/story",
+                    "2026-10-21T09:00:00+00:00", "Publisher",
+                    "<p>Generic BRAVO and KILO names only.</p>")]
+        with patch("collector.read_article", return_value=("", "")):
+            confirmed = {}
+            added = collector.match_publisher_feed(confirmed, {}, entries)
+        self.assertEqual(added, 0)
+        self.assertFalse(confirmed)
+
+    def test_rss_content_encoded(self):
+        import io
+        from unittest.mock import MagicMock
+        feed = b"""<rss xmlns:content="http://purl.org/rss/1.0/modules/content/">
+          <channel><item><title>New drone</title><link>https://publisher.example/news</link>
+          <pubDate>Wed, 21 Oct 2026 09:00:00 GMT</pubDate>
+          <content:encoded><![CDATA[<p>Triada Robotics is mentioned here.</p>]]></content:encoded>
+          </item></channel></rss>"""
+        response = MagicMock()
+        response.read.return_value = feed
+        response.__enter__.return_value = response
+        with patch("collector.urllib.request.urlopen", return_value=response):
+            entries = collector.fetch_publisher_feed("Publisher", "https://publisher.example/rss")
+        self.assertEqual(len(entries), 1)
+        self.assertIn("Triada Robotics", entries[0][4])
+
     def test_blocked_article_not_confirmed(self):
         with patch("collector.urllib.request.urlopen", side_effect=OSError("blocked")):
             self.assertEqual(collector.read_article("https://example.org"), ("", ""))
