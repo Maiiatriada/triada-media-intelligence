@@ -17,7 +17,7 @@ class CollectorTests(unittest.TestCase):
     def test_company_and_ceo(self):
         self.assertIsNotNone(collector.classify("Triada Robotics develops drones"))
         self.assertIsNotNone(collector.classify("Interview with Artem Veselov"))
-        self.assertIsNotNone(collector.classify("Інтерв'ю з Артемом Веселовим") if False else collector.classify("Артем Веселов"))
+        self.assertIsNotNone(collector.classify("Інтерв’ю з Артемом Веселовим"))
         self.assertIsNone(collector.classify("BRAVO football team scores"))
 
     def test_article_body_and_no_navigation(self):
@@ -27,11 +27,14 @@ class CollectorTests(unittest.TestCase):
         self.assertNotIn("Triada Robotics", text)
 
     def test_publisher_url_extraction(self):
-        page = '<div>https://news.google.com/abc</div><a href="https://example.org/article">Read</a>'
+        page = '<meta property="og:url" content="https://example.org/article">'
         self.assertEqual(
             collector.publisher_url_from_google(page),
             "https://example.org/article",
         )
+
+    def test_no_arbitrary_publisher_link(self):
+        self.assertEqual(collector.publisher_url_from_google('<a href="https://other.org">Other</a>'), "")
 
     def test_blocked_article_not_confirmed(self):
         with patch("collector.urllib.request.urlopen", side_effect=OSError("blocked")):
