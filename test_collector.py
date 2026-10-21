@@ -36,6 +36,28 @@ class CollectorTests(unittest.TestCase):
     def test_no_arbitrary_publisher_link(self):
         self.assertEqual(collector.publisher_url_from_google('<a href="https://other.org">Other</a>'), "")
 
+    def test_publisher_feed_confirms_body_mention(self):
+        from unittest.mock import patch
+        entries = [("Drone technology update", "https://publisher.example/story",
+                    "2026-10-21T09:00:00+00:00", "Example Publisher")]
+        with patch("collector.read_article",
+                   return_value=("Triada Robotics develops BRAVO", "https://publisher.example/story")):
+            confirmed, pending = {}, {}
+            added = collector.match_publisher_feed(confirmed, pending, entries)
+        self.assertEqual(added, 1)
+        self.assertEqual(len(confirmed), 1)
+        self.assertEqual(next(iter(confirmed.values()))["url"], "https://publisher.example/story")
+
+    def test_publisher_feed_rejects_unrelated_body(self):
+        from unittest.mock import patch
+        entries = [("Bravo wins football match", "https://publisher.example/football",
+                    "2026-10-21T09:00:00+00:00", "Example Publisher")]
+        with patch("collector.read_article", return_value=("Sports match report", "https://publisher.example/football")):
+            confirmed = {}
+            added = collector.match_publisher_feed(confirmed, {}, entries)
+        self.assertEqual(added, 0)
+        self.assertEqual(confirmed, {})
+
     def test_blocked_article_not_confirmed(self):
         with patch("collector.urllib.request.urlopen", side_effect=OSError("blocked")):
             self.assertEqual(collector.read_article("https://example.org"), ("", ""))
