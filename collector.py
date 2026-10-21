@@ -144,16 +144,13 @@ class TextExtractor(HTMLParser):
 
 def publisher_url_from_google(page):
     """Best-effort publisher link extraction from a Google News landing page."""
-    for pattern in (
-        r'<link[^>]+rel=["\\\']canonical["\\\'][^>]+href=["\\\']([^"\\\']+)',
-        r'<meta[^>]+property=["\\\']og:url["\\\'][^>]+content=["\\\']([^"\\\']+)',
-        r'https?://[^\\s"<>]+',
-    ):
-        for candidate in re.findall(pattern, page, re.I):
-            candidate = html.unescape(candidate).replace("\\\\u003d", "=")
-            host = urllib.parse.urlparse(candidate).hostname or ""
-            if host and not host.endswith(("google.com", "googleusercontent.com", "gstatic.com")):
-                return candidate
+    for candidate in re.findall(r'https?://[^\s"<>]+', page, re.I):
+        candidate = html.unescape(candidate).replace("\\u003d", "=")
+        host = urllib.parse.urlparse(candidate).hostname or ""
+        if host and not host.endswith(
+            ("google.com", "googleusercontent.com", "gstatic.com")
+        ):
+            return candidate
     return ""
 
 
