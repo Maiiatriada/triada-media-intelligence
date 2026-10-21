@@ -1,4 +1,4 @@
-"""TRIADA Media Intelligence — Google News collector."""
+"""TRIADA Media Intelligence — media monitoring."""
 
 import json
 import re
@@ -9,13 +9,14 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import timezone
 from email.utils import parsedate_to_datetime
+from html.parser import HTMLParser
 
 DATABASE = Path("mentions.json")
+REVIEW = Path("mentions_review.json")
 START_DATE = "2026-06-01"
 
-# SEARCH KEYWORDS
 QUERIES = [
     '"Triada Robotics"',
     '"TriadaRobotics"',
@@ -36,15 +37,16 @@ REGIONS = [
     ("uk", "UA", "UA:uk"),
 ]
 
-# CONFIRMED MENTIONS
 COMPANY = re.compile(
-    r"triada[\s-]*robotics|triadarobotics|"
-    r"тріада\s*робот[іи]кс|триада\s*робот[иі]кс",
+    r"\btriada[\s-]*robotics\b|"
+    r"\bтріада[\s-]*робот[іи]кс\b|"
+    r"\bтриада[\s-]*робот[иі]кс\b",
     re.I
 )
 
 CEO = re.compile(
-    r"artem\s+veselov|artem\s+veselow|артем\s+веселов",
+    r"\bartem\s+vesel(?:ov|ow)\b|"
+    r"\bартем\s+веселов\b",
     re.I
 )
 
@@ -54,22 +56,99 @@ PRODUCTS = {
 }
 
 
-def classify(title):
+def normalize(text):
+    return " ".join(re.findall(r"\w+", str(text).casefold()))
+
+
+def article_id(title, source):
+    value = normalize(title) + "|" + normalize(source)
+    return hashlib.sha256(value.encode()).hexdigest()
+
+
+def classify(text):
+    company = bool(COMPANY.search(text))
+    ceo = bool(CEO.search(text))
+
+    if not (company or ceo):
+        return None
+
     categories = []
 
-    if COMPANY.search(title):
+    if company:
         categories.append("Company")
 
-    if CEO.search(title):
+    if ceo:
         categories.append("CEO")
 
-    if categories:
-        for product, pattern in PRODUCTS.items():
-            if pattern.search(title):
-                categories.append("Products")
-                break
+    products = [
+        name for name, pattern in PRODUCTS.items()
+        if pattern.search(text)
+    ]
 
-    return categories
+    if products and company:
+        categories.append("Products")
+
+    match = COMPANY.search(text) or CEO.search(text)
+
+    return {
+        "categories": categories,
+        "products": products,
+        "matched_text": text[
+            max(0, match.start() - 80):
+            min(len(text), match.end() + 120)
+        ].strip()
+    }
+
+
+class TextExtractor(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.parts = []
+        self.skip = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style", "noscript"):
+            self.skip += 1
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style", "noscript"):
+            self.skip = max(0, self.skip - 1)
+
+    def handle_data(self, data):
+        if not self.skip:
+            self.parts.append(data)
+
+
+def read_article(url):
+    try:
+        request = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+
+        with urllib.request.urlopen(request, timeout=10) as response:
+            final_url = response.geturl()
+
+            if "news.google.com" in (
+                urllib.parse.urlparse(final_url).hostname or ""
+            ):
+                return "", ""
+
+            if "html" not in response.headers.get(
+                "Content-Type", ""
+            ).lower():
+                return "", ""
+
+            raw = response.read(2_000_000)
+            charset = response.headers.get_content_charset() or "utf-8"
+
+        parser = TextExtractor()
+        parser.feed(raw.decode(charset, errors="replace"))
+
+        return " ".join(parser.parts), final_url
+
+    except Exception:
+        return "", ""
 
 
 def fetch(query, region):
@@ -93,21 +172,89 @@ def fetch(query, region):
         return ET.fromstring(response.read()).findall("./channel/item")
 
 
-def main():
-    records = {}
+def load(path):
+    if not path.exists():
+        return []
 
-    # Keep existing confirmed mentions
-    if DATABASE.exists():
-        for item in json.loads(DATABASE.read_text(encoding="utf-8")):
-            if item.get("status") in ("relevant", "approved"):
-                records[item["id"]] = item
+    data = json.loads(path.read_text(encoding="utf-8"))
+
+    if not isinstance(data, list):
+        raise ValueError(f"Invalid JSON database: {path}")
+
+    return data
+
+
+def save(path, records):
+    data = sorted(
+        records.values(),
+        key=lambda x: x.get("published_at", ""),
+        reverse=True
+    )
+
+    temp = path.with_name(path.name + ".tmp")
+
+    temp.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+
+    temp.replace(path)
+
+
+def main():
+    confirmed = {}
+    pending = {}
+
+    # Rebuild stable IDs to eliminate duplicates.
+    for record in load(DATABASE):
+        key = article_id(record["title"], record["source"])
+        record["id"] = key
+        confirmed.setdefault(key, record)
+
+    for record in load(REVIEW):
+        key = article_id(record["title"], record["source"])
+        record["id"] = key
+
+        if key not in confirmed:
+            pending.setdefault(key, record)
+
+    # Recheck previously unverified articles.
+    for key, record in list(pending.items()):
+        title_match = classify(record["title"])
+
+        if title_match:
+            record.update(title_match)
+            record["status"] = "relevant"
+            confirmed[key] = record
+            del pending[key]
+            continue
+
+        text, direct_url = read_article(
+            record.get("direct_url") or record["url"]
+        )
+
+        match = classify(text) if text else None
+
+        if match:
+            record.update(match)
+            record["status"] = "relevant"
+
+            if direct_url:
+                record["direct_url"] = direct_url
+                record["url"] = direct_url
+
+            confirmed[key] = record
+            del pending[key]
 
     added = 0
+    errors = 0
 
     for query in QUERIES:
         for region in REGIONS:
             try:
-                for item in fetch(query, region):
+                items = fetch(query, region)
+
+                for item in items:
                     title = (item.findtext("title") or "").strip()
                     url = (item.findtext("link") or "").strip()
                     date = item.findtext("pubDate")
@@ -115,17 +262,11 @@ def main():
                     if not (title and url and date):
                         continue
 
-                    published = parsedate_to_datetime(date).astimezone(
-                        timezone.utc
-                    ).isoformat()
+                    published = parsedate_to_datetime(
+                        date
+                    ).astimezone(timezone.utc).isoformat()
 
                     if published[:10] < START_DATE:
-                        continue
-
-                    categories = classify(title)
-
-                    # Only confirmed company or CEO mentions
-                    if not categories:
                         continue
 
                     source = item.find("source")
@@ -135,44 +276,52 @@ def main():
                         else "Unknown"
                     )
 
-                    key = hashlib.sha256(
-                        (title + source_name).lower().encode()
-                    ).hexdigest()
+                    key = article_id(title, source_name)
 
-                    if key in records:
+                    if key in confirmed or key in pending:
                         continue
 
-                    records[key] = {
+                    match = classify(title)
+                    direct_url = ""
+
+                    if not match:
+                        text, direct_url = read_article(url)
+                        match = classify(text) if text else None
+
+                    record = {
                         "id": key,
                         "title": title,
                         "source": source_name,
-                        "url": url,
+                        "url": direct_url or url,
                         "published_at": published,
-                        "categories": categories,
-                        "status": "relevant",
+                        "keyword": query,
                     }
 
-                    added += 1
-                    print(f"NEW: {title}", flush=True)
+                    if match:
+                        record.update(match)
+                        record["status"] = "relevant"
+                        confirmed[key] = record
+
+                        added += 1
+                        print(f"CONFIRMED: {title}", flush=True)
+
+                    else:
+                        record["status"] = "review"
+                        pending[key] = record
 
             except Exception as error:
+                errors += 1
                 print(f"ERROR {query}: {error}", flush=True)
 
             time.sleep(1)
 
-    result = sorted(
-        records.values(),
-        key=lambda x: x["published_at"],
-        reverse=True
-    )
+    save(DATABASE, confirmed)
+    save(REVIEW, pending)
 
-    DATABASE.write_text(
-        json.dumps(result, ensure_ascii=False, indent=2),
-        encoding="utf-8"
-    )
-
-    print(f"New mentions: {added}")
-    print(f"Total confirmed mentions: {len(result)}")
+    print(f"New confirmed: {added}")
+    print(f"Total confirmed: {len(confirmed)}")
+    print(f"Pending verification: {len(pending)}")
+    print(f"Search errors: {errors}")
 
 
 if __name__ == "__main__":
