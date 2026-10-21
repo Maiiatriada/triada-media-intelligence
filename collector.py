@@ -16,6 +16,7 @@ from html.parser import HTMLParser
 
 DATABASE = Path("mentions.json")
 REVIEW = Path("mentions_review.json")
+PUBLIC = Path("mentions_public.json")
 START_DATE = "2026-06-01"
 
 QUERIES = [
@@ -498,6 +499,7 @@ def main():
 
     save(DATABASE, confirmed)
     save(REVIEW, pending)
+    save(PUBLIC, {**pending, **confirmed})
 
     print(f"New confirmed from Google News: {added}")
     print(f"Confirmed via publisher feeds: {publisher_added}")
