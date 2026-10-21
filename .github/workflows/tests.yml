@@ -2,6 +2,12 @@ name: Collector Tests
 
 on:
   pull_request:
+  push:
+    branches: [main]
+    paths:
+      - collector.py
+      - test_collector.py
+      - .github/workflows/tests.yml
   workflow_dispatch:
 
 permissions:
