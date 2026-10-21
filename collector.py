@@ -51,7 +51,7 @@ COMPANY = re.compile(
 
 CEO = re.compile(
     r"\bartem\s+vesel(?:ov|ow)\b|"
-    r"\bартем\s+веселов\b",
+    r"\bартем(?:а|ом|у)?\s+веселов(?:а|им|у|і)?\b",
     re.I
 )
 
