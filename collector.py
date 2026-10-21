@@ -29,6 +29,11 @@ QUERIES = [
     '"Артем Веселов"',
     '"Артема Веселова"',
     '"Artem Veselov" "drone"',
+    '"Артемом Веселовим"',
+    '"Веселов" "Triada"',
+    '"Veselov" "Triada Robotics"',
+    '"TRIADA ROBOTICS" BRAVO',
+    '"TRIADA ROBOTICS" KILO',
     '"Triada" "BRAVO"',
     '"Тріада" "Браво"',
     '"Триада" "Браво"',
@@ -65,7 +70,7 @@ COMPANY = re.compile(
 
 CEO = re.compile(
     r"\bartem\s+vesel(?:ov|ow)\b|"
-    r"\bартем(?:а|ом|у)?\s+веселов(?:а|им|у|і)?\b",
+    r"\bартем(?:а|ом|у|ові)?\s+веселов(?:а|им|у|і|им|им)?\b",
     re.I
 )
 
@@ -499,7 +504,7 @@ def main():
 
     save(DATABASE, confirmed)
     save(REVIEW, pending)
-    save(PUBLIC, {**pending, **confirmed})
+    save(PUBLIC, confirmed)
 
     print(f"New confirmed from Google News: {added}")
     print(f"Confirmed via publisher feeds: {publisher_added}")
