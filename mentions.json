@@ -32,7 +32,16 @@
     ],
     "products": [],
     "matched_text": "Artem Veselov, Triada Robotics: “The market is moving away from expensive legacy systems” - Militär Aktuell",
-    "verification_method": "title"
+    "verification_method": "title",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\"",
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Veselov\" \"Triada Robotics\""
+    ]
   },
   {
     "id": "d8cb9e298459a3256c23c877abd0ba1d1efa60ec26e9fd8f757ac8f3b752e2a7",
@@ -68,7 +77,14 @@
       "BRAVO"
     ],
     "matched_text": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia? - Militär Aktuell",
-    "verification_method": "title"
+    "verification_method": "title",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "be574ea01e39ae5227b297eb4b760f54c0ffe020cee9fdecf217a0f03318e008",
@@ -159,7 +175,21 @@
     ],
     "products": [],
     "matched_text": "Ukraine’s Triada Robotics is developing a deep strike drone with a 2,000 km range. What is the company’s strategy? - Defender Media",
-    "verification_method": "title"
+    "verification_method": "title",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\"",
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Triada\" \"KILO\"",
+      "\"Veselov\" \"Triada Robotics\"",
+      "\"Артем Веселов\"",
+      "\"Веселов\" \"Triada\""
+    ]
   },
   {
     "id": "8373bfb6be42f23798c964ce00ee4dd1e52ef2588bb88f13e5373ee5e565e231",
@@ -198,6 +228,19 @@
     ],
     "products": [],
     "matched_text": "Українська Triada Robotics розробляє діпстрайк на 2000 км. Яка стратегія розвитку компанії? - Defender Media",
-    "verification_method": "title"
+    "verification_method": "title",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Triada\" \"KILO\"",
+      "\"Артем Веселов\"",
+      "\"Артема Веселова\"",
+      "\"Веселов\" \"Triada\""
+    ]
   }
 ]

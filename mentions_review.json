@@ -6,7 +6,11 @@
     "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1mNkFuZmp1MmNCZTBFSTdYRVhnb2ZBQnZ6YTdFampmTTd2NDJVa0FHcV94M3JTYV9acmJiZkZQUUNKZlV3bFNBYk9ZaXcxOHNhdzgyMmZhU2pPT21PbWxPcm85SkdNSk0?oc=5",
     "published_at": "2026-10-21T16:38:20+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\""
+    ]
   },
   {
     "id": "bd903734738ab4c70f8584666f9f1c0bbde1b0c45b4869c88ab04e222800e6f4",
@@ -24,7 +28,10 @@
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBVSDVRWVpodmdWQzNtcl9vYm81TGpxQVRGT280b1ZjSXU4dDBuVTdwNHZaUTgxQ0dTT0ZyVS1ibFVUZVUycFY3eGV6UG80Y1hMT0tOWDdEcmJsRlRmV1U3UzBXem9FYWQ2VmIxWFllQU5GbWtaRF9YUVRyRjFneU0?oc=5",
     "published_at": "2026-10-17T15:02:06+00:00",
     "keyword": "\"Artem Veselov\" \"drone\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\" \"drone\""
+    ]
   },
   {
     "id": "6e04e0de4717fa057f2f0e74cb5253fae492cbee42fec217251ccbb334dd266a",
@@ -33,7 +40,11 @@
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE8yejlHVGNUWjRmdmZoUm9NQUlSQlNzeHE3ZlV6MlBrVXcyRHloci1pTmtfazEyMkxSZGNmdWhFOTVscDdFc3lqeTExem5aU0VKRGUwSG9mRzE2LWxmSVp2ZFYwQzIwNWRudjJfRzVIWWNlQQ?oc=5",
     "published_at": "2026-10-05T07:00:00+00:00",
     "keyword": "\"Artem Veselov\" \"drone\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\""
+    ]
   },
   {
     "id": "f66b81ae991aa6c158022a945d27c48b900dbc0bd74e50b8cf762b3851fc2e13",
@@ -42,7 +53,10 @@
     "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9JTk51UnJRcVFBRWtadFdfM01uajRuTllVNVg2cmE2eW1ETkNBcUxFSlgyYlFYMTUwbzdSbU1WR09lRHloUU54QlRyd3MyLWF6Y0g5RncwWmJ5MmFDcVFScTJBbU5aT0NSWTVFd2FYZWpsSDBzYXFZVVUtOXhOZw?oc=5",
     "published_at": "2026-09-17T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ]
   },
   {
     "id": "0cb5c327f639b8cdf1c205d2d505d8299d8a7cd8ef3076fe5e4e673ddf6a5335",
@@ -51,7 +65,11 @@
     "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNVzRUQmRyMUhNTGJPenpvaEpDS1J6QllRNjVEWDdjMnpxTzdqei1WM0FCV3hKNTZYWE8tUjlSWXZpdXVYZmRsVThCMjRqb1Y0VnRmTFVhcmNNTGZlbVp6MDQ5dC15TXNQUkxnQ1Y4bm9MODJJSUNqRVFOSWVVWDFVRW1QV0x4b1NCbU9Z?oc=5",
     "published_at": "2026-08-25T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\""
+    ]
   },
   {
     "id": "8494f4e11e6a7c965d4930feacc0d9682c6493a749e610f5fc16699b33f92a6e",
@@ -60,7 +78,15 @@
     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQeC1kTzI5MENRSm02ZlBWSjIwV3c5ZmtleFQwUWdOYjhsdGhCa2E3b2xvV01UZ2NnSkFrTXRpNFR0V3RsbDBwemp5Q1ZmU0pYSXZiYUlJcGlHbk1WVG1WMjBxZjF0Z2JaRG1aZnExbkhDUlE2V0NEc1BiekJjOGdjbThoSFdSTXh6MXJMMnlTZU9pckxZQV9keUMzd1FRdDg1SURGY1l4S2JELTR6MjBtdXdqcXNIbU96NzhoSE4xZU9ZaFlhbnMw?oc=5",
     "published_at": "2026-08-06T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Veselov\" \"Triada Robotics\""
+    ]
   },
   {
     "id": "78f3f7cf9737f83a6b4e7d388896baefe0c74ba13c7d29de8121faaff4791f4f",
@@ -69,7 +95,14 @@
     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRWFIbWYteW5MX2hCZE5uNTlWcnR0QWY1dDhkMmtBWGJ0VU1waG5ySnhETUJMcVpTdzgtM2xGNWNzS0czejhaWnBLbGxZZ0ZKbEc0REhCZ0REVXRza05paHAta2p0QmVUMElZN0ZsYndrZk4zQmdPNkR6dkI2ZmJySnMwQ214S21WalItZzc2SlctVHVMUTBSUw?oc=5",
     "published_at": "2026-08-04T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "faa5939422632f5c8896ac754af4401d1e3e6a4096b7d559598e974a20b545f8",
@@ -78,7 +111,14 @@
     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxON0lFVktqUnI2REl0LVZRUmpJSFYwdV9DaW50cTdOcEdTQVU3Yk5EcVBIM3RDa1dPOWJmV0VpRGdGUXJyT3NTaFExUE5zM0g2U0dYMVJoZldkLVVpSjR6eEp0eTJYY2d0LWE0ekIzRXBNeTZHaVBlZkNqUWhVZUIwVkpPR0VWYmtiMk1VTTU0RXpDcTY0Y1pZdkJXM055dTBZOGthS2pFbURfNzYyM3p6RllmVVZCcjQwbDY2T0tzOA?oc=5",
     "published_at": "2026-08-04T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "a7a0ec6a63315a503946d7a1cf67592142818916c2d55c9974adc2be647401f9",
@@ -87,7 +127,13 @@
     "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOTXhMUEdLYWs4RmF5d3FtRFJncEdXM3dmUDNCV1VMMGlMMGpLWUF6RVR4ZEF6SXp1VDEzQ01zdEJ0aE5QOTlrTVVUc1lIRW1KVndRTFMzTGV5OWs5dFZEcEZzd2NpWDBJYmdjTHNkNlRYSUYyaUNfX3VCVlJXS2xPMndTdzFTdGpLM0JmMFlmSVRIWU5HWnJRRERtTGpheENjZjM1alNSbDZDeW4xUzZVZlRaUVdXaEVhQktaQXkxNGxrRE3SAcgBQVVfeXFMTldlUGtJelZjdC04Z2xUOXBKNTJCTjFaYjZxazdkUkw4eEZyRHdSUHAtWmN0ZGF3TW9iR2RoX2M2X2h3RVZncEhrb3JjRFdzMkhyOGZPWnBjVUx3RFRJQVozdWlFc24tOUtnYkswbkhFUEhKRXBCN3R6d2Q4ZTZvb0JWNmxaYldaek9SX0xCbzZGeU1naWJJeS1DVGltZ3pPV3BSUkMxbGxTcUR4bEx6UjJzVURFT21FWno0OGV1Z0JBTVpqcFRJN3o?oc=5",
     "published_at": "2026-08-04T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "786c77a3c36ac4c760b62d84d664e02e327d841082bc7b65f44a7091b774beae",
@@ -96,7 +142,11 @@
     "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOaHRDUkYtZzROb1htYXdzZGUtQkdhTTdQdXUzT1dNOFBnVTFlYVZxNXpYUXptNElYc0NYaVd3QlU5dlNiMGlydzlFMmhseGlpVjdyTnJLbzJnbmZ2VkE5QkMzcnpGUnpURzF2UVFnYkxOZGZXLXdqYzNlSUwtNDdvckF5eVAtRzlubV96Ui1lY9IBlAFBVV95cUxOQkNjbGpIWDVOdXM2YzBnUER6UlR2ZVRhdVBzdTAtZ3A3QU9INnU5MndZWUJXbXd2TU5YeGljQTRpQ3ZORDNDZkY3ZzJnUTNiaTJEUnhRRjVMQzRQOHBQbF8wRld5b2Y4M3NER2NoRmNEX0QwamZLRnZPbVRSZ0ZseFIxNHJSRlJpQjZuSW1UcEJuUS1j?oc=5",
     "published_at": "2026-08-04T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "1f507f2915eb56770f8e2d104023b7200b8c009c06ce4f46d46a8a10d3c924ca",
@@ -105,7 +155,12 @@
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQcnZ1MXoxaUpOenA3NlZMSWkwV1ZfRTFyb3d5MnRQeEZZVUZxUVc1ZGg1UDBpS3hhYXBPcDE5ZXptcEZiRHJaaEhpOTFIVDNRRXVWa1JQSXBjdk01eVNoTHI0blA1WDYzY3FNOUVaTFVlZXpTaFM1LWJOSTRTR1NCTjlyQXIwaTZIMjVFVkltSEpNZTRycUNiRVhXWlVmSWNpSXVidENfMWRFNWJSRjZmX21NdE5hYXBM0gG-AUFVX3lxTE91WGlTV1MzU2dUdUM0VnZ1X0FiZGZkeWU4bjNXTHJTcmxsdzhMUlhkdHJNMWVaVWoweXk2NVVmcXdBYXh5QWNDTDh1dnZfM3VCemhqUWJYLVpSM2ViNHc0dFRkQ185MlRQOGQ2R1BlOTR5NEFIOGZLUmFUMzBHX2RVZUREeG9hTFNxQ2o4VnBEYlAtSGxkeHlBQ1FYVVF3aEQ1U3NNTUFvNFVvYm5kUVUtaWp3cE9aX0ZxNm5ZbWc?oc=5",
     "published_at": "2026-08-04T07:00:00+00:00",
     "keyword": "\"Triada\" \"BRAVO\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "d417d971d2409f3282bb25c2c46669123397b8c38c6495d2f13f764d819e0aa3",
@@ -114,7 +169,10 @@
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE0zUElpMk5LbEIxQjFRVFNVR1NHNGN5czFIbVZPSHA5UUVxLUs1WHBhbnAydGF4b3A2b2VDU2d1T3JPd2I0SlFLbWtPWDUyaExIaGgzbG5GZ0ZqeE5fSUtBYXBRajlVanZtcDNPVFRFbFlaWTVrZTFaZlNLU3g?oc=5",
     "published_at": "2026-07-28T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ]
   },
   {
     "id": "e4ba06af03df7f70164d74adceeb10cdac93e8ddcd2049650ce4e97a987d1bf7",
@@ -123,7 +181,13 @@
     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZVpKaUhIS19lM09WaEZ4b2R6VTRhQ2ZCNVAyTzZ5czZEeU1qcm9SVV8wbzgzY0ZZalNwaVBFcE1xbHplT0Y4LUxCbGpIckhHT2ZtdTM3Y1NCTm1oTHhGaUZveDl1ZURuQzY5dFhCNXlobVlWN2dxd0lkdDk4TG05a0xYT1U4dlZZbE9NT2JTa1dSQ3JVZ1hDaXphb1ZMN3FmMVlvLV91OGMwNlU?oc=5",
     "published_at": "2026-07-22T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\"",
+      "\"Triada Robotics\"",
+      "\"Veselov\" \"Triada Robotics\""
+    ]
   },
   {
     "id": "c61fad81287c05e4f7f2d46be1e1c28ba21c9a7c71904339eb07baaea1180aa2",
@@ -132,7 +196,12 @@
     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPMzlka0RTcjhsa2pQOF9SZ3puelNia190RjJTeENMdjhUR2JrSGNzSVRNaE9fdlRoVENFQmpEMEZFazJDMG9tMlhKUWlNeVFCR0F2TVBycnpaa09RZktBTUNucm5DbTVmSnlPVC03bFdWMThGeFV3YzJOY0trU1M5TmJpYkdiRldBSUFOTHRIMGpVa293U0xSVExjMS1jNXR2eFFv?oc=5",
     "published_at": "2026-07-14T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\"",
+      "\"Veselov\" \"Triada Robotics\""
+    ]
   },
   {
     "id": "91d9eca90b6be923d7f5f0cfbe57d79666360176a381245c33ae5a34c4fd1201",
@@ -141,7 +210,10 @@
     "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOWDE1VEQ1c1Y0Z0llVG50UXJCRThxY2U4NnVtMjNqVldPU0lCaWtlMUxZd05FRFRsdnR3UEFSckpJeEFGZFRrTE1zdGtIM0dwZzlLMnBKeDkwWU5FSXFvOE5EMHcwOWZWZ00tNHhSNjNHd25COWdoYzBMUmc4RUJzMWVlX3AxWFNhVzlhNW0tYU5kQUpOMzMtbm9uQkM?oc=5",
     "published_at": "2026-07-13T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Triada Robotics\""
+    ]
   },
   {
     "id": "d0ec14cd13c7eb497776bc295b17bf9805f2d8def047dafba54f72791aefdb87",
@@ -150,7 +222,11 @@
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9QQ2RwMFRTQks2X01Tc2E4RGxJc21lTTVjbzJxc3JZSXplYS1jTzdkV1g2RjVGU2x0NlUxbmp0WVNuQ0ZCZlNaSEduaUpWUGFKMk9ickVRTE5JYmxzbHVWR1I3SUJmY29NQWc?oc=5",
     "published_at": "2026-07-08T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Triada Robotics\"",
+      "\"Артем Веселов\""
+    ]
   },
   {
     "id": "a4388712469cf36e49938bcb7c4f72551e0aac6f647c46028df61315b39a2ffb",
@@ -159,6 +235,21 @@
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1fTms2Q0xDcHBfekMzcjJOTVc0ZXNPVFdWZFM1TWg2bW5KNm8yMTNZRVd5SEM0Z2hHSDBHenpWS09ta1pFbGhxRDNHRDVSZTRXVWJxa0pXeXdubzQtTzJ6NmNSMVNwUUdYVEE?oc=5",
     "published_at": "2026-07-08T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ]
+  },
+  {
+    "id": "ca67d15e0a8919e04206ac18602fdf75cfdbf4734da047f20127a2034d1eb9c2",
+    "title": "VD Accelerator 2.0: гранти по $50 000 для defence-стартапів - Defender Media",
+    "source": "Defender Media",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1fTms2Q0xDcHBfekMzcjJOTVc0ZXNPVFdWZFM1TWg2bW5KNm8yMTNZRVd5SEM0Z2hHSDBHenpWS09ta1pFbGhxRDNHRDVSZTRXVWJxa0pXeXdubzQtTzJ6NmNSMVNwUUdYVEE?oc=5",
+    "published_at": "2026-07-08T07:00:00+00:00",
+    "keyword": "\"Артем Веселов\"",
+    "matched_queries": [
+      "\"Артем Веселов\""
+    ],
     "status": "review"
   },
   {
@@ -168,7 +259,10 @@
     "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQc3hVNFR2VWVRNk01MG54eFpXVEZqMVl6cmQ1ZldmXzN4Qlh6TG5vRkRDYkkyZi1mbEdOUHJNUzdCc0hoNjBJRUoyQmlOWUNJaGJOb1BROXJtVHNzTjlES1lpLXBZY2hvRTRFNzJQb1VsREZqY3VRNnl4R3Q4V0lZc1BJelhGQQ?oc=5",
     "published_at": "2026-06-26T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ]
   },
   {
     "id": "e38d4790d84466c23147fe71b0a3623e1aa874d71397ea48c8534ea05323e5b6",
@@ -177,7 +271,11 @@
     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNeHMySVhxSmdERVVEMUFRM1l2bERwQl9HcUN2cDlRcmJaQmo5NXBYSXZTeVZ1MVhtUUpHTXdwdTI1c3UzVFJjajlVV1RsUUpCT3MyR2p3aHRjSXl1TTY1d1RYRmFwTHhHSGdoUFFCWHNibFNPRDliaDIweTZZYk1qS0h1VFZaS0p3NzNPb1RWWEY?oc=5",
     "published_at": "2026-06-26T07:00:00+00:00",
     "keyword": "\"Artem Veselov\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Артем Веселов\""
+    ]
   },
   {
     "id": "e43c3a9ac2cc46935425f2641c13680b5904cefeb1501e8d7c87c41aa60064e2",
@@ -186,7 +284,11 @@
     "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1Ralo1TFpFeXdOdHlWM3c1Tlltb2dLVy1GbElLNGVRY0JwRjlEOFBSZlBGdVJCeXVCblV4ZHBZbXJpLWR2Z1o4RDNNRzZmSXZLMjM5SWgzZ0dkNTZVclY5em9LcUNUQnhfZHFn?oc=5",
     "published_at": "2026-06-25T14:34:20+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Triada Robotics\"",
+      "\"Артем Веселов\""
+    ]
   },
   {
     "id": "195df4ec3edd201900522c40ce99956c63c6143517860babbe298089e1068912",
@@ -195,7 +297,14 @@
     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQMGRvNmE0Mnd1Tk41TTE1SnZXc0xiQ0VnT3RXMjExcWVLRVlKRldoYXRzSzBxSThtWUxwSXY3T1dOX3AtSVUxOHJ0T0tTRkhxdm1PWmJUNUlJNTA1bDFPWEZnYVRrc2VnMUlvM1ViaEpVZVZQVVJvS1c2MDNOakVvd0FFa3hZXzkzd1dGOW1XV0NRZw?oc=5",
     "published_at": "2026-06-25T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "c91749aed825587937b2192aa66f572a1cc9c8d892a11c27f72f6fa23cda701c",
@@ -204,7 +313,15 @@
     "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOSmVxVEs1TmdZMjNJQzVvM3QwWF9fV2lTdkZheEhUbmhVWmdreXdvbkpJc3B1S3g4UzRRUWVqREhLTm5GUEJWWGpOY1h4OHVUWW9rVEpuRFVpOGtlOU1ranVZblhmaGU4ajZfQ2hVQlI1R0gxUDBmWlJsSzZwRmF4QVJFOE9QbWdlN3llazMzRlZoUEMycXl3XzczRlI0MjJobFNGOHpZRUhUbUpOa1lvdWRscUlnc2RuWmZRLWRPQkNIaFdaTU5XUjZ30gHPAUFVX3lxTE5JQU1xTmxoNlltYjEtQ1A2YWo2SFVaREpMNk5Wa2lvVVBZN1dNVFA1UUFhbnB1U25DanlVUTVZRGtUbWd1aHFmSTNoaWZsS1J3a0ZodjlMRk5PZVBKOGxlTkZ6aVpKMnNpdkE1MUJGMS1yWTBCVlhDaE1DVlNRTDA3SGpldjJBenhPcFJpZUM1MnVFY3p5S3FGcGpUNmxFVHk3X1B0ZWZvTldpVE9CMHZjRU5uODhkMHJNZjRreVpMcm5CRldpSnA3YnJLLTl0VQ?oc=5",
     "published_at": "2026-06-25T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "7e06a0e82d717fe79abec5e965eae699aef7d096255798eb6b9a7faa78d589c3",
@@ -213,7 +330,16 @@
     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQaUFLYlJIbTBsakFxNm03SkRMWXZoMGFiOVZyejdQckVnaU9YRDVnN2N6QlcyUGxyOEQ5b21fVmpJTmZIZy1pb05yS0FGdFdCM0NsM3MybkJZNGFlRkV0d1FQTHVLV2lHLU93LUVjWlJfZkd4QUZDLThDS0tsZGZELUZqc2ZzNXI3TW45X011MGrSAZYBQVVfeXFMUGtud2NXamstNWtrWHRSRlFpVnZlajduaGk5aldHNzNzLVV1bDFiREtfZ0U2Sm4wbUZsSG12UDBVMmY4UVpUV2E4ak0zUlcyakd6LW9HcmUySnhKSFRjVTE4Q0NEVXg0NzFOZ2oxdDFqdGhqTW9ueGw3YzdKbGM4dGM2SGE5TjF4SXlzWkt1LTgxZ0pfZ2l3?oc=5",
     "published_at": "2026-06-24T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Triada\" \"KILO\""
+    ]
   },
   {
     "id": "5fa03ff4e95e12f6ea8217ce2e24e48f4fb55b4af8f70d55ef42b4401093eb11",
@@ -222,7 +348,16 @@
     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOT245Q3k3UXRGX010OEljbkROTnBTekN0LWNaNWcwX0dOdHowQnFhRHpTMmQ2bGc5bDVFcFRBaXQtd2lpY1kwNHI0T2REcEFod1RyTDlxd0hwRUs2TFFuTEswUE0zb2NCcEc4WUMzaXlEOGRzTWgtNDNFWXB5NDRRZnVUTU1uNFJGQUJrM2ZGYmbSAZYBQVVfeXFMTXhKcGdoazNzaXJCazJJNXFibnp5LUZnaVNfOTNGT1BfLXJRcUxzQWY4YkJmSGV1WjlnZGNfRTdVNGM2enNpb2ZKX25wenAtaWtldVJLZTZYYmZoWldIZFY0WVQzLUprY2sybExSYjdaeUJSSEVNMkJCQzdaTzRXMnR1czdsQ1U4TnhGZEh2bGF2cy1uM0x3?oc=5",
     "published_at": "2026-06-24T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Triada\" \"KILO\""
+    ]
   },
   {
     "id": "b84d72e5fbc883e6b7bac718297cd5a8d7a8e31edefcea90d662135f86383e5d",
@@ -231,7 +366,15 @@
     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1SNWhETFRSNFhfTHhZR2ZrcDBBMHZjaHdBOFhkYVRlUmdJbDY3TnhyeFlDRk1HQzRENEJTTzNSTXRDZkFENVVUdDRkVzBVbGxsOExxMWItNjBUVnlFZGlNZzR5M3E?oc=5",
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "fdd8fd6a4e7828c736c8ce1f57394621fb7b49c9b390756d99128288b0731a05",
@@ -240,7 +383,14 @@
     "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPVGo0eEpMeVlnMHMtZGtITHJNV0hmSXRjRHhOa3ZPWFBpY2N2WHkxWjlJTFdVRUNQSEZjdER0MzFxdG1aYVUwc0JiaTBNS3hEUzFRandvZ2lZaVBQdEF2blJ3QXRWYVp2cHJFVmVHVERrbVgxOFZiN0YteHNNV2hDbEVXR1YxZ19vYkE?oc=5",
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\""
+    ]
   },
   {
     "id": "056fe16c320adefeb4e55d2a7b75d36c058182f961afe54bc01b205e25837a51",
@@ -249,7 +399,13 @@
     "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5OZzBRUnN0cFNWRTBjQmVDb1pKUS1RZm9lRGxiUkZrTWY0VG5fZW9rakRmT2laYXJxVVNqZEZZcWFpZjFYQ3pwVW1hMXFqYkhBd3owS3lfYVpaNjM4bmtfdw?oc=5",
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "68e54bc41641a03ccd5edf7c0fa4d070963d8249bf149e03a741d37ff1af4ab6",
@@ -258,7 +414,15 @@
     "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE45cVlwbXQ0S0lPcWVOMHgyUlRyUVRXY2hQSU5abXZOakNIN29VUFJVemh2QUVmV19uREpnT09CM09wZ3JSazlMNmpSRDZXX1ltbUpXamdialVoS1BvcnhMdjN6UXVOY3RUZFhZdQ?oc=5",
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ]
   },
   {
     "id": "dfa9ce1d0a0cff04921d8469df484a63c1011abc4599931333a19f3dc4744ecd",
@@ -285,7 +449,10 @@
     "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBmN2JKQ3VncXQ1V2FBd29TNUVPNmVHOHJTZE95X3B3UHQ5SnBDX3RQdVZkaGZTWUZCcDBNUUpyeUlnRzFJbjl5aDdUOXBnc1MxRHBqOUpYU29LMFNvazVJRFlyRHNFRk96SEVRd2lvSHFBTjJVbHRiVmpWTDVzQQ?oc=5",
     "published_at": "2026-06-12T07:00:00+00:00",
     "keyword": "\"Artem Veselov\" \"drone\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\" \"drone\""
+    ]
   },
   {
     "id": "0ed1ed1dfd95082a62afba54cd73f9192031d95ae3386d9b074ddaae622471f1",
@@ -294,7 +461,12 @@
     "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNRGJObGt0WGpUNDJPeTlaTEIwUlg5dEdxMUkwRUhHdDZwTTFzeWJGR1RsaTNPS0E1MmRES3hWMGM2TTVoa0xIOTRvaVV6alBBQXNkSmg1RXIxdlZlVkRWUGlSNjlJYmRpbkZRcDB2N2UzbGQ4eTVXVTducGVXdVM4bXZB?oc=5",
     "published_at": "2026-06-09T07:00:00+00:00",
     "keyword": "\"Артем Веселов\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\"",
+      "\"Артем Веселов\""
+    ]
   },
   {
     "id": "516290dcf8801304a4d6118d2af6550d6e1d22da2bb7a9de2d450d9b3183dbb8",
@@ -303,6 +475,9 @@
     "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOME1leTNFNWl2U1I1ZW53T0NEenB5MEFJckphbWE5STFfUmxsbDdua25JQ2dRWkpqUUF2OUpfVi1UeVlwNmNZUnZWNWlXVXJ1OTJUY1hjXzhCQ1V0ZVhhZmFEeURENWNvX1RjM29GTVJESEhoZmd3eDRpZy1rR25UMFp1amZhU1lQRnBfaUlnU1VHZDZzQ2FqUmtOZk4?oc=5",
     "published_at": "2026-06-03T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"Triada Robotics\""
+    ]
   }
 ]
