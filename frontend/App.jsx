@@ -26,7 +26,6 @@ const APP = {
 const NAV_ITEMS = [
   { id: "overview", label: "Overview" },
   { id: "mentions", label: "Mentions Library" },
-  { id: "connectors", label: "Connectors" },
 ];
 
 /* ---------- Mentions data layer ---------- */
@@ -270,7 +269,6 @@ const MENTION_COLUMNS = [
     render: (m) => (
       <>
         <span>{m.title || "Untitled"}</span>
-        <StatusBadge status={m.status} />
       </>
     ),
   },
@@ -823,19 +821,16 @@ function DateRangeFilter({ id, label, value, onChange, customRange, onCustomRang
 
 function MentionsLibrary({ data }) {
   const { phase, records, skipped, error, lastUpdated, refreshing, refresh } = data;
-  const [filter, setFilter] = useState("all");
   const [subject, setSubject] = useState(SUBJECT_OPTIONS[0].value);
   const [dateRange, setDateRange] = useState(DATE_RANGE_OPTIONS[0].value);
   const [sortBy, setSortBy] = useState(SORT_OPTIONS[0].value);
   // { start, end } as "YYYY-MM-DD", set when a custom range is applied (not used for filtering yet)
   const [customRange, setCustomRange] = useState(null);
 
-  const options = useMemo(() => buildFilterOptions(records), [records]);
   const visible = useMemo(() => {
     const now = Date.now();
     const days = dateRange === "last-7-days" ? 7 : dateRange === "last-30-days" ? 30 : null;
     const filtered = records.filter((record) => {
-      if (filter !== "all" && record.status !== filter) return false;
       // Review candidates use provisional subject labels, not verified article text.
       const text = [record.title, record.keyword, record.subject].filter(Boolean).join(" ");
       const isCEO = record.categories.includes("CEO") || /artem\s+veselov|артем\s+веселов/i.test(text);
@@ -855,7 +850,7 @@ function MentionsLibrary({ data }) {
     });
     const sorted = sortNewestFirst(filtered);
     return sortBy === "oldest" ? sorted.reverse() : sorted;
-  }, [records, filter, subject, dateRange, customRange, sortBy]);
+  }, [records, subject, dateRange, customRange, sortBy]);
   const discovered = useMemo(() => latestDiscovery(records), [records]);
 
   const isLoading = phase === "loading";
@@ -897,44 +892,6 @@ function MentionsLibrary({ data }) {
           onChange={setSortBy}
         />
       </div>
-
-      {isReady && (
-        <div className="tmi-toolbar">
-          <div className="tmi-filters" role="group" aria-label="Filter by relevance status">
-            {options.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className="tmi-chip"
-                aria-pressed={filter === option.value}
-                onClick={() => setFilter(option.value)}
-              >
-                {option.label}
-                <span className="tmi-chip-count">{option.count}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="tmi-sync" aria-live="polite">
-            <span>
-              {refreshing
-                ? "Updating…"
-                : lastUpdated
-                ? `Last checked ${formatClock(lastUpdated)}`
-                : ""}
-              {" · auto-refresh every 5 min"}
-            </span>
-            <button
-              type="button"
-              className="tmi-text-button"
-              onClick={refresh}
-              disabled={refreshing}
-            >
-              Refresh
-            </button>
-          </div>
-        </div>
-      )}
 
       <div className="tmi-card" aria-busy={refreshing}>
         {refreshing && <div className="tmi-progress" aria-hidden="true" />}
@@ -1009,7 +966,7 @@ function MentionsLibrary({ data }) {
 
         {isReady && records.length > 0 && visible.length === 0 && (
           <StateBlock title="No mentions match this filter.">
-            <button type="button" className="tmi-text-button" onClick={() => { setFilter("all"); setSubject("all"); setDateRange("all-time"); setSortBy("newest"); setCustomRange(null); }}>
+            <button type="button" className="tmi-text-button" onClick={() => { setSubject("all"); setDateRange("all-time"); setSortBy("newest"); setCustomRange(null); }}>
               Show all mentions
             </button>
           </StateBlock>
@@ -1072,7 +1029,6 @@ function ConnectorsView() {
 const VIEWS = {
   overview: DashboardPlaceholder,
   mentions: MentionsLibrary,
-  connectors: ConnectorsView,
 };
 
 /* ---------- Layout components ---------- */
