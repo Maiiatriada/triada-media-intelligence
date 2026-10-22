@@ -4,6 +4,7 @@ import json
 import os
 import re
 import time
+import functools
 import hashlib
 import html
 import urllib.parse
@@ -12,12 +13,14 @@ import xml.etree.ElementTree as ET
 
 from pathlib import Path
 from datetime import timezone
+from datetime import datetime as _datetime
 from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 
 DATABASE = Path("mentions.json")
 REVIEW = Path("mentions_review.json")
 PUBLIC = Path("mentions_public.json")
+STATUS_FILE = Path("collector_status.json")
 START_DATE = "2026-06-01"
 
 QUERIES = [
@@ -79,6 +82,294 @@ PRODUCTS = {
     "BRAVO": re.compile(r"\bbravo\b|\bбраво\b", re.I),
     "KILO": re.compile(r"\bkilo\b|\bкіло\b", re.I),
 }
+
+
+# ---------------------------------------------------------------------------
+# Connector diagnostics
+#
+# Observe-only bookkeeping for collector_status.json. It never changes what is
+# collected or saved: every Diagnostics method swallows its own errors, so a
+# bug in this block cannot stop a run.
+#
+# Status "ok" means the requests completed without a technical error. It does
+# NOT guarantee complete monitoring: a source can answer successfully and still
+# miss articles. Error text is cleaned before it is stored, because this
+# repository is public and the Google Alerts feed addresses are secret.
+# ---------------------------------------------------------------------------
+
+CONNECTORS = (
+    ("google_news", "Google News"),
+    ("bing", "Bing"),
+    ("gdelt", "GDELT"),
+    ("publisher_rss", "Publisher RSS"),
+    ("google_alerts", "Google Alerts"),
+)
+
+STATUS_LEGEND = {
+    "ok": (
+        "Every request completed without a technical error. "
+        "This does not guarantee complete monitoring coverage."
+    ),
+    "partial": "Some requests completed and some failed.",
+    "error": "Every request failed.",
+    "not_configured": "The connector needs configuration that is missing.",
+    "not_run": "The connector made no requests in this run.",
+}
+
+ALERTS_ADDRESS_IGNORED = (
+    "A configured feed address was ignored: it is not a Google Alerts feed URL."
+)
+
+_URL_PATTERN = re.compile(r"(?:https?://|www\.)\S+", re.I)
+_ALERTS_PATH_PATTERN = re.compile(r"/?alerts/feeds/\S*", re.I)
+
+
+def redact(text):
+    """Remove URLs and anything that came from the Google Alerts secret."""
+    text = str(text)
+
+    secrets = set()
+    for line in os.environ.get("GOOGLE_ALERTS_RSS", "").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        secrets.add(line)
+        secrets.add(urllib.parse.quote(line, safe=""))
+        secrets.add(urllib.parse.quote(line))
+        parsed = urllib.parse.urlparse(line)
+        for part in (parsed.netloc + parsed.path, parsed.path, parsed.query):
+            if len(part) >= 8:
+                secrets.add(part)
+        for segment in parsed.path.split("/") + parsed.query.replace("&", "/").split("/"):
+            if len(segment) >= 8 and segment not in ("alerts", "feeds"):
+                secrets.add(segment)
+    for secret in sorted(secrets, key=len, reverse=True):
+        text = text.replace(secret, "<redacted>")
+
+    text = _URL_PATTERN.sub("<url>", text)
+    return _ALERTS_PATH_PATTERN.sub("<redacted>", text)
+
+
+def safe_error(error):
+    """Short, single-line, secret-free description of an error."""
+    if isinstance(error, BaseException):
+        text = f"{type(error).__name__}: {error}"
+    else:
+        text = str(error)
+    return " ".join(redact(text).split())[:160]
+
+
+def _safe_len(collection):
+    try:
+        return len(collection)
+    except TypeError:
+        return 0
+
+
+def _now_iso():
+    return _datetime.now(timezone.utc).isoformat()
+
+
+def _text_or_none(value):
+    return value if isinstance(value, str) else None
+
+
+def _count_or_zero(value):
+    if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
+        return value
+    return 0
+
+
+def github_run_url():
+    server = os.environ.get("GITHUB_SERVER_URL", "").strip()
+    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    run_id = os.environ.get("GITHUB_RUN_ID", "").strip()
+    if server and repository and run_id:
+        return f"{server}/{repository}/actions/runs/{run_id}"
+    return None
+
+
+def _never_raise(method):
+    @functools.wraps(method)
+    def wrapper(*args, **kwargs):
+        try:
+            return method(*args, **kwargs)
+        except Exception:
+            return None
+    return wrapper
+
+
+def _connector_status(entry):
+    if not entry["configured"]:
+        return "not_configured"
+    if entry["requests"] == 0:
+        return "not_run"
+    if entry["failed_requests"] == 0:
+        return "ok"
+    if entry["failed_requests"] >= entry["requests"]:
+        return "error"
+    return "partial"
+
+
+class Diagnostics:
+    """Per-connector counters for one collector run."""
+
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.data = {key: self._blank() for key, _ in CONNECTORS}
+        self.feeds = {}  # publisher feed name -> per-feed detail
+        self.started_utc = _now_iso()
+        self._started = time.monotonic()
+
+    @staticmethod
+    def _blank():
+        return {
+            "configured": True,
+            "requests": 0,
+            "failed_requests": 0,
+            "items_fetched": 0,
+            "new_confirmed": 0,
+            "last_error": None,
+            "last_attempt_utc": None,
+        }
+
+    @_never_raise
+    def start(self):
+        self.reset()
+
+    @_never_raise
+    def attempt(self, connector):
+        entry = self.data[connector]
+        entry["requests"] += 1
+        entry["last_attempt_utc"] = _now_iso()
+
+    @_never_raise
+    def items(self, connector, collection):
+        self.data[connector]["items_fetched"] += _safe_len(collection)
+
+    @_never_raise
+    def confirmed(self, connector, count=1):
+        self.data[connector]["new_confirmed"] += count
+
+    @_never_raise
+    def failure(self, connector, error):
+        entry = self.data[connector]
+        entry["failed_requests"] += 1
+        entry["last_error"] = safe_error(error)
+
+    @_never_raise
+    def not_configured(self, connector):
+        self.data[connector]["configured"] = False
+
+    # Publisher RSS: one request per feed, with per-feed detail.
+    def _feed(self, name):
+        return self.feeds.setdefault(name, {
+            "name": name,
+            "status": "ok",
+            "items_fetched": 0,
+            "new_confirmed": 0,
+            "last_error": None,
+        })
+
+    @_never_raise
+    def feed_attempt(self, name):
+        self._feed(name)
+        self.attempt("publisher_rss")
+
+    @_never_raise
+    def feed_items(self, name, collection):
+        self._feed(name)["items_fetched"] += _safe_len(collection)
+        self.items("publisher_rss", collection)
+
+    @_never_raise
+    def feed_confirmed(self, name, count):
+        self._feed(name)["new_confirmed"] += count
+        self.confirmed("publisher_rss", count)
+
+    @_never_raise
+    def feed_failure(self, name, error):
+        feed = self._feed(name)
+        feed["status"] = "error"
+        feed["last_error"] = safe_error(error)
+        self.failure("publisher_rss", error)
+
+    @_never_raise
+    def report(self, previous):
+        """New status keys. `previous` is the connectors section of the last run."""
+        finished = _now_iso()
+        connectors = {}
+        for key, label in CONNECTORS:
+            entry = self.data[key]
+            old = previous.get(key) if isinstance(previous.get(key), dict) else {}
+            status = _connector_status(entry)
+
+            if entry["requests"] > 0:
+                last_attempt = entry["last_attempt_utc"]
+            else:
+                last_attempt = _text_or_none(old.get("last_attempt_utc"))
+
+            # A success means at least one request completed technically in this run.
+            if status in ("ok", "partial"):
+                last_success = entry["last_attempt_utc"]
+            else:
+                last_success = _text_or_none(old.get("last_success_utc"))
+
+            streak = _count_or_zero(old.get("consecutive_failures"))
+            if status == "error":
+                streak += 1
+            elif status != "not_run":
+                streak = 0
+
+            connector = {
+                "label": label,
+                "status": status,
+                "last_attempt_utc": last_attempt,
+                "last_success_utc": last_success,
+                "consecutive_failures": streak,
+                "requests": entry["requests"],
+                "failed_requests": entry["failed_requests"],
+                "items_fetched": entry["items_fetched"],
+                "new_confirmed": entry["new_confirmed"],
+                "last_error": entry["last_error"],
+            }
+            if key == "publisher_rss":
+                connector["feeds"] = [dict(feed) for feed in self.feeds.values()]
+            connectors[key] = connector
+
+        return {
+            "schema_version": 2,
+            "status_legend": STATUS_LEGEND,
+            "run": {
+                "started_utc": self.started_utc,
+                "finished_utc": finished,
+                "duration_seconds": round(time.monotonic() - self._started, 1),
+                "github_run_url": github_run_url(),
+            },
+            "connectors": connectors,
+        }
+
+
+DIAG = Diagnostics()
+
+
+def load_previous_connectors():
+    """Connector section of the previous status file, or {} if unavailable."""
+    try:
+        data = json.loads(STATUS_FILE.read_text(encoding="utf-8"))
+        connectors = data.get("connectors")
+        return connectors if isinstance(connectors, dict) else {}
+    except Exception:
+        return {}
+
+
+def build_diagnostics_report():
+    """New status keys, or {} if they could not be built (old keys still get written)."""
+    try:
+        return DIAG.report(load_previous_connectors()) or {}
+    except Exception:
+        return {}
 
 
 def normalize(text):
@@ -213,14 +504,22 @@ def fetch_bing_rss(query):
 def fetch_alert_feeds():
     """Optional Google Alerts RSS URLs stored in a GitHub Actions secret."""
     urls = [x.strip() for x in os.environ.get("GOOGLE_ALERTS_RSS", "").splitlines() if x.strip()]
+    if not urls:
+        DIAG.not_configured("google_alerts")
     for url in urls:
         if not url.startswith("https://www.google.com/alerts/feeds/"):
+            DIAG.attempt("google_alerts")
+            DIAG.failure("google_alerts", ALERTS_ADDRESS_IGNORED)
             continue
         try:
-            for title, link, published, source, body in fetch_publisher_feed("Google Alerts", url):
+            DIAG.attempt("google_alerts")
+            entries = fetch_publisher_feed("Google Alerts", url)
+            DIAG.items("google_alerts", entries)
+            for title, link, published, source, body in entries:
                 yield title, link, published, source, body
         except Exception as error:
-            print(f"ALERT FEED UNAVAILABLE: {error}", flush=True)
+            print(f"ALERT FEED UNAVAILABLE: {redact(error)}", flush=True)
+            DIAG.failure("google_alerts", error)
 
 
 def collect_web_rss(confirmed, pending):
@@ -230,13 +529,17 @@ def collect_web_rss(confirmed, pending):
     for query in ('"Triada Robotics"', '"Artem Veselov"',
                   '"Тріада Роботікс"', '"Артем Веселов"'):
         try:
-            for item in fetch_bing_rss(query):
+            DIAG.attempt("bing")
+            items = fetch_bing_rss(query)
+            DIAG.items("bing", items)
+            for item in items:
                 title = (item.findtext("title") or "").strip()
                 link = (item.findtext("link") or "").strip()
                 if title and link:
                     entries.append((title, link, "", "Bing Search", ""))
         except Exception as error:
             print(f"BING RSS UNAVAILABLE {query}: {error}", flush=True)
+            DIAG.failure("bing", error)
     for title, link, published, source, body in entries:
         if not link.startswith(("http://", "https://")):
             continue
@@ -264,6 +567,7 @@ def collect_web_rss(confirmed, pending):
         confirmed[key] = record
         pending.pop(key, None)
         added += 1
+        DIAG.confirmed("bing" if source == "Bing Search" else "google_alerts")
     return added
 
 
@@ -456,11 +760,14 @@ def collect_gdelt(confirmed, pending):
     """Publish only articles verified in the title or publisher body."""
     added = 0
     for query in ('"Triada Robotics"', '"Artem Veselov"', '"TriadaRobotics"'):
+        DIAG.attempt("gdelt")
         try:
             articles = fetch_gdelt(query)
         except Exception as error:
             print(f"GDELT UNAVAILABLE {query}: {error}", flush=True)
+            DIAG.failure("gdelt", error)
             continue
+        DIAG.items("gdelt", articles)
         for article in articles:
             title = html.unescape(article.get("title") or "").strip()
             url = article.get("url") or ""
@@ -498,6 +805,7 @@ def collect_gdelt(confirmed, pending):
             confirmed[key] = record
             pending.pop(key, None)
             added += 1
+            DIAG.confirmed("gdelt")
     return added
 
 
@@ -531,6 +839,7 @@ def save(path, records):
 
 
 def main():
+    DIAG.start()
     confirmed = {}
     pending = {}
 
@@ -588,7 +897,9 @@ def main():
     for query in QUERIES:
         for region in REGIONS:
             try:
+                DIAG.attempt("google_news")
                 items = fetch(query, region)
+                DIAG.items("google_news", items)
 
                 for item in items:
                     title = (item.findtext("title") or "").strip()
@@ -650,6 +961,7 @@ def main():
                         confirmed[key] = record
 
                         added += 1
+                        DIAG.confirmed("google_news")
                         print(f"CONFIRMED: {title}", flush=True)
 
                     else:
@@ -659,6 +971,7 @@ def main():
             except Exception as error:
                 errors += 1
                 print(f"ERROR {query}: {error}", flush=True)
+                DIAG.failure("google_news", error)
 
             time.sleep(1)
 
@@ -667,11 +980,16 @@ def main():
 
     publisher_added = 0
     for source, feed in PUBLISHER_FEEDS:
+        feed_added_before = publisher_added
         try:
+            DIAG.feed_attempt(source)
             entries = fetch_publisher_feed(source, feed)
+            DIAG.feed_items(source, entries)
             publisher_added += match_publisher_feed(confirmed, pending, entries)
+            DIAG.feed_confirmed(source, publisher_added - feed_added_before)
         except Exception as error:
             print(f"FEED UNAVAILABLE {source}: {error}", flush=True)
+            DIAG.feed_failure(source, error)
 
     gdelt_added = collect_gdelt(confirmed, pending)
     print(f'Confirmed via GDELT: {gdelt_added}', flush=True)
@@ -706,7 +1024,8 @@ def main():
         "bing_and_alerts_added": web_added,
         "google_news_query_errors": errors,
     }
-    Path("collector_status.json").write_text(
+    report.update(build_diagnostics_report())
+    STATUS_FILE.write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
