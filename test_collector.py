@@ -452,6 +452,20 @@ class ConnectorDiagnosticsTests(unittest.TestCase):
                          ("ok", total, 1))
         self.assertEqual(news["new_confirmed"], status["google_news_added"])
 
+    def test_google_news_archives_older_hits_and_deduplicates_queries(self):
+        from email.utils import format_datetime
+        from datetime import datetime, timezone
+        item = rss_item("Unrelated industry story", "https://publisher.example/old")
+        item.find("pubDate").text = format_datetime(
+            datetime(2026, 4, 2, tzinfo=timezone.utc))
+        status, files, _ = self.run_main(fetch=lambda q, r: [item])
+        public = json.loads(files["mentions_public.json"])
+        self.assertEqual(len(public), 1)
+        self.assertEqual(public[0]["status"], "review")
+        self.assertEqual(len(public[0]["matched_queries"]), len(collector.QUERIES))
+        self.assertEqual(status["google_news_verification"]["already_known"],
+                         len(collector.QUERIES) * len(collector.REGIONS) - 1)
+
     def test_google_news_verification_funnel_distinguishes_outcomes(self):
         items = [
             rss_item("Triada Robotics launches BRAVO", "https://publisher.example/verified"),

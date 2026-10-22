@@ -923,9 +923,8 @@ def main():
                         date
                     ).astimezone(timezone.utc).isoformat()
 
-                    if published[:10] < START_DATE:
-                        continue
-
+                    # Archive every dated search hit, including older results.
+                    # Search hits are candidates, not verified media mentions.
                     source = item.find("source")
                     source_name = (
                         source.text.strip()
@@ -936,6 +935,14 @@ def main():
                     key = article_id(title, source_name)
 
                     if key in confirmed or key in pending:
+                        # Keep every search phrase that found this article,
+                        # without duplicating the article in the public library.
+                        record = confirmed.get(key) or pending[key]
+                        queries = set(record.get("matched_queries") or [])
+                        if record.get("keyword"):
+                            queries.add(record["keyword"])
+                        queries.add(query)
+                        record["matched_queries"] = sorted(queries)
                         DIAG.verification_event("already_known")
                         continue
 
@@ -957,6 +964,7 @@ def main():
                         "url": direct_url or url,
                         "published_at": published,
                         "keyword": query,
+                        "matched_queries": [query],
                     }
 
                     if match:

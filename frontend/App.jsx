@@ -82,6 +82,7 @@ function normalizeRecord(raw) {
     subject: raw.subject ?? null,
     sourceType: raw.source_type ?? "",
     keyword: raw.keyword ?? "",
+    categories: Array.isArray(raw.categories) ? raw.categories : [],
     firstSeenAt: typeof raw.first_seen_at === "string" ? raw.first_seen_at : "",
   };
 }
@@ -830,10 +831,31 @@ function MentionsLibrary({ data }) {
   const [customRange, setCustomRange] = useState(null);
 
   const options = useMemo(() => buildFilterOptions(records), [records]);
-  const visible = useMemo(
-    () => (filter === "all" ? records : records.filter((r) => r.status === filter)),
-    [records, filter]
-  );
+  const visible = useMemo(() => {
+    const now = Date.now();
+    const days = dateRange === "last-7-days" ? 7 : dateRange === "last-30-days" ? 30 : null;
+    const filtered = records.filter((record) => {
+      if (filter !== "all" && record.status !== filter) return false;
+      // Review candidates use provisional subject labels, not verified article text.
+      const text = [record.title, record.keyword, record.subject].filter(Boolean).join(" ");
+      const isCEO = record.categories.includes("CEO") || /artem\s+veselov|артем\s+веселов/i.test(text);
+      const isCompany = record.categories.includes("Company") || record.categories.includes("Products") || /triada\s+robotics|тріада\s+роботікс|триада\s+роботикс/i.test(text);
+      if (subject === "artem-veselov" && !isCEO) return false;
+      if (subject === "triada-robotics" && !isCompany) return false;
+      if (dateRange !== "all-time") {
+        const published = toTime(record.publishedAt);
+        if (published === null) return false;
+        if (days !== null && (published > now || published < now - days * 86400000)) return false;
+        if (dateRange === "custom" && customRange?.start && customRange?.end) {
+          const day = new Date(published).toISOString().slice(0, 10);
+          if (day < customRange.start || day > customRange.end) return false;
+        }
+      }
+      return true;
+    });
+    const sorted = sortNewestFirst(filtered);
+    return sortBy === "oldest" ? sorted.reverse() : sorted;
+  }, [records, filter, subject, dateRange, customRange, sortBy]);
   const discovered = useMemo(() => latestDiscovery(records), [records]);
 
   const isLoading = phase === "loading";
@@ -987,7 +1009,7 @@ function MentionsLibrary({ data }) {
 
         {isReady && records.length > 0 && visible.length === 0 && (
           <StateBlock title="No mentions match this filter.">
-            <button type="button" className="tmi-text-button" onClick={() => setFilter("all")}>
+            <button type="button" className="tmi-text-button" onClick={() => { setFilter("all"); setSubject("all"); setDateRange("all-time"); setSortBy("newest"); setCustomRange(null); }}>
               Show all mentions
             </button>
           </StateBlock>
