@@ -112,6 +112,63 @@
     "verification_method": "title"
   },
   {
+    "id": "manual-what-battle-tested-really-means-ukraine-is-not-a-lab-it-is-the-exam-20955",
+    "title": "What “Battle-Tested” Really Means: Ukraine Is Not a Lab. It Is the Exam",
+    "source": "UNITED24 Media",
+    "url": "https://united24media.com/opinion/what-battle-tested-really-means-ukraine-is-not-a-lab-it-is-the-exam-20955",
+    "published_at": "2026-07-22T08:54:00+00:00",
+    "categories": [
+      "Company",
+      "CEO"
+    ],
+    "matched_text": "Author: Artem Veselov — Ukrainian veteran, CEO of Triada Robotics & Resist.Hub.",
+    "keyword": "manual_verified",
+    "status": "relevant",
+    "verification_method": "manual_publisher_review",
+    "subject": "Artem Veselov",
+    "source_type": "publisher",
+    "first_seen_at": "2026-10-22T13:18:00+00:00",
+    "matched_queries": []
+  },
+  {
+    "id": "manual-ukraines-wartime-innovation-isnt-about-drones-its-about-speed-20748",
+    "title": "Ukraine’s Wartime Innovation Isn’t About Drones—It’s About Speed",
+    "source": "UNITED24 Media",
+    "url": "https://united24media.com/opinion/ukraines-wartime-innovation-isnt-about-drones-its-about-speed-20748",
+    "published_at": "2026-07-14T14:26:00+00:00",
+    "categories": [
+      "Company",
+      "CEO"
+    ],
+    "matched_text": "Authors: Artem Veselov — Ukrainian veteran, CEO of Triada Robotics & Resist.Hub.",
+    "keyword": "manual_verified",
+    "status": "relevant",
+    "verification_method": "manual_publisher_review",
+    "subject": "Artem Veselov",
+    "source_type": "publisher",
+    "first_seen_at": "2026-10-22T13:18:00+00:00",
+    "matched_queries": []
+  },
+  {
+    "id": "manual-dalekobijnyj-turboreaktyvnyj-udarnyj-bezpilotnyk-bravo-z-dalnistiu-2000-km-predstavyla-ukrainska-kompaniia-triada-robotics",
+    "title": "Далекобійний турбореактивний ударний безпілотник Bravo з дальністю 2000 км представила українська компанія Triada Robotics",
+    "source": "Газета МИГ",
+    "url": "https://mig.com.ua/dalekobijnyj-turboreaktyvnyj-udarnyj-bezpilotnyk-bravo-z-dalnistiu-2000-km-predstavyla-ukrainska-kompaniia-triada-robotics/",
+    "published_at": "2026-06-30T12:00:00+00:00",
+    "categories": [
+      "Company",
+      "Products"
+    ],
+    "matched_text": "Компанія Triada Robotics представила безпілотник Bravo.",
+    "keyword": "manual_verified",
+    "status": "relevant",
+    "verification_method": "manual_publisher_review",
+    "subject": "TRIADA Robotics",
+    "source_type": "publisher",
+    "first_seen_at": "2026-10-22T13:18:00+00:00",
+    "matched_queries": []
+  },
+  {
     "id": "582a89d194935089b29ac8f0196c6d82a236b4a190c7899fd74237e08ec2ebdb",
     "title": "Bravo: украинский дрон с дальностью полета 2000 км от Triada Robotics - Новини Донбасу",
     "source": "Новини Донбасу",
@@ -242,5 +299,24 @@
       "\"Артема Веселова\"",
       "\"Веселов\" \"Triada\""
     ]
+  },
+  {
+    "id": "manual-how-can-europe-rearm-by-scaling-ukrainian-innovation-18164",
+    "title": "How Can Europe Rearm? By Scaling Ukrainian Innovation",
+    "source": "UNITED24 Media",
+    "url": "https://united24media.com/opinion/how-can-europe-rearm-by-scaling-ukrainian-innovation-18164",
+    "published_at": "2026-04-23T16:22:00+00:00",
+    "categories": [
+      "Company",
+      "CEO"
+    ],
+    "matched_text": "Authors: Artem Veselov — Ukrainian veteran, CEO of Triada Robotics & Resist.Hub.",
+    "keyword": "manual_verified",
+    "status": "relevant",
+    "verification_method": "manual_publisher_review",
+    "subject": "Artem Veselov",
+    "source_type": "publisher",
+    "first_seen_at": "2026-10-22T13:18:00+00:00",
+    "matched_queries": []
   }
 ]
