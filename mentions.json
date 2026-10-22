@@ -14,7 +14,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "6e04e0de4717fa057f2f0e74cb5253fae492cbee42fec217251ccbb334dd266a",
@@ -31,7 +32,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "8e5eec0c36038519afaf0b53107a0cc580b71ef974d9d265459ddb58ba570315",
@@ -75,7 +77,8 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\"",
       "\"Veselov\" \"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "f66b81ae991aa6c158022a945d27c48b900dbc0bd74e50b8cf762b3851fc2e13",
@@ -91,7 +94,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "0cb5c327f639b8cdf1c205d2d505d8299d8a7cd8ef3076fe5e4e673ddf6a5335",
@@ -108,7 +112,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-1-20260813",
@@ -124,7 +129,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "d8cb9e298459a3256c23c877abd0ba1d1efa60ec26e9fd8f757ac8f3b752e2a7",
@@ -167,7 +173,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "be574ea01e39ae5227b297eb4b760f54c0ffe020cee9fdecf217a0f03318e008",
@@ -192,7 +199,8 @@
       "BRAVO"
     ],
     "matched_text": "Турбореактивный дрон Bravo Triada Robotics с модулем навигации TOPAZ - AmalNews",
-    "verification_method": "title"
+    "verification_method": "title",
+    "platform": "Media"
   },
   {
     "id": "d417d971d2409f3282bb25c2c46669123397b8c38c6495d2f13f764d819e0aa3",
@@ -208,7 +216,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-what-battle-tested-really-means-ukraine-is-not-a-lab-it-is-the-exam-20955",
@@ -227,7 +236,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "manual-ukraines-wartime-innovation-isnt-about-drones-its-about-speed-20748",
@@ -246,7 +256,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "manual-6-20260706",
@@ -262,7 +273,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "manual-dalekobijnyj-turboreaktyvnyj-udarnyj-bezpilotnyk-bravo-z-dalnistiu-2000-km-predstavyla-ukrainska-kompaniia-triada-robotics",
@@ -281,7 +293,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "582a89d194935089b29ac8f0196c6d82a236b4a190c7899fd74237e08ec2ebdb",
@@ -306,7 +319,8 @@
       "BRAVO"
     ],
     "matched_text": "Bravo: украинский дрон с дальностью полета 2000 км от Triada Robotics - Новини Донбасу",
-    "verification_method": "title"
+    "verification_method": "title",
+    "platform": "Media"
   },
   {
     "id": "manual-4-20260626",
@@ -322,7 +336,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "manual-5-20260626",
@@ -338,7 +353,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "e38d4790d84466c23147fe71b0a3623e1aa874d71397ea48c8534ea05323e5b6",
@@ -355,7 +371,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "c91749aed825587937b2192aa66f572a1cc9c8d892a11c27f72f6fa23cda701c",
@@ -376,7 +393,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-3-20260624",
@@ -392,7 +410,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "7e06a0e82d717fe79abec5e965eae699aef7d096255798eb6b9a7faa78d589c3",
@@ -414,7 +433,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "97f5088da6394688367c934425e83f821dbbe5d11893a09dae163f15f235cdc7",
@@ -469,7 +489,8 @@
       "\"Veselov\" \"Triada Robotics\"",
       "\"Артем Веселов\"",
       "\"Веселов\" \"Triada\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "8373bfb6be42f23798c964ce00ee4dd1e52ef2588bb88f13e5373ee5e565e231",
@@ -521,7 +542,8 @@
       "\"Артем Веселов\"",
       "\"Артема Веселова\"",
       "\"Веселов\" \"Triada\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "fdd8fd6a4e7828c736c8ce1f57394621fb7b49c9b390756d99128288b0731a05",
@@ -541,7 +563,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "056fe16c320adefeb4e55d2a7b75d36c058182f961afe54bc01b205e25837a51",
@@ -560,7 +583,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-2-20260610",
@@ -576,7 +600,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "0ed1ed1dfd95082a62afba54cd73f9192031d95ae3386d9b074ddaae622471f1",
@@ -594,7 +619,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-how-can-europe-rearm-by-scaling-ukrainian-innovation-18164",
@@ -613,6 +639,7 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   }
 ]

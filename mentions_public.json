@@ -14,7 +14,24 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
+  },
+  {
+    "id": "b21f63962f3fe9ee89f8c5e8e35ecab1daf95c68b96326c7e6abefe8981b5b38",
+    "title": "How Can MANET Reduce Dependence on Starlink? - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBVSDVRWVpodmdWQzNtcl9vYm81TGpxQVRGT280b1ZjSXU4dDBuVTdwNHZaUTgxQ0dTT0ZyVS1ibFVUZVUycFY3eGV6UG80Y1hMT0tOWDdEcmJsRlRmV1U3UzBXem9FYWQ2VmIxWFllQU5GbWtaRF9YUVRyRjFneU0?oc=5",
+    "published_at": "2026-10-17T15:02:06+00:00",
+    "keyword": "\"Artem Veselov\" \"drone\"",
+    "matched_queries": [
+      "\"Artem Veselov\" \"drone\""
+    ],
+    "status": "review",
+    "platform": "Media",
+    "categories": [
+      "CEO"
+    ]
   },
   {
     "id": "6e04e0de4717fa057f2f0e74cb5253fae492cbee42fec217251ccbb334dd266a",
@@ -31,7 +48,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "8e5eec0c36038519afaf0b53107a0cc580b71ef974d9d265459ddb58ba570315",
@@ -75,7 +93,8 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\"",
       "\"Veselov\" \"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "f66b81ae991aa6c158022a945d27c48b900dbc0bd74e50b8cf762b3851fc2e13",
@@ -91,7 +110,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "0cb5c327f639b8cdf1c205d2d505d8299d8a7cd8ef3076fe5e4e673ddf6a5335",
@@ -108,7 +128,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-1-20260813",
@@ -124,7 +145,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "8494f4e11e6a7c965d4930feacc0d9682c6493a749e610f5fc16699b33f92a6e",
@@ -142,6 +164,7 @@
       "\"Triada\" \"BRAVO\"",
       "\"Veselov\" \"Triada Robotics\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -187,7 +210,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "be574ea01e39ae5227b297eb4b760f54c0ffe020cee9fdecf217a0f03318e008",
@@ -212,7 +236,8 @@
       "BRAVO"
     ],
     "matched_text": "Турбореактивный дрон Bravo Triada Robotics с модулем навигации TOPAZ - AmalNews",
-    "verification_method": "title"
+    "verification_method": "title",
+    "platform": "Media"
   },
   {
     "id": "78f3f7cf9737f83a6b4e7d388896baefe0c74ba13c7d29de8121faaff4791f4f",
@@ -229,6 +254,7 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -248,6 +274,7 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -266,6 +293,7 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -282,6 +310,7 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -299,6 +328,7 @@
       "\"TRIADA ROBOTICS\" BRAVO",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -317,7 +347,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "manual-what-battle-tested-really-means-ukraine-is-not-a-lab-it-is-the-exam-20955",
@@ -336,7 +367,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "e4ba06af03df7f70164d74adceeb10cdac93e8ddcd2049650ce4e97a987d1bf7",
@@ -352,6 +384,7 @@
       "\"Triada Robotics\"",
       "\"Veselov\" \"Triada Robotics\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -373,7 +406,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "c61fad81287c05e4f7f2d46be1e1c28ba21c9a7c71904339eb07baaea1180aa2",
@@ -388,6 +422,7 @@
       "\"Artem Veselov\" \"drone\"",
       "\"Veselov\" \"Triada Robotics\""
     ],
+    "platform": "Media",
     "categories": [
       "CEO"
     ]
@@ -403,6 +438,7 @@
     "matched_queries": [
       "\"Triada Robotics\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -419,6 +455,7 @@
       "\"Triada Robotics\"",
       "\"Артем Веселов\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -432,8 +469,10 @@
     "keyword": "\"Artem Veselov\"",
     "status": "review",
     "matched_queries": [
-      "\"Artem Veselov\""
+      "\"Artem Veselov\"",
+      "\"Артем Веселов\""
     ],
+    "platform": "Media",
     "categories": [
       "CEO"
     ]
@@ -446,9 +485,11 @@
     "published_at": "2026-07-08T07:00:00+00:00",
     "keyword": "\"Артем Веселов\"",
     "matched_queries": [
+      "\"Artem Veselov\"",
       "\"Артем Веселов\""
     ],
     "status": "review",
+    "platform": "Media",
     "categories": [
       "CEO"
     ]
@@ -467,7 +508,8 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "manual-dalekobijnyj-turboreaktyvnyj-udarnyj-bezpilotnyk-bravo-z-dalnistiu-2000-km-predstavyla-ukrainska-kompaniia-triada-robotics",
@@ -486,7 +528,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "582a89d194935089b29ac8f0196c6d82a236b4a190c7899fd74237e08ec2ebdb",
@@ -511,7 +554,8 @@
       "BRAVO"
     ],
     "matched_text": "Bravo: украинский дрон с дальностью полета 2000 км от Triada Robotics - Новини Донбасу",
-    "verification_method": "title"
+    "verification_method": "title",
+    "platform": "Media"
   },
   {
     "id": "manual-4-20260626",
@@ -527,7 +571,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "manual-5-20260626",
@@ -543,22 +588,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
-  },
-  {
-    "id": "d7deed40daef6753b4063b32e0a32dde37ed029b6be56817561bee9858936651",
-    "title": "Eurosatory 2026. Is Europe Ready for Modern War? - Мілітарний",
-    "source": "Мілітарний",
-    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQc3hVNFR2VWVRNk01MG54eFpXVEZqMVl6cmQ1ZldmXzN4Qlh6TG5vRkRDYkkyZi1mbEdOUHJNUzdCc0hoNjBJRUoyQmlOWUNJaGJOb1BROXJtVHNzTjlES1lpLXBZY2hvRTRFNzJQb1VsREZqY3VRNnl4R3Q4V0lZc1BJelhGQQ?oc=5",
-    "published_at": "2026-06-26T07:00:00+00:00",
-    "keyword": "\"Artem Veselov\"",
-    "status": "review",
-    "matched_queries": [
-      "\"Artem Veselov\""
-    ],
-    "categories": [
-      "CEO"
-    ]
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "e38d4790d84466c23147fe71b0a3623e1aa874d71397ea48c8534ea05323e5b6",
@@ -575,7 +606,24 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
+  },
+  {
+    "id": "d7deed40daef6753b4063b32e0a32dde37ed029b6be56817561bee9858936651",
+    "title": "Eurosatory 2026. Is Europe Ready for Modern War? - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQc3hVNFR2VWVRNk01MG54eFpXVEZqMVl6cmQ1ZldmXzN4Qlh6TG5vRkRDYkkyZi1mbEdOUHJNUzdCc0hoNjBJRUoyQmlOWUNJaGJOb1BROXJtVHNzTjlES1lpLXBZY2hvRTRFNzJQb1VsREZqY3VRNnl4R3Q4V0lZc1BJelhGQQ?oc=5",
+    "published_at": "2026-06-26T07:00:00+00:00",
+    "keyword": "\"Artem Veselov\"",
+    "status": "review",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ],
+    "platform": "Media",
+    "categories": [
+      "CEO"
+    ]
   },
   {
     "id": "e43c3a9ac2cc46935425f2641c13680b5904cefeb1501e8d7c87c41aa60064e2",
@@ -589,25 +637,7 @@
       "\"Triada Robotics\"",
       "\"Артем Веселов\""
     ],
-    "categories": [
-      "Company"
-    ]
-  },
-  {
-    "id": "195df4ec3edd201900522c40ce99956c63c6143517860babbe298089e1068912",
-    "title": "Polish Striker drone reaches Urals range after successful Ukraine tests - RBC-Ukraine",
-    "source": "RBC-Ukraine",
-    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQMGRvNmE0Mnd1Tk41TTE1SnZXc0xiQ0VnT3RXMjExcWVLRVlKRldoYXRzSzBxSThtWUxwSXY3T1dOX3AtSVUxOHJ0T0tTRkhxdm1PWmJUNUlJNTA1bDFPWEZnYVRrc2VnMUlvM1ViaEpVZVZQVVJvS1c2MDNOakVvd0FFa3hZXzkzd1dGOW1XV0NRZw?oc=5",
-    "published_at": "2026-06-25T07:00:00+00:00",
-    "keyword": "\"Triada Robotics\"",
-    "status": "review",
-    "matched_queries": [
-      "\"BRAVO\" \"Triada Robotics\"",
-      "\"TRIADA ROBOTICS\" BRAVO",
-      "\"TRIADA ROBOTICS\" KILO",
-      "\"Triada Robotics\"",
-      "\"Triada\" \"BRAVO\""
-    ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -631,7 +661,28 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
+  },
+  {
+    "id": "195df4ec3edd201900522c40ce99956c63c6143517860babbe298089e1068912",
+    "title": "Polish Striker drone reaches Urals range after successful Ukraine tests - RBC-Ukraine",
+    "source": "RBC-Ukraine",
+    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQMGRvNmE0Mnd1Tk41TTE1SnZXc0xiQ0VnT3RXMjExcWVLRVlKRldoYXRzSzBxSThtWUxwSXY3T1dOX3AtSVUxOHJ0T0tTRkhxdm1PWmJUNUlJNTA1bDFPWEZnYVRrc2VnMUlvM1ViaEpVZVZQVVJvS1c2MDNOakVvd0FFa3hZXzkzd1dGOW1XV0NRZw?oc=5",
+    "published_at": "2026-06-25T07:00:00+00:00",
+    "keyword": "\"Triada Robotics\"",
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ],
+    "platform": "Media",
+    "categories": [
+      "Company"
+    ]
   },
   {
     "id": "manual-3-20260624",
@@ -647,7 +698,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "7e06a0e82d717fe79abec5e965eae699aef7d096255798eb6b9a7faa78d589c3",
@@ -669,7 +721,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "5fa03ff4e95e12f6ea8217ce2e24e48f4fb55b4af8f70d55ef42b4401093eb11",
@@ -688,6 +741,7 @@
       "\"Triada\" \"BRAVO\"",
       "\"Triada\" \"KILO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -745,7 +799,8 @@
       "\"Veselov\" \"Triada Robotics\"",
       "\"Артем Веселов\"",
       "\"Веселов\" \"Triada\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "8373bfb6be42f23798c964ce00ee4dd1e52ef2588bb88f13e5373ee5e565e231",
@@ -797,27 +852,8 @@
       "\"Артем Веселов\"",
       "\"Артема Веселова\"",
       "\"Веселов\" \"Triada\""
-    ]
-  },
-  {
-    "id": "b84d72e5fbc883e6b7bac718297cd5a8d7a8e31edefcea90d662135f86383e5d",
-    "title": "Ukraine has developed a new deep strike drone with a range of 2,000 km - dev.ua",
-    "source": "dev.ua",
-    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1SNWhETFRSNFhfTHhZR2ZrcDBBMHZjaHdBOFhkYVRlUmdJbDY3TnhyeFlDRk1HQzRENEJTTzNSTXRDZkFENVVUdDRkVzBVbGxsOExxMWItNjBUVnlFZGlNZzR5M3E?oc=5",
-    "published_at": "2026-06-23T07:00:00+00:00",
-    "keyword": "\"Triada Robotics\"",
-    "status": "review",
-    "matched_queries": [
-      "\"BRAVO\" \"Triada Robotics\"",
-      "\"KILO\" \"Triada Robotics\"",
-      "\"TRIADA ROBOTICS\" BRAVO",
-      "\"TRIADA ROBOTICS\" KILO",
-      "\"Triada Robotics\"",
-      "\"Triada\" \"BRAVO\""
     ],
-    "categories": [
-      "Company"
-    ]
+    "platform": "Media"
   },
   {
     "id": "fdd8fd6a4e7828c736c8ce1f57394621fb7b49c9b390756d99128288b0731a05",
@@ -837,7 +873,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "056fe16c320adefeb4e55d2a7b75d36c058182f961afe54bc01b205e25837a51",
@@ -856,7 +893,29 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
+  },
+  {
+    "id": "b84d72e5fbc883e6b7bac718297cd5a8d7a8e31edefcea90d662135f86383e5d",
+    "title": "Ukraine has developed a new deep strike drone with a range of 2,000 km - dev.ua",
+    "source": "dev.ua",
+    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1SNWhETFRSNFhfTHhZR2ZrcDBBMHZjaHdBOFhkYVRlUmdJbDY3TnhyeFlDRk1HQzRENEJTTzNSTXRDZkFENVVUdDRkVzBVbGxsOExxMWItNjBUVnlFZGlNZzR5M3E?oc=5",
+    "published_at": "2026-06-23T07:00:00+00:00",
+    "keyword": "\"Triada Robotics\"",
+    "status": "review",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ],
+    "platform": "Media",
+    "categories": [
+      "Company"
+    ]
   },
   {
     "id": "68e54bc41641a03ccd5edf7c0fa4d070963d8249bf149e03a741d37ff1af4ab6",
@@ -874,6 +933,7 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -886,6 +946,12 @@
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada\" \"BRAVO\"",
     "status": "review",
+    "matched_queries": [
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -898,6 +964,7 @@
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada\" \"BRAVO\"",
     "status": "review",
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -913,6 +980,7 @@
     "matched_queries": [
       "\"Artem Veselov\" \"drone\""
     ],
+    "platform": "Media",
     "categories": [
       "CEO"
     ]
@@ -931,7 +999,8 @@
     "subject": "TRIADA Robotics",
     "source_type": "publisher",
     "verification_method": "publisher_or_notion_source",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   },
   {
     "id": "0ed1ed1dfd95082a62afba54cd73f9192031d95ae3386d9b074ddaae622471f1",
@@ -949,7 +1018,8 @@
     "categories": [
       "CEO"
     ],
-    "verification_method": "manual_publisher_review"
+    "verification_method": "manual_publisher_review",
+    "platform": "Media"
   },
   {
     "id": "516290dcf8801304a4d6118d2af6550d6e1d22da2bb7a9de2d450d9b3183dbb8",
@@ -962,6 +1032,7 @@
     "matched_queries": [
       "\"Triada Robotics\""
     ],
+    "platform": "Media",
     "categories": [
       "Company"
     ]
@@ -983,6 +1054,7 @@
     "subject": "Artem Veselov",
     "source_type": "publisher",
     "first_seen_at": "2026-10-22T13:18:00+00:00",
-    "matched_queries": []
+    "matched_queries": [],
+    "platform": "Media"
   }
 ]

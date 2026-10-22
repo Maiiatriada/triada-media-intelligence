@@ -1,5 +1,18 @@
 [
   {
+    "id": "b21f63962f3fe9ee89f8c5e8e35ecab1daf95c68b96326c7e6abefe8981b5b38",
+    "title": "How Can MANET Reduce Dependence on Starlink? - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBVSDVRWVpodmdWQzNtcl9vYm81TGpxQVRGT280b1ZjSXU4dDBuVTdwNHZaUTgxQ0dTT0ZyVS1ibFVUZVUycFY3eGV6UG80Y1hMT0tOWDdEcmJsRlRmV1U3UzBXem9FYWQ2VmIxWFllQU5GbWtaRF9YUVRyRjFneU0?oc=5",
+    "published_at": "2026-10-17T15:02:06+00:00",
+    "keyword": "\"Artem Veselov\" \"drone\"",
+    "matched_queries": [
+      "\"Artem Veselov\" \"drone\""
+    ],
+    "status": "review",
+    "platform": "Media"
+  },
+  {
     "id": "8494f4e11e6a7c965d4930feacc0d9682c6493a749e610f5fc16699b33f92a6e",
     "title": "Ukraine’s new drone is a cousin to America’s stealth bombers. It reaches Ufa in three hours. - Euromaidan Press",
     "source": "Euromaidan Press",
@@ -14,7 +27,8 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\"",
       "\"Veselov\" \"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "78f3f7cf9737f83a6b4e7d388896baefe0c74ba13c7d29de8121faaff4791f4f",
@@ -30,7 +44,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "faa5939422632f5c8896ac754af4401d1e3e6a4096b7d559598e974a20b545f8",
@@ -46,7 +61,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "a7a0ec6a63315a503946d7a1cf67592142818916c2d55c9974adc2be647401f9",
@@ -61,7 +77,8 @@
       "\"TRIADA ROBOTICS\" BRAVO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "786c77a3c36ac4c760b62d84d664e02e327d841082bc7b65f44a7091b774beae",
@@ -74,7 +91,8 @@
     "matched_queries": [
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "1f507f2915eb56770f8e2d104023b7200b8c009c06ce4f46d46a8a10d3c924ca",
@@ -88,7 +106,8 @@
       "\"BRAVO\" \"Triada Robotics\"",
       "\"TRIADA ROBOTICS\" BRAVO",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "e4ba06af03df7f70164d74adceeb10cdac93e8ddcd2049650ce4e97a987d1bf7",
@@ -103,7 +122,8 @@
       "\"Artem Veselov\" \"drone\"",
       "\"Triada Robotics\"",
       "\"Veselov\" \"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "c61fad81287c05e4f7f2d46be1e1c28ba21c9a7c71904339eb07baaea1180aa2",
@@ -117,7 +137,8 @@
       "\"Artem Veselov\"",
       "\"Artem Veselov\" \"drone\"",
       "\"Veselov\" \"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "91d9eca90b6be923d7f5f0cfbe57d79666360176a381245c33ae5a34c4fd1201",
@@ -129,7 +150,8 @@
     "status": "review",
     "matched_queries": [
       "\"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "d0ec14cd13c7eb497776bc295b17bf9805f2d8def047dafba54f72791aefdb87",
@@ -142,7 +164,8 @@
     "matched_queries": [
       "\"Triada Robotics\"",
       "\"Артем Веселов\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "a4388712469cf36e49938bcb7c4f72551e0aac6f647c46028df61315b39a2ffb",
@@ -153,8 +176,10 @@
     "keyword": "\"Artem Veselov\"",
     "status": "review",
     "matched_queries": [
-      "\"Artem Veselov\""
-    ]
+      "\"Artem Veselov\"",
+      "\"Артем Веселов\""
+    ],
+    "platform": "Media"
   },
   {
     "id": "ca67d15e0a8919e04206ac18602fdf75cfdbf4734da047f20127a2034d1eb9c2",
@@ -164,9 +189,11 @@
     "published_at": "2026-07-08T07:00:00+00:00",
     "keyword": "\"Артем Веселов\"",
     "matched_queries": [
+      "\"Artem Veselov\"",
       "\"Артем Веселов\""
     ],
-    "status": "review"
+    "status": "review",
+    "platform": "Media"
   },
   {
     "id": "d7deed40daef6753b4063b32e0a32dde37ed029b6be56817561bee9858936651",
@@ -178,7 +205,8 @@
     "status": "review",
     "matched_queries": [
       "\"Artem Veselov\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "e43c3a9ac2cc46935425f2641c13680b5904cefeb1501e8d7c87c41aa60064e2",
@@ -191,7 +219,8 @@
     "matched_queries": [
       "\"Triada Robotics\"",
       "\"Артем Веселов\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "195df4ec3edd201900522c40ce99956c63c6143517860babbe298089e1068912",
@@ -207,7 +236,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "5fa03ff4e95e12f6ea8217ce2e24e48f4fb55b4af8f70d55ef42b4401093eb11",
@@ -225,7 +255,8 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\"",
       "\"Triada\" \"KILO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "b84d72e5fbc883e6b7bac718297cd5a8d7a8e31edefcea90d662135f86383e5d",
@@ -242,7 +273,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "68e54bc41641a03ccd5edf7c0fa4d070963d8249bf149e03a741d37ff1af4ab6",
@@ -259,7 +291,8 @@
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "dfa9ce1d0a0cff04921d8469df484a63c1011abc4599931333a19f3dc4744ecd",
@@ -268,7 +301,13 @@
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1GaU1wUUpuTmhjN0piY2tQMU5LSmw4YTNlOHhOckVFMDNVT1ppWWRuWXpraXVIdjZNcmVEajNoSzNFU1EtbFNfeERVUEJxd1NXX3ZxUGVSNDdpNm9DU25qOUJtSE5VR1lkTmc?oc=5",
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada\" \"BRAVO\"",
-    "status": "review"
+    "status": "review",
+    "matched_queries": [
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ],
+    "platform": "Media"
   },
   {
     "id": "7896dad866b54e478b2095e1df3d2037d12c4c99f068c7bcbed342dd6b2a54d1",
@@ -277,7 +316,8 @@
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1GaU1wUUpuTmhjN0piY2tQMU5LSmw4YTNlOHhOckVFMDNVT1ppWWRuWXpraXVIdjZNcmVEajNoSzNFU1EtbFNfeERVUEJxd1NXX3ZxUGVSNDdpNm9DU25qOUJtSE5VR1lkTmc?oc=5",
     "published_at": "2026-06-23T07:00:00+00:00",
     "keyword": "\"Triada\" \"BRAVO\"",
-    "status": "review"
+    "status": "review",
+    "platform": "Media"
   },
   {
     "id": "120d735aca08c926c00fd46c0c050e4877a98437ffe643625bc3e8834c260567",
@@ -289,7 +329,8 @@
     "status": "review",
     "matched_queries": [
       "\"Artem Veselov\" \"drone\""
-    ]
+    ],
+    "platform": "Media"
   },
   {
     "id": "516290dcf8801304a4d6118d2af6550d6e1d22da2bb7a9de2d450d9b3183dbb8",
@@ -301,6 +342,7 @@
     "status": "review",
     "matched_queries": [
       "\"Triada Robotics\""
-    ]
+    ],
+    "platform": "Media"
   }
 ]
