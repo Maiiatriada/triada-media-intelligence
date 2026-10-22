@@ -442,7 +442,10 @@ class ConnectorDiagnosticsTests(unittest.TestCase):
 
     def test_google_news_success_counts_items_and_confirmations(self):
         item = rss_item("Triada Robotics unveils BRAVO", "https://publisher.example/gn")
-        status, _, _ = self.run_main(fetch=lambda q, r: [item])
+        status, _, _ = self.run_main(
+            fetch=lambda q, r: [item],
+            article=lambda url: ("Triada Robotics unveils BRAVO", "https://publisher.example/gn")
+        )
         news = status["connectors"]["google_news"]
         total = len(collector.QUERIES) * len(collector.REGIONS)
         self.assertEqual((news["status"], news["items_fetched"], news["new_confirmed"]),

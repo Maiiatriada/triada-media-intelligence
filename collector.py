@@ -861,14 +861,15 @@ def main():
         title_match = classify(record["title"])
 
         if title_match:
-            resolved_url = resolve_google_news(record.get("direct_url") or record["url"])
-            if "news.google.com/" in resolved_url:
+            # A decoded link alone does not prove the publisher article exists.
+            text, direct_url = read_article(record.get("direct_url") or record["url"])
+            if not (text and direct_url):
                 continue
-            record["url"] = resolved_url
-            record["direct_url"] = resolved_url
+            record["url"] = direct_url
+            record["direct_url"] = direct_url
             record.update(title_match)
             record["status"] = "relevant"
-            record["verification_method"] = "title"
+            record["verification_method"] = "verified_publisher_title"
             confirmed[key] = record
             del pending[key]
             continue
@@ -948,16 +949,22 @@ def main():
                     }
 
                     if match:
-                        resolved_url = resolve_google_news(url)
-                        if "news.google.com/" in resolved_url:
+                        # Google News titles and decoded URLs are not sufficient
+                        # evidence: require a successful publisher HTML fetch.
+                        if not direct_url:
+                            text, direct_url = read_article(url)
+                        if not (text and direct_url):
                             record["status"] = "review"
                             pending[key] = record
                             continue
-                        record["url"] = direct_url or resolved_url
-                        record["direct_url"] = direct_url or resolved_url
+                        record["url"] = direct_url
+                        record["direct_url"] = direct_url
                         record.update(match)
                         record["status"] = "relevant"
-                        record["verification_method"] = verification_method
+                        record["verification_method"] = (
+                            "verified_publisher_title" if verification_method == "title"
+                            else "article_body"
+                        )
                         confirmed[key] = record
 
                         added += 1
