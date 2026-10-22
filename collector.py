@@ -681,7 +681,21 @@ def main():
 
     save(DATABASE, confirmed)
     save(REVIEW, pending)
-    save(PUBLIC, confirmed)
+    # Public All library includes both verified mentions and search candidates.
+    # Keep internal status for transparency and retain candidates across runs.
+    all_records = dict(confirmed)
+    for key, record in pending.items():
+        if key not in all_records:
+            candidate = dict(record)
+            if not candidate.get("categories"):
+                q = candidate.get("keyword", "").lower()
+                candidate["categories"] = (
+                    ["CEO"] if any(x in q for x in ("veselov", "veselow", "веселов"))
+                    else ["Company"] if any(x in q for x in ("triada", "тріада", "триада"))
+                    else []
+                )
+            all_records[key] = candidate
+    save(PUBLIC, all_records)
     report = {
         "last_run_utc": __import__("datetime").datetime.now(timezone.utc).isoformat(),
         "confirmed_total": len(confirmed),
