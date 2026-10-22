@@ -220,6 +220,10 @@ class Diagnostics:
     def reset(self):
         self.data = {key: self._blank() for key, _ in CONNECTORS}
         self.feeds = {}  # publisher feed name -> per-feed detail
+        self.verification = {key: 0 for key in (
+            "candidates_checked", "publisher_opened", "publisher_unavailable",
+            "mention_absent", "confirmed", "already_known",
+        )}
         self.started_utc = _now_iso()
         self._started = time.monotonic()
 
@@ -234,6 +238,10 @@ class Diagnostics:
             "last_error": None,
             "last_attempt_utc": None,
         }
+
+    @_never_raise
+    def verification_event(self, event):
+        self.verification[event] += 1
 
     @_never_raise
     def start(self):
@@ -348,6 +356,7 @@ class Diagnostics:
                 "github_run_url": github_run_url(),
             },
             "connectors": connectors,
+            "google_news_verification": dict(self.verification),
         }
 
 
@@ -927,8 +936,10 @@ def main():
                     key = article_id(title, source_name)
 
                     if key in confirmed or key in pending:
+                        DIAG.verification_event("already_known")
                         continue
 
+                    DIAG.verification_event("candidates_checked")
                     match = classify(title)
                     direct_url = ""
 
@@ -954,9 +965,11 @@ def main():
                         if not direct_url:
                             text, direct_url = read_article(url)
                         if not (text and direct_url):
+                            DIAG.verification_event("publisher_unavailable")
                             record["status"] = "review"
                             pending[key] = record
                             continue
+                        DIAG.verification_event("publisher_opened")
                         record["url"] = direct_url
                         record["direct_url"] = direct_url
                         record.update(match)
@@ -969,9 +982,15 @@ def main():
 
                         added += 1
                         DIAG.confirmed("google_news")
+                        DIAG.verification_event("confirmed")
                         print(f"CONFIRMED: {title}", flush=True)
 
                     else:
+                        if direct_url:
+                            DIAG.verification_event("publisher_opened")
+                            DIAG.verification_event("mention_absent")
+                        else:
+                            DIAG.verification_event("publisher_unavailable")
                         record["status"] = "review"
                         pending[key] = record
 
