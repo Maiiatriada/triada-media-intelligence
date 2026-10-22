@@ -4,6 +4,7 @@ import json
 import os
 import re
 import time
+import copy
 import functools
 import hashlib
 import html
@@ -390,6 +391,148 @@ def article_id(title, source):
     return hashlib.sha256(value.encode()).hexdigest()
 
 
+# ---------------------------------------------------------------------------
+# Platform handling, hand-added records and record identity
+#
+# Every mention has a `platform`. Mentions found by this collector are Media.
+#
+# Hand-added records are READ-ONLY for the collector. A record counts as
+# hand-added when it has any of these markers (all already used in the data):
+#   - "origin": "manual"                      (the explicit marker, recommended)
+#   - a platform other than Media             (Facebook, Instagram, X, LinkedIn, YouTube, ...)
+#   - a hand-written id                       (anything that is not an automatic 64-character hash)
+#   - verification_method "manual_*" or "publisher_or_notion_source"
+#   - keyword "manual_*"
+# A record in a source file without any id can only have been written by a
+# person, so it is marked "origin": "manual" when it is first seen.
+#
+# The media pipeline never verifies, promotes, updates, replaces or reclassifies
+# such a record, and as a final safety net the collector restores every
+# hand-added record to exactly what was loaded, in the file it came from,
+# before anything is saved.
+# ---------------------------------------------------------------------------
+
+DEFAULT_PLATFORM = "Media"
+AUTOMATIC_ID = re.compile(r"[0-9a-f]{64}")
+
+
+def has_explicit_platform(record):
+    value = record.get("platform")
+    return not (value is None or (isinstance(value, str) and not value.strip()))
+
+
+def has_social_platform(record):
+    """An explicit platform other than Media."""
+    return (isinstance(record, dict) and has_explicit_platform(record)
+            and str(record["platform"]).strip().casefold() != DEFAULT_PLATFORM.casefold())
+
+
+def has_no_id(record):
+    current = record.get("id")
+    return current is None or (isinstance(current, str) and not current.strip())
+
+
+def has_hand_written_id(record):
+    current = record.get("id")
+    return (isinstance(current, str) and bool(current.strip())
+            and not AUTOMATIC_ID.fullmatch(current))
+
+
+def is_protected(record):
+    """True for a hand-added (or hand-verified) record, which the collector never changes."""
+    if not isinstance(record, dict):
+        return False
+    if record.get("origin") == "manual" or has_social_platform(record) or has_hand_written_id(record):
+        return True
+    method = str(record.get("verification_method") or "")
+    if method.startswith("manual") or method == "publisher_or_notion_source":
+        return True
+    return str(record.get("keyword") or "").startswith("manual")
+
+
+def ensure_platform(record):
+    """Records without a platform are Media. An existing value is never touched."""
+    if not has_explicit_platform(record):
+        record["platform"] = DEFAULT_PLATFORM
+    return record
+
+
+def record_key(record):
+    """Identity of a record. Normal records: title + source, exactly as before.
+    A hand-made record without a title or source keeps its own id (or url)."""
+    if "title" in record and "source" in record:
+        return article_id(record["title"], record["source"])
+    fallback = record.get("id") or hashlib.sha256(
+        (record.get("url") or json.dumps(record, sort_keys=True)).encode()
+    ).hexdigest()
+    return str(fallback)
+
+
+def rebuild_id(record, key):
+    """Automatic ids are rebuilt from the key, as before. A hand-written id such
+    as "manual-1-20260813" is kept exactly as written."""
+    if has_no_id(record) or AUTOMATIC_ID.fullmatch(str(record.get("id"))):
+        record["id"] = key
+    return record
+
+
+def adopt_record(record):
+    """Called when a record is loaded from a source file: mark id-less records as
+    hand-added (only a person writes a record without an id)."""
+    if has_no_id(record):
+        record.setdefault("origin", "manual")
+    return record
+
+
+def merge_duplicate(kept, other, prefer_manual=True):
+    """Two records with the same identity in the same file. A hand-added record wins
+    over an automatic one; between two of the same kind the first stays. What the
+    winner lacks is filled in from the other, and an explicit social platform is
+    never lost."""
+    if prefer_manual and is_protected(other) and not is_protected(kept):
+        winner, loser = dict(other), kept
+    else:
+        winner, loser = kept, other
+    for field, value in loser.items():
+        if field == "platform":
+            continue
+        if field not in winner or winner[field] in (None, "", [], {}):
+            winner[field] = value
+    if has_social_platform(loser) and not has_social_platform(winner):
+        winner["platform"] = loser["platform"]
+    if winner is not kept:
+        kept.clear()
+        kept.update(winner)
+    return kept
+
+
+def snapshot_manual(confirmed, pending):
+    """Every hand-added record exactly as loaded, plus which keys each file held at load time."""
+    return {
+        "records": [(name, key, copy.deepcopy(record))
+                    for name, bucket in (("confirmed", confirmed), ("pending", pending))
+                    for key, record in bucket.items() if is_protected(record)],
+        "loaded": {"confirmed": set(confirmed), "pending": set(pending)},
+    }
+
+
+def restore_manual(confirmed, pending, snapshot):
+    """Safety net. Whatever happened during the run, every hand-added record leaves
+    exactly as it came in, in the file it came from. Returns what had to be restored."""
+    buckets = {"confirmed": confirmed, "pending": pending}
+    restored = []
+    for name, key, original in snapshot["records"]:
+        if buckets[name].get(key) != original:
+            buckets[name][key] = copy.deepcopy(original)
+            restored.append(original.get("title") or key)
+        # A copy that crossed over to the other file during the run is removed;
+        # a record that was already in the other file when loaded is left alone.
+        other = "pending" if name == "confirmed" else "confirmed"
+        if key in buckets[other] and key not in snapshot["loaded"][other]:
+            del buckets[other][key]
+    return restored
+
+
 def classify(text):
     company = bool(COMPANY.search(text))
     ceo = bool(CEO.search(text))
@@ -563,7 +706,7 @@ def collect_web_rss(confirmed, pending):
         if not match:
             continue
         key = article_id(title, source)
-        if key in confirmed:
+        if key in confirmed or is_protected(pending.get(key)):
             continue
         # Bing RSS may omit dates: use collection date only as fallback.
         if not published:
@@ -706,13 +849,15 @@ def fetch_publisher_feed(name, url):
 def match_publisher_feed(confirmed, pending, entries):
     """Verify direct article text or publisher-authored RSS content."""
     added = 0
-    existing = {article_id(x["title"], x["source"]): x
+    existing = {record_key(x): x
                 for x in list(confirmed.values()) + list(pending.values())}
     for entry in entries:
         title, link, published, source = entry[:4]
         feed_body = entry[4] if len(entry) > 4 else ""
         key = article_id(title, source)
         record = existing.get(key)
+        if is_protected(record):
+            continue  # a hand-added record is never updated by the media pipeline
         if key in confirmed:
             if not (urllib.parse.urlparse(confirmed[key].get("url", "")).hostname or "").endswith("news.google.com"):
                 continue
@@ -785,7 +930,7 @@ def collect_gdelt(confirmed, pending):
             if not (title and url and date):
                 continue
             key = article_id(title, source)
-            if key in confirmed:
+            if key in confirmed or is_protected(pending.get(key)):
                 continue
             # A GDELT query match alone is not evidence of a mention.
             title_match = classify(title)
@@ -831,9 +976,12 @@ def load(path):
 
 
 def save(path, records):
+    for record in records.values():
+        ensure_platform(record)
+
     data = sorted(
         records.values(),
-        key=lambda x: x.get("published_at", ""),
+        key=lambda x: str(x.get("published_at") or ""),
         reverse=True
     )
 
@@ -852,21 +1000,35 @@ def main():
     confirmed = {}
     pending = {}
 
-    # Rebuild stable IDs to eliminate duplicates.
+    # Rebuild stable IDs to eliminate duplicates. Hand-written ids are kept, and
+    # a duplicate never discards what the first copy lacks (nor a hand-added record).
     for record in load(DATABASE):
-        key = article_id(record["title"], record["source"])
-        record["id"] = key
-        confirmed.setdefault(key, record)
+        adopt_record(record)
+        key = record_key(record)
+        rebuild_id(record, key)
+        if key in confirmed:
+            merge_duplicate(confirmed[key], record)
+        else:
+            confirmed[key] = record
 
     for record in load(REVIEW):
-        key = article_id(record["title"], record["source"])
-        record["id"] = key
+        adopt_record(record)
+        key = record_key(record)
+        rebuild_id(record, key)
+        if key in pending:
+            merge_duplicate(pending[key], record)
+        elif key in confirmed and not is_protected(record):
+            merge_duplicate(confirmed[key], record, prefer_manual=False)
+        else:
+            pending[key] = record  # a hand-added record stays in the file it was written in
 
-        if key not in confirmed:
-            pending.setdefault(key, record)
+    # Hand-added records are read-only: remember them exactly as loaded.
+    manual_snapshot = snapshot_manual(confirmed, pending)
 
     # Recheck previously unverified articles.
     for key, record in list(pending.items()):
+        if is_protected(record):
+            continue  # hand-added records are not media candidates
         title_match = classify(record["title"])
 
         if title_match:
@@ -938,11 +1100,12 @@ def main():
                         # Keep every search phrase that found this article,
                         # without duplicating the article in the public library.
                         record = confirmed.get(key) or pending[key]
-                        queries = set(record.get("matched_queries") or [])
-                        if record.get("keyword"):
-                            queries.add(record["keyword"])
-                        queries.add(query)
-                        record["matched_queries"] = sorted(queries)
+                        if not is_protected(record):
+                            queries = set(record.get("matched_queries") or [])
+                            if record.get("keyword"):
+                                queries.add(record["keyword"])
+                            queries.add(query)
+                            record["matched_queries"] = sorted(queries)
                         DIAG.verification_event("already_known")
                         continue
 
@@ -1031,6 +1194,9 @@ def main():
     web_added = collect_web_rss(confirmed, pending)
     print(f"Verified from Bing and Alerts: {web_added}", flush=True)
 
+    for title in restore_manual(confirmed, pending, manual_snapshot):
+        print(f"WARNING: restored a hand-added record that a collection step changed or removed: {title}", flush=True)
+
     save(DATABASE, confirmed)
     save(REVIEW, pending)
     # Public All library includes both verified mentions and search candidates.
@@ -1039,7 +1205,7 @@ def main():
     for key, record in pending.items():
         if key not in all_records:
             candidate = dict(record)
-            if not candidate.get("categories"):
+            if not candidate.get("categories") and not is_protected(candidate):
                 q = candidate.get("keyword", "").lower()
                 candidate["categories"] = (
                     ["CEO"] if any(x in q for x in ("veselov", "veselow", "веселов"))
