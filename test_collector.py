@@ -1,1040 +1,518 @@
-"""TRIADA Media Intelligence — media monitoring."""
-
+import contextlib
+import io
 import json
 import os
-import re
-import time
-import functools
-import hashlib
-import html
+import tempfile
+import unittest
 import urllib.parse
-import urllib.request
 import xml.etree.ElementTree as ET
-
 from pathlib import Path
-from datetime import timezone
-from datetime import datetime as _datetime
-from email.utils import parsedate_to_datetime
-from html.parser import HTMLParser
+from unittest.mock import patch
+import collector
 
-DATABASE = Path("mentions.json")
-REVIEW = Path("mentions_review.json")
-PUBLIC = Path("mentions_public.json")
-STATUS_FILE = Path("collector_status.json")
-START_DATE = "2026-06-01"
 
-QUERIES = [
-    '"Triada Robotics"',
-    '"TriadaRobotics"',
-    '"Тріада Роботікс"',
-    '"Триада Роботикс"',
-    '"Artem Veselov"',
-    '"Artem Veselow"',
-    '"Артем Веселов"',
-    '"Артема Веселова"',
-    '"Artem Veselov" "drone"',
-    '"Артемом Веселовим"',
-    '"Веселов" "Triada"',
-    '"Veselov" "Triada Robotics"',
-    '"TRIADA ROBOTICS" BRAVO',
-    '"TRIADA ROBOTICS" KILO',
-    '"Triada" "BRAVO"',
-    '"Тріада" "Браво"',
-    '"Триада" "Браво"',
-    '"Triada" "KILO"',
-    '"Тріада" "Кіло"',
-    '"BRAVO" "Triada Robotics"',
-    '"KILO" "Triada Robotics"',
-]
+class CollectorTests(unittest.TestCase):
+    def test_stable_deduplication(self):
+        self.assertEqual(
+            collector.article_id("Triada Robotics’ Bravo!", "Defender Media"),
+            collector.article_id("Triada Robotics Bravo", "Defender Media"),
+        )
+        self.assertNotEqual(
+            collector.article_id("Triada Robotics Bravo", "Defender Media"),
+            collector.article_id("Тріада Роботікс Bravo", "Defender Media"),
+        )
 
-# Publisher feeds supply direct article links that Google News RSS does not.
-# Inaccessible feeds are skipped without interrupting other discovery.
-PUBLISHER_FEEDS = [
-    ("Мілітарний", "https://militarnyi.com/uk/feed/"),
-    ("Militarnyi", "https://militarnyi.com/en/feed/"),
-    ("Defender Media", "https://thedefender.media/feed/"),
-    ("dev.ua", "https://dev.ua/rss"),
-    ("ITC.ua", "https://itc.ua/feed/"),
-    ("Euromaidan Press", "https://euromaidanpress.com/feed/"),
-    ("РБК-Україна", "https://www.rbc.ua/ukr/rss"),
-    ("UNITED24 Media", "https://united24media.com/rss"),
-]
+    def test_company_and_ceo(self):
+        self.assertIsNotNone(collector.classify("Triada Robotics develops drones"))
+        self.assertIsNotNone(collector.classify("Interview with Artem Veselov"))
+        self.assertIsNotNone(collector.classify("Інтерв’ю з Артемом Веселовим"))
+        self.assertIsNone(collector.classify("BRAVO football team scores"))
 
-REGIONS = [
-    ("en", "US", "US:en"),
-    ("uk", "UA", "UA:uk"),
-]
+    def test_article_body_and_no_navigation(self):
+        page = "<nav>Triada Robotics</nav><article><h1>Drone news</h1><p>Artem Veselov said this.</p></article>"
+        text = collector.extract_article(page)
+        self.assertIn("Artem Veselov", text)
+        self.assertNotIn("Triada Robotics", text)
 
-COMPANY = re.compile(
-    r"\btriada[\s-]*robotics\b|"
-    r"\bтріада[\s-]*робот[іи]кс\b|"
-    r"\bтриада[\s-]*робот[иі]кс\b",
-    re.I
-)
+    def test_publisher_url_extraction(self):
+        page = '<meta property="og:url" content="https://example.org/article">'
+        self.assertEqual(
+            collector.publisher_url_from_google(page),
+            "https://example.org/article",
+        )
 
-CEO = re.compile(
-    r"\bartem\s+vesel(?:ov|ow)\b|"
-    r"\bартем(?:а|ом|у|ові)?\s+веселов(?:а|им|у|і|им|им)?\b",
-    re.I
-)
+    def test_no_arbitrary_publisher_link(self):
+        self.assertEqual(collector.publisher_url_from_google('<a href="https://other.org">Other</a>'), "")
 
-PRODUCTS = {
-    "BRAVO": re.compile(r"\bbravo\b|\bбраво\b", re.I),
-    "KILO": re.compile(r"\bkilo\b|\bкіло\b", re.I),
-}
+    def test_publisher_feed_confirms_body_mention(self):
+        from unittest.mock import patch
+        entries = [("Drone technology update", "https://publisher.example/story",
+                    "2026-10-21T09:00:00+00:00", "Example Publisher")]
+        with patch("collector.read_article",
+                   return_value=("Triada Robotics develops BRAVO", "https://publisher.example/story")):
+            confirmed, pending = {}, {}
+            added = collector.match_publisher_feed(confirmed, pending, entries)
+        self.assertEqual(added, 1)
+        self.assertEqual(len(confirmed), 1)
+        self.assertEqual(next(iter(confirmed.values()))["url"], "https://publisher.example/story")
+
+    def test_publisher_feed_rejects_unrelated_body(self):
+        from unittest.mock import patch
+        entries = [("Bravo wins football match", "https://publisher.example/football",
+                    "2026-10-21T09:00:00+00:00", "Example Publisher")]
+        with patch("collector.read_article", return_value=("Sports match report", "https://publisher.example/football")):
+            confirmed = {}
+            added = collector.match_publisher_feed(confirmed, {}, entries)
+        self.assertEqual(added, 0)
+        self.assertEqual(confirmed, {})
+
+    def test_publisher_feed_content_verifies_body_without_fetch(self):
+        entries = [("New defence technology", "https://publisher.example/story",
+                    "2026-10-21T09:00:00+00:00", "Publisher",
+                    "<p>Artem Veselov of Triada Robotics spoke about drones.</p>")]
+        with patch("collector.read_article", side_effect=AssertionError("No fetch needed")):
+            confirmed = {}
+            added = collector.match_publisher_feed(confirmed, {}, entries)
+        self.assertEqual(added, 1)
+        self.assertEqual(next(iter(confirmed.values()))["verification_method"],
+                         "publisher_feed_body")
+
+    def test_publisher_feed_ignores_unrelated_content(self):
+        entries = [("Drone technology", "https://publisher.example/story",
+                    "2026-10-21T09:00:00+00:00", "Publisher",
+                    "<p>Generic BRAVO and KILO names only.</p>")]
+        with patch("collector.read_article", return_value=("", "")):
+            confirmed = {}
+            added = collector.match_publisher_feed(confirmed, {}, entries)
+        self.assertEqual(added, 0)
+        self.assertFalse(confirmed)
+
+    def test_rss_content_encoded(self):
+        import io
+        from unittest.mock import MagicMock
+        feed = b"""<rss xmlns:content="http://purl.org/rss/1.0/modules/content/">
+          <channel><item><title>New drone</title><link>https://publisher.example/news</link>
+          <pubDate>Wed, 21 Oct 2026 09:00:00 GMT</pubDate>
+          <content:encoded><![CDATA[<p>Triada Robotics is mentioned here.</p>]]></content:encoded>
+          </item></channel></rss>"""
+        response = MagicMock()
+        response.read.return_value = feed
+        response.__enter__.return_value = response
+        with patch("collector.urllib.request.urlopen", return_value=response):
+            entries = collector.fetch_publisher_feed("Publisher", "https://publisher.example/rss")
+        self.assertEqual(len(entries), 1)
+        self.assertIn("Triada Robotics", entries[0][4])
+
+    def test_gdelt_verifies_body_before_publication(self):
+        article = {"title": "New drone capabilities",
+                   "url": "https://example.org/triada", "domain": "example.org",
+                   "seendate": "20261022T110000Z"}
+        with patch("collector.fetch_gdelt", return_value=[article]), patch(
+            "collector.read_article",
+            return_value=("Triada Robotics develops drones.", "https://example.org/triada")
+        ):
+            confirmed = {}
+            count = collector.collect_gdelt(confirmed, {})
+        self.assertEqual(count, 1)
+        self.assertEqual(len(confirmed), 1)
+
+    def test_gdelt_rejects_keyword_only_search_hit(self):
+        article = {"title": "Random drone news", "url": "https://example.org/random",
+                   "domain": "example.org", "seendate": "20261022T110000Z"}
+        with patch("collector.fetch_gdelt", return_value=[article]), patch(
+            "collector.read_article", return_value=("No company mention.", "https://example.org/random")
+        ):
+            confirmed = {}
+            count = collector.collect_gdelt(confirmed, {})
+        self.assertEqual(count, 0)
+        self.assertFalse(confirmed)
+
+    def test_bing_rss_rejects_unrelated_article(self):
+        import xml.etree.ElementTree as ET
+        xml = ET.fromstring("<item><title>Drone technology</title><link>https://example.org/drone</link></item>")
+        with patch("collector.fetch_bing_rss", return_value=[xml]), patch(
+            "collector.fetch_alert_feeds", return_value=iter(())
+        ), patch("collector.read_publisher", return_value=("Other unrelated drones", "https://example.org/drone")):
+            confirmed = {}
+            count = collector.collect_web_rss(confirmed, {})
+        self.assertEqual(count, 0)
+        self.assertEqual(confirmed, {})
+
+    def test_bing_rss_accepts_verified_company_article(self):
+        import xml.etree.ElementTree as ET
+        xml = ET.fromstring("<item><title>Drone technology</title><link>https://example.org/drone</link></item>")
+        with patch("collector.fetch_bing_rss", return_value=[xml]), patch(
+            "collector.fetch_alert_feeds", return_value=iter(())
+        ), patch("collector.read_publisher", return_value=("Triada Robotics developed a drone", "https://example.org/drone")):
+            confirmed = {}
+            count = collector.collect_web_rss(confirmed, {})
+        self.assertEqual(count, 1)
+        self.assertEqual(next(iter(confirmed.values()))["categories"], ["Company"])
+
+    def test_blocked_article_not_confirmed(self):
+        with patch("collector.urllib.request.urlopen", side_effect=OSError("blocked")):
+            self.assertEqual(collector.read_article("https://example.org"), ("", ""))
 
 
 # ---------------------------------------------------------------------------
-# Connector diagnostics
-#
-# Observe-only bookkeeping for collector_status.json. It never changes what is
-# collected or saved: every Diagnostics method swallows its own errors, so a
-# bug in this block cannot stop a run.
-#
-# Status "ok" means the requests completed without a technical error. It does
-# NOT guarantee complete monitoring: a source can answer successfully and still
-# miss articles. Error text is cleaned before it is stored, because this
-# repository is public and the Google Alerts feed addresses are secret.
+# Connector diagnostics (collector_status.json)
 # ---------------------------------------------------------------------------
 
-CONNECTORS = (
-    ("google_news", "Google News"),
-    ("bing", "Bing"),
-    ("gdelt", "GDELT"),
-    ("publisher_rss", "Publisher RSS"),
-    ("google_alerts", "Google Alerts"),
+# Fake feed address used only to prove that secrets never reach any output.
+SECRET_URL = ("https://www.google.com/alerts/feeds/"
+              "12345678901234567890/09876543210987654321")
+SECRET_TOKENS = ("12345678901234567890", "09876543210987654321")
+OLD_STATUS_KEYS = (
+    "last_run_utc", "confirmed_total", "pending_internal", "google_news_added",
+    "publisher_feeds_added", "gdelt_added", "bing_and_alerts_added",
+    "google_news_query_errors",
 )
 
-STATUS_LEGEND = {
-    "ok": (
-        "Every request completed without a technical error. "
-        "This does not guarantee complete monitoring coverage."
-    ),
-    "partial": "Some requests completed and some failed.",
-    "error": "Every request failed.",
-    "not_configured": "The connector needs configuration that is missing.",
-    "not_run": "The connector made no requests in this run.",
-}
 
-ALERTS_ADDRESS_IGNORED = (
-    "A configured feed address was ignored: it is not a Google Alerts feed URL."
-)
-
-_URL_PATTERN = re.compile(r"(?:https?://|www\.)\S+", re.I)
-_ALERTS_PATH_PATTERN = re.compile(r"/?alerts/feeds/\S*", re.I)
+def rss_item(title, link, source="Example Source",
+             date="Wed, 21 Oct 2026 09:00:00 GMT"):
+    return ET.fromstring(
+        f"<item><title>{title}</title><link>{link}</link>"
+        f"<pubDate>{date}</pubDate><source>{source}</source></item>"
+    )
 
 
-def redact(text):
-    """Remove URLs and anything that came from the Google Alerts secret."""
-    text = str(text)
-
-    secrets = set()
-    for line in os.environ.get("GOOGLE_ALERTS_RSS", "").splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        secrets.add(line)
-        secrets.add(urllib.parse.quote(line, safe=""))
-        secrets.add(urllib.parse.quote(line))
-        parsed = urllib.parse.urlparse(line)
-        for part in (parsed.netloc + parsed.path, parsed.path, parsed.query):
-            if len(part) >= 8:
-                secrets.add(part)
-        for segment in parsed.path.split("/") + parsed.query.replace("&", "/").split("/"):
-            if len(segment) >= 8 and segment not in ("alerts", "feeds"):
-                secrets.add(segment)
-    for secret in sorted(secrets, key=len, reverse=True):
-        text = text.replace(secret, "<redacted>")
-
-    text = _URL_PATTERN.sub("<url>", text)
-    return _ALERTS_PATH_PATTERN.sub("<redacted>", text)
+def gdelt_article(title="Triada Robotics expands", url="https://example.org/t"):
+    return {"title": title, "url": url, "domain": "example.org",
+            "seendate": "20261022T110000Z"}
 
 
-def safe_error(error):
-    """Short, single-line, secret-free description of an error."""
-    if isinstance(error, BaseException):
-        text = f"{type(error).__name__}: {error}"
-    else:
-        text = str(error)
-    return " ".join(redact(text).split())[:160]
-
-
-def _safe_len(collection):
-    try:
-        return len(collection)
-    except TypeError:
-        return 0
-
-
-def _now_iso():
-    return _datetime.now(timezone.utc).isoformat()
-
-
-def _text_or_none(value):
-    return value if isinstance(value, str) else None
-
-
-def _count_or_zero(value):
-    if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
-        return value
-    return 0
-
-
-def github_run_url():
-    server = os.environ.get("GITHUB_SERVER_URL", "").strip()
-    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
-    run_id = os.environ.get("GITHUB_RUN_ID", "").strip()
-    if server and repository and run_id:
-        return f"{server}/{repository}/actions/runs/{run_id}"
-    return None
-
-
-def _never_raise(method):
-    @functools.wraps(method)
-    def wrapper(*args, **kwargs):
-        try:
-            return method(*args, **kwargs)
-        except Exception:
-            return None
-    return wrapper
-
-
-def _connector_status(entry):
-    if not entry["configured"]:
-        return "not_configured"
-    if entry["requests"] == 0:
-        return "not_run"
-    if entry["failed_requests"] == 0:
-        return "ok"
-    if entry["failed_requests"] >= entry["requests"]:
-        return "error"
-    return "partial"
-
-
-class Diagnostics:
-    """Per-connector counters for one collector run."""
-
-    def __init__(self):
-        self.reset()
-
-    def reset(self):
-        self.data = {key: self._blank() for key, _ in CONNECTORS}
-        self.feeds = {}  # publisher feed name -> per-feed detail
-        self.started_utc = _now_iso()
-        self._started = time.monotonic()
-
-    @staticmethod
-    def _blank():
-        return {
-            "configured": True,
-            "requests": 0,
-            "failed_requests": 0,
-            "items_fetched": 0,
-            "new_confirmed": 0,
-            "last_error": None,
-            "last_attempt_utc": None,
-        }
-
-    @_never_raise
-    def start(self):
-        self.reset()
-
-    @_never_raise
-    def attempt(self, connector):
-        entry = self.data[connector]
-        entry["requests"] += 1
-        entry["last_attempt_utc"] = _now_iso()
-
-    @_never_raise
-    def items(self, connector, collection):
-        self.data[connector]["items_fetched"] += _safe_len(collection)
-
-    @_never_raise
-    def confirmed(self, connector, count=1):
-        self.data[connector]["new_confirmed"] += count
-
-    @_never_raise
-    def failure(self, connector, error):
-        entry = self.data[connector]
-        entry["failed_requests"] += 1
-        entry["last_error"] = safe_error(error)
-
-    @_never_raise
-    def not_configured(self, connector):
-        self.data[connector]["configured"] = False
-
-    # Publisher RSS: one request per feed, with per-feed detail.
-    def _feed(self, name):
-        return self.feeds.setdefault(name, {
-            "name": name,
-            "status": "ok",
-            "items_fetched": 0,
-            "new_confirmed": 0,
-            "last_error": None,
+class ConnectorDiagnosticsTests(unittest.TestCase):
+    def setUp(self):
+        collector.DIAG.reset()
+        self.addCleanup(collector.DIAG.reset)
+        quiet = contextlib.redirect_stdout(io.StringIO())  # keep CI logs free of collector output
+        quiet.__enter__()
+        self.addCleanup(quiet.__exit__, None, None, None)
+        env = patch.dict(os.environ, {
+            "GOOGLE_ALERTS_RSS": "", "GITHUB_SERVER_URL": "",
+            "GITHUB_REPOSITORY": "", "GITHUB_RUN_ID": "",
         })
-
-    @_never_raise
-    def feed_attempt(self, name):
-        self._feed(name)
-        self.attempt("publisher_rss")
-
-    @_never_raise
-    def feed_items(self, name, collection):
-        self._feed(name)["items_fetched"] += _safe_len(collection)
-        self.items("publisher_rss", collection)
-
-    @_never_raise
-    def feed_confirmed(self, name, count):
-        self._feed(name)["new_confirmed"] += count
-        self.confirmed("publisher_rss", count)
-
-    @_never_raise
-    def feed_failure(self, name, error):
-        feed = self._feed(name)
-        feed["status"] = "error"
-        feed["last_error"] = safe_error(error)
-        self.failure("publisher_rss", error)
-
-    @_never_raise
-    def report(self, previous):
-        """New status keys. `previous` is the connectors section of the last run."""
-        finished = _now_iso()
-        connectors = {}
-        for key, label in CONNECTORS:
-            entry = self.data[key]
-            old = previous.get(key) if isinstance(previous.get(key), dict) else {}
-            status = _connector_status(entry)
-
-            if entry["requests"] > 0:
-                last_attempt = entry["last_attempt_utc"]
-            else:
-                last_attempt = _text_or_none(old.get("last_attempt_utc"))
-
-            # A success means at least one request completed technically in this run.
-            if status in ("ok", "partial"):
-                last_success = entry["last_attempt_utc"]
-            else:
-                last_success = _text_or_none(old.get("last_success_utc"))
-
-            streak = _count_or_zero(old.get("consecutive_failures"))
-            if status == "error":
-                streak += 1
-            elif status != "not_run":
-                streak = 0
-
-            connector = {
-                "label": label,
-                "status": status,
-                "last_attempt_utc": last_attempt,
-                "last_success_utc": last_success,
-                "consecutive_failures": streak,
-                "requests": entry["requests"],
-                "failed_requests": entry["failed_requests"],
-                "items_fetched": entry["items_fetched"],
-                "new_confirmed": entry["new_confirmed"],
-                "last_error": entry["last_error"],
-            }
-            if key == "publisher_rss":
-                connector["feeds"] = [dict(feed) for feed in self.feeds.values()]
-            connectors[key] = connector
-
-        return {
-            "schema_version": 2,
-            "status_legend": STATUS_LEGEND,
-            "run": {
-                "started_utc": self.started_utc,
-                "finished_utc": finished,
-                "duration_seconds": round(time.monotonic() - self._started, 1),
-                "github_run_url": github_run_url(),
-            },
-            "connectors": connectors,
-        }
-
-
-DIAG = Diagnostics()
-
-
-def load_previous_connectors():
-    """Connector section of the previous status file, or {} if unavailable."""
-    try:
-        data = json.loads(STATUS_FILE.read_text(encoding="utf-8"))
-        connectors = data.get("connectors")
-        return connectors if isinstance(connectors, dict) else {}
-    except Exception:
-        return {}
-
-
-def build_diagnostics_report():
-    """New status keys, or {} if they could not be built (old keys still get written)."""
-    try:
-        return DIAG.report(load_previous_connectors()) or {}
-    except Exception:
-        return {}
-
-
-def normalize(text):
-    return " ".join(re.findall(r"\w+", str(text).casefold()))
-
-
-def article_id(title, source):
-    value = normalize(title) + "|" + normalize(source)
-    return hashlib.sha256(value.encode()).hexdigest()
-
-
-def classify(text):
-    company = bool(COMPANY.search(text))
-    ceo = bool(CEO.search(text))
-
-    if not (company or ceo):
-        return None
-
-    categories = []
-
-    if company:
-        categories.append("Company")
-
-    if ceo:
-        categories.append("CEO")
-
-    products = [
-        name for name, pattern in PRODUCTS.items()
-        if pattern.search(text)
-    ]
-
-    if products and company:
-        categories.append("Products")
-
-    match = COMPANY.search(text) or CEO.search(text)
-
-    return {
-        "categories": categories,
-        "products": products,
-        "matched_text": text[
-            max(0, match.start() - 80):
-            min(len(text), match.end() + 120)
-        ].strip()
-    }
-
-
-class TextExtractor(HTMLParser):
-    """Extract article text without navigation, scripts, or site footers."""
-
-    SKIP = {"script", "style", "noscript", "nav", "footer", "header"}
-
-    def __init__(self):
-        super().__init__()
-        self.parts = []
-        self.skipped = 0
-        self.article_depth = 0
-        self.article_parts = []
-        self.article_seen = False
-
-    def handle_starttag(self, tag, attrs):
-        if tag in self.SKIP:
-            self.skipped += 1
-        if tag == "article":
-            self.article_depth += 1
-            self.article_seen = True
-
-    def handle_endtag(self, tag):
-        if tag in self.SKIP:
-            self.skipped = max(0, self.skipped - 1)
-        if tag == "article":
-            self.article_depth = max(0, self.article_depth - 1)
-
-    def handle_data(self, data):
-        if not self.skipped and data.strip():
-            self.parts.append(data)
-            if self.article_depth:
-                self.article_parts.append(data)
-
-    def text(self):
-        # Prefer article text to prevent matches in "related articles" menus.
-        return " ".join(self.article_parts if self.article_parts else self.parts)
-
-
-def publisher_url_from_google(page):
-    """Use explicit publisher metadata, never an arbitrary external page link."""
-    patterns = (
-        r'<meta[^>]+(?:property|name)="og:url"[^>]+content="([^"]+)"',
-        r'<link[^>]+rel="canonical"[^>]+href="([^"]+)"',
-    )
-    for pattern in patterns:
-        for candidate in re.findall(pattern, page, re.I):
-            candidate = html.unescape(candidate)
-            host = urllib.parse.urlparse(candidate).hostname or ""
-            if host and not host.endswith(
-                ("google.com", "googleusercontent.com", "gstatic.com")
-            ):
-                return candidate
-    return ""
-
-
-
-def resolve_google_news(url):
-    """Decode Google News RSS links to original publishers when possible."""
-    if "news.google.com/" not in url:
-        return url
-    try:
-        from googlenewsdecoder import gnewsdecoder
-        result = gnewsdecoder(url, interval=0)
-        if result.get("status") and result.get("decoded_url"):
-            target = result["decoded_url"]
-            host = urllib.parse.urlparse(target).hostname or ""
-            if host and not host.endswith("google.com"):
-                return target
-    except Exception as error:
-        print(f"GOOGLE NEWS DECODE FAILED: {str(error)[:160]}", flush=True)
-    return url
-
-
-def fetch_bing_rss(query):
-    """Bing web search RSS gives a separate search index and direct links."""
-    url = "https://www.bing.com/search?" + urllib.parse.urlencode({
-        "q": query, "format": "rss", "count": 50
-    })
-    request = urllib.request.Request(
-        url, headers={"User-Agent": "Mozilla/5.0"}
-    )
-    with urllib.request.urlopen(request, timeout=15) as response:
-        root = ET.fromstring(response.read(2_000_000))
-    return root.findall("./channel/item")
-
-
-def fetch_alert_feeds():
-    """Optional Google Alerts RSS URLs stored in a GitHub Actions secret."""
-    urls = [x.strip() for x in os.environ.get("GOOGLE_ALERTS_RSS", "").splitlines() if x.strip()]
-    if not urls:
-        DIAG.not_configured("google_alerts")
-    for url in urls:
-        if not url.startswith("https://www.google.com/alerts/feeds/"):
-            DIAG.attempt("google_alerts")
-            DIAG.failure("google_alerts", ALERTS_ADDRESS_IGNORED)
-            continue
-        try:
-            DIAG.attempt("google_alerts")
-            entries = fetch_publisher_feed("Google Alerts", url)
-            DIAG.items("google_alerts", entries)
-            for title, link, published, source, body in entries:
-                yield title, link, published, source, body
-        except Exception as error:
-            print(f"ALERT FEED UNAVAILABLE: {redact(error)}", flush=True)
-            DIAG.failure("google_alerts", error)
-
-
-def collect_web_rss(confirmed, pending):
-    """Verify Bing web search and user-configured Google Alerts against articles."""
-    added = 0
-    entries = list(fetch_alert_feeds())
-    for query in ('"Triada Robotics"', '"Artem Veselov"',
-                  '"Тріада Роботікс"', '"Артем Веселов"'):
-        try:
-            DIAG.attempt("bing")
-            items = fetch_bing_rss(query)
-            DIAG.items("bing", items)
-            for item in items:
-                title = (item.findtext("title") or "").strip()
-                link = (item.findtext("link") or "").strip()
-                if title and link:
-                    entries.append((title, link, "", "Bing Search", ""))
-        except Exception as error:
-            print(f"BING RSS UNAVAILABLE {query}: {error}", flush=True)
-            DIAG.failure("bing", error)
-    for title, link, published, source, body in entries:
-        if not link.startswith(("http://", "https://")):
-            continue
-        resolved = resolve_google_news(link)
-        if "news.google.com/" in resolved:
-            continue
-        # Verify the *original article* rather than trusting search snippets.
-        text, direct = read_publisher(resolved)
-        title_match = classify(title)
-        body_match = classify(text) if text else None
-        match = body_match or (title_match if text else None)
-        if not match:
-            continue
-        key = article_id(title, source)
-        if key in confirmed:
-            continue
-        # Bing RSS may omit dates: use collection date only as fallback.
-        if not published:
-            published = __import__("datetime").datetime.now(timezone.utc).isoformat()
-        record = {"id": key, "title": title, "source": source,
-                  "published_at": published, "url": direct or resolved,
-                  "direct_url": direct or resolved, "keyword": source,
-                  "status": "relevant", "verification_method": "verified_web_article"}
-        record.update(match)
-        confirmed[key] = record
-        pending.pop(key, None)
-        added += 1
-        DIAG.confirmed("bing" if source == "Bing Search" else "google_alerts")
-    return added
-
-
-def read_article(url):
-    """Only treat publisher HTML as verifiable article text."""
-    try:
-        url = resolve_google_news(url)
-        request = urllib.request.Request(
-            url, headers={"User-Agent": "Mozilla/5.0"}
-        )
-        with urllib.request.urlopen(request, timeout=12) as response:
-            final_url = response.geturl()
-            content_type = response.headers.get("Content-Type", "").lower()
-            if "html" not in content_type:
-                return "", ""
-            raw = response.read(2_000_000)
-            charset = response.headers.get_content_charset() or "utf-8"
-        page = raw.decode(charset, errors="replace")
-        host = urllib.parse.urlparse(final_url).hostname or ""
-        if host.endswith("news.google.com"):
-            publisher = publisher_url_from_google(page)
-            if publisher:
-                return read_publisher(publisher)
-            return "", ""
-        return extract_article(page), final_url
-    except Exception:
-        return "", ""
-
-
-def extract_article(page):
-    parser = TextExtractor()
-    parser.feed(page)
-    return html.unescape(parser.text())
-
-
-def read_publisher(url):
-    """Avoid recursive Google News redirects."""
-    host = urllib.parse.urlparse(url).hostname or ""
-    if host.endswith("google.com"):
-        return "", ""
-    try:
-        request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(request, timeout=12) as response:
-            final_url = response.geturl()
-            if (urllib.parse.urlparse(final_url).hostname or "").endswith("google.com"):
-                return "", ""
-            if "html" not in response.headers.get("Content-Type", "").lower():
-                return "", ""
-            raw = response.read(2_000_000)
-            charset = response.headers.get_content_charset() or "utf-8"
-        return extract_article(raw.decode(charset, errors="replace")), final_url
-    except Exception:
-        return "", ""
-
-
-def fetch(query, region):
-    lang, country, edition = region
-
-    params = urllib.parse.urlencode({
-        "q": f"{query} after:2026-05-31",
-        "hl": lang,
-        "gl": country,
-        "ceid": edition,
-    })
-
-    url = "https://news.google.com/rss/search?" + params
-
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": "Mozilla/5.0"}
-    )
-
-    with urllib.request.urlopen(request, timeout=15) as response:
-        return ET.fromstring(response.read()).findall("./channel/item")
-
-
-def fetch_publisher_feed(name, url):
-    """Read RSS/Atom, including publisher-authored article content."""
-    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(request, timeout=12) as response:
-        root = ET.fromstring(response.read(2_000_000))
-
-    entries = []
-    atom = "{http://www.w3.org/2005/Atom}"
-    content_ns = "{http://purl.org/rss/1.0/modules/content/}"
-
-    if root.tag == atom + "feed":
-        items = root.findall(atom + "entry")
-        for item in items:
-            title = " ".join(item.findtext(atom + "title", default="").split())
-            link_element = next(
-                (x for x in item.findall(atom + "link")
-                 if x.get("rel", "alternate") == "alternate"), None
-            )
-            link = link_element.get("href", "") if link_element is not None else ""
-            date = item.findtext(atom + "published") or item.findtext(atom + "updated")
-            raw_body = (item.findtext(atom + "content") or
-                        item.findtext(atom + "summary") or "")
-            if not (title and link and date):
-                continue
-            try:
-                published = __import__("datetime").datetime.fromisoformat(
-                    date.replace("Z", "+00:00")
-                ).astimezone(timezone.utc).isoformat()
-            except (ValueError, TypeError):
-                continue
-            if published[:10] >= START_DATE:
-                entries.append((title, link, published, name, raw_body))
-    else:
-        for item in root.findall("./channel/item"):
-            title = " ".join((item.findtext("title") or "").split())
-            link = (item.findtext("link") or "").strip()
-            date = item.findtext("pubDate")
-            raw_body = (item.findtext(content_ns + "encoded") or
-                        item.findtext("description") or "")
-            if not (title and link and date):
-                continue
-            try:
-                published = parsedate_to_datetime(date).astimezone(timezone.utc).isoformat()
-            except (ValueError, TypeError):
-                continue
-            if published[:10] >= START_DATE:
-                entries.append((title, link, published, name, raw_body))
-    return entries
-
-
-def match_publisher_feed(confirmed, pending, entries):
-    """Verify direct article text or publisher-authored RSS content."""
-    added = 0
-    existing = {article_id(x["title"], x["source"]): x
-                for x in list(confirmed.values()) + list(pending.values())}
-    for entry in entries:
-        title, link, published, source = entry[:4]
-        feed_body = entry[4] if len(entry) > 4 else ""
-        key = article_id(title, source)
-        record = existing.get(key)
-        if key in confirmed:
-            if not (urllib.parse.urlparse(confirmed[key].get("url", "")).hostname or "").endswith("news.google.com"):
-                continue
-
-        # A publisher's own feed is trusted as the source, not Google snippets.
-        feed_text = extract_article(html.unescape(feed_body)) if feed_body else ""
-        title_match = classify(title)
-        feed_match = classify(feed_text) if feed_text else None
-        match = title_match or feed_match
-        verification_method = "publisher_feed_title" if title_match else "publisher_feed_body"
-
-        # Read the original article if the feed does not contain a relevant mention.
-        direct = ""
-        if not match:
-            text, direct = read_article(link)
-            match = classify(text) if text else None
-            verification_method = "publisher_article_body"
-        if not match:
-            continue
-        if record is None:
-            record = {"id": key, "title": title, "source": source,
-                      "published_at": published, "keyword": "publisher RSS"}
-        record.update(match)
-        record.update({"status": "relevant", "url": direct or link,
-                       "direct_url": direct or link,
-                       "verification_method": verification_method})
-        confirmed[key] = record
-        pending.pop(key, None)
-        added += 1
-    return added
-
-
-
-def fetch_gdelt(query):
-    """GDELT DOC API: independent discovery with publisher URLs."""
-    params = urllib.parse.urlencode({
-        "query": query,
-        "mode": "artlist",
-        "maxrecords": 100,
-        "format": "json",
-        "timespan": "3months",
-        "sort": "datedesc",
-    })
-    request = urllib.request.Request(
-        "https://api.gdeltproject.org/api/v2/doc/doc?" + params,
-        headers={"User-Agent": "TRIADA-Media-Monitor/1.0"}
-    )
-    with urllib.request.urlopen(request, timeout=20) as response:
-        data = json.load(response)
-    return data.get("articles", [])
-
-
-def collect_gdelt(confirmed, pending):
-    """Publish only articles verified in the title or publisher body."""
-    added = 0
-    for query in ('"Triada Robotics"', '"Artem Veselov"', '"TriadaRobotics"'):
-        DIAG.attempt("gdelt")
-        try:
-            articles = fetch_gdelt(query)
-        except Exception as error:
-            print(f"GDELT UNAVAILABLE {query}: {error}", flush=True)
-            DIAG.failure("gdelt", error)
-            continue
-        DIAG.items("gdelt", articles)
-        for article in articles:
-            title = html.unescape(article.get("title") or "").strip()
-            url = article.get("url") or ""
-            source = article.get("domain") or "GDELT"
-            date = article.get("seendate") or ""
-            if not (title and url and date):
-                continue
-            key = article_id(title, source)
-            if key in confirmed:
-                continue
-            # A GDELT query match alone is not evidence of a mention.
-            title_match = classify(title)
-            body, direct_url = read_article(url)
-            body_match = classify(body) if body else None
-            match = body_match or title_match
-            if not match:
-                continue
-            # GDELT dates are UTC YYYYMMDDTHHMMSSZ.
-            try:
-                published = __import__("datetime").datetime.strptime(
-                    date[:15], "%Y%m%dT%H%M%S"
-                ).replace(tzinfo=timezone.utc).isoformat()
-            except ValueError:
-                continue
-            if published[:10] < START_DATE:
-                continue
-            record = {
-                "id": key, "title": title, "source": source,
-                "url": direct_url or url, "direct_url": direct_url or url,
-                "published_at": published, "keyword": query,
-                "status": "relevant",
-                "verification_method": "gdelt_article_body" if body_match else "gdelt_title",
-            }
-            record.update(match)
-            confirmed[key] = record
-            pending.pop(key, None)
-            added += 1
-            DIAG.confirmed("gdelt")
-    return added
-
-
-def load(path):
-    if not path.exists():
-        return []
-
-    data = json.loads(path.read_text(encoding="utf-8"))
-
-    if not isinstance(data, list):
-        raise ValueError(f"Invalid JSON database: {path}")
-
-    return data
-
-
-def save(path, records):
-    data = sorted(
-        records.values(),
-        key=lambda x: x.get("published_at", ""),
-        reverse=True
-    )
-
-    temp = path.with_name(path.name + ".tmp")
-
-    temp.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2),
-        encoding="utf-8"
-    )
-
-    temp.replace(path)
-
-
-def main():
-    DIAG.start()
-    confirmed = {}
-    pending = {}
-
-    # Rebuild stable IDs to eliminate duplicates.
-    for record in load(DATABASE):
-        key = article_id(record["title"], record["source"])
-        record["id"] = key
-        confirmed.setdefault(key, record)
-
-    for record in load(REVIEW):
-        key = article_id(record["title"], record["source"])
-        record["id"] = key
-
-        if key not in confirmed:
-            pending.setdefault(key, record)
-
-    # Recheck previously unverified articles.
-    for key, record in list(pending.items()):
-        title_match = classify(record["title"])
-
-        if title_match:
-            resolved_url = resolve_google_news(record.get("direct_url") or record["url"])
-            if "news.google.com/" in resolved_url:
-                continue
-            record["url"] = resolved_url
-            record["direct_url"] = resolved_url
-            record.update(title_match)
-            record["status"] = "relevant"
-            record["verification_method"] = "title"
-            confirmed[key] = record
-            del pending[key]
-            continue
-
-        text, direct_url = read_article(
-            record.get("direct_url") or record["url"]
-        )
-
-        match = classify(text) if text else None
-
-        if match and direct_url and "news.google.com/" not in direct_url:
-            record.update(match)
-            record["status"] = "relevant"
-            record["verification_method"] = "article_body"
-
-            if direct_url:
-                record["direct_url"] = direct_url
-                record["url"] = direct_url
-
-            confirmed[key] = record
-            del pending[key]
-
-    added = 0
-    errors = 0
-
-    for query in QUERIES:
-        for region in REGIONS:
-            try:
-                DIAG.attempt("google_news")
-                items = fetch(query, region)
-                DIAG.items("google_news", items)
-
-                for item in items:
-                    title = (item.findtext("title") or "").strip()
-                    url = (item.findtext("link") or "").strip()
-                    date = item.findtext("pubDate")
-
-                    if not (title and url and date):
-                        continue
-
-                    published = parsedate_to_datetime(
-                        date
-                    ).astimezone(timezone.utc).isoformat()
-
-                    if published[:10] < START_DATE:
-                        continue
-
-                    source = item.find("source")
-                    source_name = (
-                        source.text.strip()
-                        if source is not None and source.text
-                        else "Unknown"
-                    )
-
-                    key = article_id(title, source_name)
-
-                    if key in confirmed or key in pending:
-                        continue
-
-                    match = classify(title)
-                    direct_url = ""
-
-                    verification_method = "title" if match else ""
-                    if not match:
-                        text, direct_url = read_article(url)
-                        match = classify(text) if text else None
-                        if match:
-                            verification_method = "article_body"
-
-                    record = {
-                        "id": key,
-                        "title": title,
-                        "source": source_name,
-                        "url": direct_url or url,
-                        "published_at": published,
-                        "keyword": query,
-                    }
-
-                    if match:
-                        resolved_url = resolve_google_news(url)
-                        if "news.google.com/" in resolved_url:
-                            record["status"] = "review"
-                            pending[key] = record
-                            continue
-                        record["url"] = direct_url or resolved_url
-                        record["direct_url"] = direct_url or resolved_url
-                        record.update(match)
-                        record["status"] = "relevant"
-                        record["verification_method"] = verification_method
-                        confirmed[key] = record
-
-                        added += 1
-                        DIAG.confirmed("google_news")
-                        print(f"CONFIRMED: {title}", flush=True)
-
-                    else:
-                        record["status"] = "review"
-                        pending[key] = record
-
-            except Exception as error:
-                errors += 1
-                print(f"ERROR {query}: {error}", flush=True)
-                DIAG.failure("google_news", error)
-
-            time.sleep(1)
-
-    if errors == len(QUERIES) * len(REGIONS):
-        print("Google News unavailable; continuing with publisher feeds and GDELT", flush=True)
-
-    publisher_added = 0
-    for source, feed in PUBLISHER_FEEDS:
-        feed_added_before = publisher_added
-        try:
-            DIAG.feed_attempt(source)
-            entries = fetch_publisher_feed(source, feed)
-            DIAG.feed_items(source, entries)
-            publisher_added += match_publisher_feed(confirmed, pending, entries)
-            DIAG.feed_confirmed(source, publisher_added - feed_added_before)
-        except Exception as error:
-            print(f"FEED UNAVAILABLE {source}: {error}", flush=True)
-            DIAG.feed_failure(source, error)
-
-    gdelt_added = collect_gdelt(confirmed, pending)
-    print(f'Confirmed via GDELT: {gdelt_added}', flush=True)
-
-    web_added = collect_web_rss(confirmed, pending)
-    print(f"Verified from Bing and Alerts: {web_added}", flush=True)
-
-    save(DATABASE, confirmed)
-    save(REVIEW, pending)
-    # Public All library includes both verified mentions and search candidates.
-    # Keep internal status for transparency and retain candidates across runs.
-    all_records = dict(confirmed)
-    for key, record in pending.items():
-        if key not in all_records:
-            candidate = dict(record)
-            if not candidate.get("categories"):
-                q = candidate.get("keyword", "").lower()
-                candidate["categories"] = (
-                    ["CEO"] if any(x in q for x in ("veselov", "veselow", "веселов"))
-                    else ["Company"] if any(x in q for x in ("triada", "тріада", "триада"))
-                    else []
-                )
-            all_records[key] = candidate
-    save(PUBLIC, all_records)
-    report = {
-        "last_run_utc": __import__("datetime").datetime.now(timezone.utc).isoformat(),
-        "confirmed_total": len(confirmed),
-        "pending_internal": len(pending),
-        "google_news_added": added,
-        "publisher_feeds_added": publisher_added,
-        "gdelt_added": gdelt_added,
-        "bing_and_alerts_added": web_added,
-        "google_news_query_errors": errors,
-    }
-    report.update(build_diagnostics_report())
-    STATUS_FILE.write_text(
-        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
-
-    print(f"New confirmed from Google News: {added}")
-    print(f"Confirmed via publisher feeds: {publisher_added}")
-    print(f"Total confirmed: {len(confirmed)}")
-    print(f"Pending verification: {len(pending)}")
-    print(f"Search errors: {errors}")
+        env.start()
+        self.addCleanup(env.stop)
+
+    def connector(self, name):
+        return collector.DIAG.report({})["connectors"][name]
+
+    def run_main(self, fetch=None, feed=None, gdelt=None, bing=None,
+                 article=None, publisher=None, alerts_env="", previous=None):
+        """Run main() in a temporary folder with every network call mocked."""
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        original_dir = os.getcwd()
+        os.chdir(tmp.name)
+        self.addCleanup(os.chdir, original_dir)
+        if previous is not None:
+            Path("collector_status.json").write_text(
+                previous if isinstance(previous, str) else json.dumps(previous),
+                encoding="utf-8")
+        output = io.StringIO()
+        with patch.dict(os.environ, {"GOOGLE_ALERTS_RSS": alerts_env}), \
+                patch("collector.fetch", side_effect=fetch or (lambda q, r: [])), \
+                patch("collector.fetch_publisher_feed", side_effect=feed or (lambda n, u: [])), \
+                patch("collector.fetch_gdelt", side_effect=gdelt or (lambda q: [])), \
+                patch("collector.fetch_bing_rss", side_effect=bing or (lambda q: [])), \
+                patch("collector.read_article", side_effect=article or (lambda u: ("", ""))), \
+                patch("collector.read_publisher", side_effect=publisher or (lambda u: ("", ""))), \
+                patch("collector.resolve_google_news", side_effect=lambda url: url), \
+                patch("collector.time.sleep"), \
+                contextlib.redirect_stdout(output):
+            collector.main()
+        files = {p.name: p.read_text(encoding="utf-8") for p in Path(".").glob("*.json")}
+        return json.loads(files["collector_status.json"]), files, output.getvalue()
+
+    # ---- error cleaning and secrets -------------------------------------
+
+    def test_safe_error_strips_urls_and_limits_length(self):
+        text = collector.safe_error(
+            OSError("failed https://example.org/a?token=abc " + "x" * 400))
+        self.assertTrue(text.startswith("OSError:"))
+        self.assertNotIn("example.org", text)
+        self.assertNotIn("token=abc", text)
+        self.assertLessEqual(len(text), 160)
+        self.assertNotIn("\n", collector.safe_error(OSError("line one\nline two")))
+
+    def test_safe_error_redacts_alert_secret_in_any_form(self):
+        with patch.dict(os.environ, {"GOOGLE_ALERTS_RSS": SECRET_URL}):
+            forms = [
+                SECRET_URL,
+                SECRET_URL.replace("https://", ""),
+                "/alerts/feeds/12345678901234567890/09876543210987654321",
+                "feed id 12345678901234567890 broke",
+                urllib.parse.quote(SECRET_URL, safe=""),
+            ]
+            for form in forms:
+                with self.subTest(form=form[:40]):
+                    text = collector.safe_error(OSError(f"cannot read {form}"))
+                    for token in SECRET_TOKENS:
+                        self.assertNotIn(token, text)
+
+    def test_alert_secret_never_reaches_any_output(self):
+        def feed(name, url):
+            if name == "Google Alerts":
+                raise OSError(f"cannot read {url}")
+            return []
+        status, files, stdout = self.run_main(feed=feed, alerts_env=SECRET_URL)
+        everything = stdout + "".join(files.values())
+        for secret in SECRET_TOKENS + (SECRET_URL,):
+            self.assertNotIn(secret, everything)
+        self.assertIn("ALERT FEED UNAVAILABLE", stdout)
+        self.assertEqual(status["connectors"]["google_alerts"]["status"], "error")
+
+    # ---- status rules ------------------------------------------------------
+
+    def test_status_rules(self):
+        d = collector.Diagnostics()
+        d.attempt("gdelt"); d.items("gdelt", [1, 2])
+        d.attempt("gdelt"); d.items("gdelt", [])
+        d.attempt("bing"); d.attempt("bing"); d.failure("bing", OSError("x"))
+        d.attempt("google_news"); d.failure("google_news", OSError("x"))
+        d.not_configured("google_alerts")
+        report = d.report({})["connectors"]
+        self.assertEqual(report["gdelt"]["status"], "ok")
+        self.assertEqual(report["bing"]["status"], "partial")
+        self.assertEqual(report["google_news"]["status"], "error")
+        self.assertEqual(report["google_alerts"]["status"], "not_configured")
+        self.assertEqual(report["publisher_rss"]["status"], "not_run")
+        self.assertEqual(report["gdelt"]["items_fetched"], 2)
+        self.assertEqual(report["bing"]["failed_requests"], 1)
+
+    def test_ok_means_technical_success_not_complete_coverage(self):
+        d = collector.Diagnostics()
+        d.attempt("gdelt"); d.items("gdelt", [])  # answered, but returned nothing
+        report = d.report({})
+        self.assertEqual(report["connectors"]["gdelt"]["status"], "ok")
+        self.assertEqual(report["connectors"]["gdelt"]["items_fetched"], 0)
+        self.assertIn("does not guarantee", report["status_legend"]["ok"])
+        for status in ("ok", "partial", "error", "not_configured", "not_run"):
+            self.assertIn(status, report["status_legend"])
+
+    def test_carry_over_success_time_and_failure_streak(self):
+        before = "2026-10-01T00:00:00+00:00"
+        previous = {"gdelt": {"last_success_utc": before, "last_attempt_utc": before,
+                              "consecutive_failures": 2}}
+        d = collector.Diagnostics()
+        d.attempt("gdelt"); d.failure("gdelt", OSError("down"))
+        failing = d.report(previous)["connectors"]["gdelt"]
+        self.assertEqual(failing["consecutive_failures"], 3)
+        self.assertEqual(failing["last_success_utc"], before)
+        self.assertNotEqual(failing["last_attempt_utc"], before)
+
+        d = collector.Diagnostics()
+        d.attempt("gdelt")
+        recovered = d.report(previous)["connectors"]["gdelt"]
+        self.assertEqual(recovered["consecutive_failures"], 0)
+        self.assertEqual(recovered["last_success_utc"], recovered["last_attempt_utc"])
+
+        idle = collector.Diagnostics().report(previous)["connectors"]["gdelt"]
+        self.assertEqual(idle["status"], "not_run")
+        self.assertEqual(idle["consecutive_failures"], 2)
+        self.assertEqual(idle["last_success_utc"], before)
+
+    def test_malformed_previous_status_is_ignored(self):
+        for previous in ("{not json", '["a list"]', '{"connectors": "text"}',
+                         '{"connectors": {"gdelt": {"consecutive_failures": "x", '
+                         '"last_success_utc": 5}}}'):
+            with self.subTest(previous=previous[:20]):
+                status, _, _ = self.run_main(previous=previous)
+                gdelt = status["connectors"]["gdelt"]
+                self.assertEqual(gdelt["status"], "ok")
+                self.assertEqual(gdelt["consecutive_failures"], 0)
+                self.assertIsInstance(gdelt["last_success_utc"], str)
+
+    # ---- GDELT ---------------------------------------------------------------
+
+    def test_gdelt_total_failure_is_reported_and_collection_continues(self):
+        with patch("collector.fetch_gdelt", side_effect=OSError("boom")):
+            self.assertEqual(collector.collect_gdelt({}, {}), 0)
+        gdelt = self.connector("gdelt")
+        self.assertEqual((gdelt["status"], gdelt["requests"], gdelt["failed_requests"]),
+                         ("error", 3, 3))
+        self.assertEqual(gdelt["last_error"], "OSError: boom")
+
+    def test_gdelt_partial_success_counts_items_and_confirmations(self):
+        calls = [OSError("boom"), [gdelt_article()], []]
+        with patch("collector.fetch_gdelt", side_effect=calls), patch(
+                "collector.read_article", return_value=("", "")):
+            confirmed = {}
+            self.assertEqual(collector.collect_gdelt(confirmed, {}), 1)
+        gdelt = self.connector("gdelt")
+        self.assertEqual(gdelt["status"], "partial")
+        self.assertEqual((gdelt["items_fetched"], gdelt["new_confirmed"]), (1, 1))
+
+    def test_gdelt_ok_with_no_results(self):
+        with patch("collector.fetch_gdelt", return_value=[]):
+            collector.collect_gdelt({}, {})
+        self.assertEqual(self.connector("gdelt")["status"], "ok")
+
+    # ---- Bing ------------------------------------------------------------------
+
+    def test_bing_failures_and_confirmations(self):
+        item = ET.fromstring("<item><title>Drone news</title>"
+                             "<link>https://example.org/d</link></item>")
+        with patch("collector.fetch_bing_rss", side_effect=OSError("down")), patch(
+                "collector.fetch_alert_feeds", return_value=iter(())):
+            self.assertEqual(collector.collect_web_rss({}, {}), 0)
+        self.assertEqual(self.connector("bing")["status"], "error")
+        self.assertEqual(self.connector("bing")["failed_requests"], 4)
+
+        collector.DIAG.reset()
+        with patch("collector.fetch_bing_rss",
+                   side_effect=[[item], OSError("down"), [], []]), patch(
+                "collector.fetch_alert_feeds", return_value=iter(())), patch(
+                "collector.read_publisher",
+                return_value=("Triada Robotics built a drone", "https://example.org/d")):
+            confirmed = {}
+            self.assertEqual(collector.collect_web_rss(confirmed, {}), 1)
+        bing = self.connector("bing")
+        self.assertEqual((bing["status"], bing["items_fetched"], bing["new_confirmed"]),
+                         ("partial", 1, 1))
+        self.assertEqual(self.connector("google_alerts")["new_confirmed"], 0)
+
+    # ---- Google Alerts -------------------------------------------------------------
+
+    def test_alerts_not_configured_without_secret(self):
+        self.assertEqual(list(collector.fetch_alert_feeds()), [])
+        alerts = self.connector("google_alerts")
+        self.assertEqual((alerts["status"], alerts["requests"]), ("not_configured", 0))
+
+    def test_alerts_configured_and_working(self):
+        entries = [("T1", "https://x.example/1", "2026-10-21T09:00:00+00:00", "Google Alerts", ""),
+                   ("T2", "https://x.example/2", "2026-10-21T09:00:00+00:00", "Google Alerts", "")]
+        with patch.dict(os.environ, {"GOOGLE_ALERTS_RSS": SECRET_URL}), patch(
+                "collector.fetch_publisher_feed", return_value=entries):
+            self.assertEqual(len(list(collector.fetch_alert_feeds())), 2)
+        alerts = self.connector("google_alerts")
+        self.assertEqual((alerts["status"], alerts["items_fetched"]), ("ok", 2))
+
+    def test_alerts_invalid_address_is_flagged_without_echoing_it(self):
+        bad = "https://example.com/private-token-abcdefgh"
+        with patch.dict(os.environ, {"GOOGLE_ALERTS_RSS": bad}):
+            self.assertEqual(list(collector.fetch_alert_feeds()), [])
+        alerts = self.connector("google_alerts")
+        self.assertEqual(alerts["status"], "error")
+        self.assertEqual(alerts["last_error"], collector.ALERTS_ADDRESS_IGNORED)
+        self.assertNotIn("example.com", json.dumps(alerts))
+        self.assertNotIn("abcdefgh", json.dumps(alerts))
+
+    # ---- Publisher RSS ----------------------------------------------------------------
+
+    def test_publisher_feeds_are_reported_individually(self):
+        names = [name for name, _ in collector.PUBLISHER_FEEDS]
+        broken = {names[1], names[3]}
+
+        def feed(name, url):
+            if name in broken:
+                raise OSError("feed down")
+            if name == names[0]:
+                return [("Drone update", "https://publisher.example/story",
+                         "2026-10-21T09:00:00+00:00", name,
+                         "<p>Triada Robotics is mentioned here.</p>")]
+            return []
+
+        status, _, _ = self.run_main(feed=feed)
+        publisher = status["connectors"]["publisher_rss"]
+        self.assertEqual(publisher["status"], "partial")
+        self.assertEqual([f["name"] for f in publisher["feeds"]], names)
+        by_name = {f["name"]: f for f in publisher["feeds"]}
+        self.assertEqual(by_name[names[0]]["status"], "ok")
+        self.assertEqual((by_name[names[0]]["items_fetched"], by_name[names[0]]["new_confirmed"]), (1, 1))
+        self.assertEqual(by_name[names[1]]["status"], "error")
+        self.assertEqual(by_name[names[1]]["last_error"], "OSError: feed down")
+        self.assertEqual((publisher["requests"], publisher["failed_requests"]), (len(names), 2))
+        self.assertEqual(publisher["new_confirmed"], status["publisher_feeds_added"])
+
+    # ---- Google News --------------------------------------------------------------------
+
+    def test_google_news_total_failure(self):
+        def fail(query, region):
+            raise OSError("blocked")
+        status, _, _ = self.run_main(fetch=fail)
+        news = status["connectors"]["google_news"]
+        total = len(collector.QUERIES) * len(collector.REGIONS)
+        self.assertEqual((news["status"], news["requests"], news["failed_requests"]),
+                         ("error", total, total))
+        self.assertEqual(news["failed_requests"], status["google_news_query_errors"])
+        self.assertEqual(news["last_error"], "OSError: blocked")
+
+    def test_google_news_success_counts_items_and_confirmations(self):
+        item = rss_item("Triada Robotics unveils BRAVO", "https://publisher.example/gn")
+        status, _, _ = self.run_main(fetch=lambda q, r: [item])
+        news = status["connectors"]["google_news"]
+        total = len(collector.QUERIES) * len(collector.REGIONS)
+        self.assertEqual((news["status"], news["items_fetched"], news["new_confirmed"]),
+                         ("ok", total, 1))
+        self.assertEqual(news["new_confirmed"], status["google_news_added"])
+
+    # ---- whole-run guarantees ------------------------------------------------------------
+
+    def test_old_status_keys_are_kept_and_agree_with_connector_totals(self):
+        gn = rss_item("Triada Robotics unveils BRAVO", "https://publisher.example/gn")
+        feed_entry = ("Update", "https://publisher.example/pf",
+                      "2026-10-21T09:00:00+00:00", "Feed", "<p>Artem Veselov of Triada Robotics</p>")
+        bing_item = ET.fromstring("<item><title>Defence news</title>"
+                                  "<link>https://example.org/bing</link></item>")
+        alert_entry = ("Alert story", "https://example.org/alert",
+                       "2026-10-21T09:00:00+00:00", "Google Alerts", "")
+
+        def feed(name, url):
+            return [alert_entry] if name == "Google Alerts" else (
+                [feed_entry] if name == collector.PUBLISHER_FEEDS[0][0] else [])
+
+        def publisher(url):
+            return ("Triada Robotics is here", url) if "bing" in url or "alert" in url else ("", "")
+
+        status, _, _ = self.run_main(
+            fetch=lambda q, r: [gn], feed=feed,
+            gdelt=lambda q: [gdelt_article()] if "Triada" in q else [],
+            bing=lambda q: [bing_item], publisher=publisher, alerts_env=SECRET_URL)
+
+        for key in OLD_STATUS_KEYS:
+            self.assertIn(key, status)
+        c = status["connectors"]
+        self.assertEqual(status["google_news_added"], c["google_news"]["new_confirmed"])
+        self.assertEqual(status["publisher_feeds_added"], c["publisher_rss"]["new_confirmed"])
+        self.assertEqual(status["gdelt_added"], c["gdelt"]["new_confirmed"])
+        self.assertEqual(status["bing_and_alerts_added"],
+                         c["bing"]["new_confirmed"] + c["google_alerts"]["new_confirmed"])
+        self.assertEqual(status["bing_and_alerts_added"], 2)
+        self.assertEqual(list(c), [key for key, _ in collector.CONNECTORS])
+        self.assertEqual(status["schema_version"], 2)
+
+    def test_run_section_and_github_run_url(self):
+        status, _, _ = self.run_main()
+        run = status["run"]
+        self.assertIsNone(run["github_run_url"])
+        self.assertLessEqual(run["started_utc"], run["finished_utc"])
+        self.assertGreaterEqual(run["duration_seconds"], 0)
+        env = {"GITHUB_SERVER_URL": "https://github.com", "GITHUB_REPOSITORY": "owner/repo",
+               "GITHUB_RUN_ID": "42"}
+        with patch.dict(os.environ, env):
+            self.assertEqual(collector.github_run_url(), "https://github.com/owner/repo/actions/runs/42")
+
+    def test_diagnostics_failure_does_not_change_results(self):
+        gn = rss_item("Triada Robotics unveils BRAVO", "https://publisher.example/gn")
+        kwargs = dict(fetch=lambda q, r: [gn], gdelt=lambda q: [gdelt_article()])
+        _, normal_files, _ = self.run_main(**kwargs)
+
+        def corrupt(self):
+            self.data = None  # every diagnostics method now fails internally
+            self.feeds = None
+
+        with patch.object(collector.Diagnostics, "reset", corrupt):
+            status, broken_files, _ = self.run_main(**kwargs)
+
+        for name in ("mentions.json", "mentions_review.json", "mentions_public.json"):
+            self.assertEqual(normal_files[name], broken_files[name], name)
+        for key in OLD_STATUS_KEYS:
+            self.assertIn(key, status)
+        self.assertNotIn("connectors", status)  # diagnostics skipped, old keys intact
 
 
 if __name__ == "__main__":
-    main()
+    unittest.main()
