@@ -452,6 +452,29 @@ class ConnectorDiagnosticsTests(unittest.TestCase):
                          ("ok", total, 1))
         self.assertEqual(news["new_confirmed"], status["google_news_added"])
 
+    def test_google_news_verification_funnel_distinguishes_outcomes(self):
+        items = [
+            rss_item("Triada Robotics launches BRAVO", "https://publisher.example/verified"),
+            rss_item("Triada Robotics announces update", "https://publisher.example/blocked"),
+            rss_item("Unrelated drone article", "https://publisher.example/unrelated"),
+        ]
+
+        def article(url):
+            if url.endswith("/verified"):
+                return "Triada Robotics launches BRAVO", url
+            if url.endswith("/unrelated"):
+                return "Article about a different company", url
+            return "", ""
+
+        status, _, _ = self.run_main(fetch=lambda q, r: items, article=article)
+        funnel = status["google_news_verification"]
+        self.assertEqual(funnel["candidates_checked"], 3)
+        self.assertEqual(funnel["publisher_opened"], 2)
+        self.assertEqual(funnel["publisher_unavailable"], 1)
+        self.assertEqual(funnel["mention_absent"], 1)
+        self.assertEqual(funnel["confirmed"], 1)
+        self.assertGreater(funnel["already_known"], 0)
+
     # ---- whole-run guarantees ------------------------------------------------------------
 
     def test_old_status_keys_are_kept_and_agree_with_connector_totals(self):
