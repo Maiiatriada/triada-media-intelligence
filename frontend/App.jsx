@@ -80,6 +80,7 @@ function normalizeRecord(raw) {
     status: raw.status ? String(raw.status).trim().toLowerCase() : "unknown",
     subject: raw.subject ?? null,
     sourceType: raw.source_type ?? "",
+    platform: typeof raw.platform === "string" && raw.platform.trim() ? raw.platform.trim() : "Media",
     keyword: raw.keyword ?? "",
     categories: Array.isArray(raw.categories) ? raw.categories : [],
     firstSeenAt: typeof raw.first_seen_at === "string" ? raw.first_seen_at : "",
@@ -257,6 +258,12 @@ const MENTION_COLUMNS = [
     render: (m) => formatDate(m.publishedAt) || "Unknown",
   },
   {
+    key: "platform",
+    label: "Platform",
+    className: "tmi-col-platform",
+    render: (m) => m.platform,
+  },
+  {
     key: "source",
     label: "Media Source",
     className: "tmi-col-source",
@@ -337,6 +344,16 @@ const SUBJECT_OPTIONS = [
   { value: "all", label: "All Mentions" },
   { value: "triada-robotics", label: "TRIADA Robotics" },
   { value: "artem-veselov", label: "Artem Veselov" },
+];
+
+const PLATFORM_OPTIONS = [
+  { value: "all", label: "All Platforms" },
+  { value: "Media", label: "Media" },
+  { value: "LinkedIn", label: "LinkedIn" },
+  { value: "Facebook", label: "Facebook" },
+  { value: "Instagram", label: "Instagram" },
+  { value: "X", label: "X" },
+  { value: "YouTube", label: "YouTube" },
 ];
 
 const DATE_RANGE_OPTIONS = [
@@ -822,6 +839,7 @@ function DateRangeFilter({ id, label, value, onChange, customRange, onCustomRang
 function MentionsLibrary({ data }) {
   const { phase, records, skipped, error, lastUpdated, refreshing, refresh } = data;
   const [subject, setSubject] = useState(SUBJECT_OPTIONS[0].value);
+  const [platform, setPlatform] = useState(PLATFORM_OPTIONS[0].value);
   const [dateRange, setDateRange] = useState(DATE_RANGE_OPTIONS[0].value);
   const [sortBy, setSortBy] = useState(SORT_OPTIONS[0].value);
   // { start, end } as "YYYY-MM-DD", set when a custom range is applied (not used for filtering yet)
@@ -835,6 +853,7 @@ function MentionsLibrary({ data }) {
       const text = [record.title, record.keyword, record.subject].filter(Boolean).join(" ");
       const isCEO = record.categories.includes("CEO") || /artem\s+veselov|артем\s+веселов/i.test(text);
       const isCompany = record.categories.includes("Company") || record.categories.includes("Products") || /triada\s+robotics|тріада\s+роботікс|триада\s+роботикс/i.test(text);
+      if (platform !== "all" && record.platform.toLowerCase() !== platform.toLowerCase()) return false;
       if (subject === "artem-veselov" && !isCEO) return false;
       if (subject === "triada-robotics" && !isCompany) return false;
       if (dateRange !== "all-time") {
@@ -850,7 +869,7 @@ function MentionsLibrary({ data }) {
     });
     const sorted = sortNewestFirst(filtered);
     return sortBy === "oldest" ? sorted.reverse() : sorted;
-  }, [records, subject, dateRange, customRange, sortBy]);
+  }, [records, subject, platform, dateRange, customRange, sortBy]);
   const discovered = useMemo(() => latestDiscovery(records), [records]);
 
   const isLoading = phase === "loading";
@@ -864,7 +883,7 @@ function MentionsLibrary({ data }) {
           Mentions Library
         </h2>
         <p className="tmi-page-subtitle">
-          Centralized archive of media coverage and online mentions.
+          Centralized archive of media coverage and online mentions. {isReady ? `${visible.length} of ${records.length} mentions shown.` : ""}
         </p>
       </div>
 
@@ -875,6 +894,13 @@ function MentionsLibrary({ data }) {
           value={subject}
           options={SUBJECT_OPTIONS}
           onChange={setSubject}
+        />
+        <FilterSelect
+          id="filter-platform"
+          label="Platform"
+          value={platform}
+          options={PLATFORM_OPTIONS}
+          onChange={setPlatform}
         />
         <DateRangeFilter
           id="filter-date-range"
