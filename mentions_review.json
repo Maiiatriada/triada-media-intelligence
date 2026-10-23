@@ -13,6 +13,19 @@
     "platform": "Media"
   },
   {
+    "id": "6d90a540881cec32fec4db07dc508ecf7906a7051cc7a5a7a94cdaec24874b24",
+    "title": "Global Changes to Roaming Availability for Starlink Users - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQ1B1WjQwd2xjUDZDMHRmcURFTDFhVHVTSkRRS2RfSDdubnBxWGNJZy1WaFJaNnoyWEhWX2ZEMFRqS3EzQkVTd3AyNWtzS28tOHVVMWN4MUppWGRLaVRVZzM4SmliWFdHRHJQdVo2S05SZHZwTmRvVUt3WGptVmxFSEpBOVBzbVZJWWRuMzRxTjF0bDYx?oc=5",
+    "published_at": "2026-08-13T07:00:00+00:00",
+    "keyword": "\"Artem Veselov\"",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ],
+    "status": "review",
+    "platform": "Media"
+  },
+  {
     "id": "8494f4e11e6a7c965d4930feacc0d9682c6493a749e610f5fc16699b33f92a6e",
     "title": "Ukraine’s new drone is a cousin to America’s stealth bombers. It reaches Ufa in three hours. - Euromaidan Press",
     "source": "Euromaidan Press",
@@ -136,6 +149,7 @@
     "matched_queries": [
       "\"Artem Veselov\"",
       "\"Artem Veselov\" \"drone\"",
+      "\"Triada Robotics\"",
       "\"Veselov\" \"Triada Robotics\""
     ],
     "platform": "Media"
@@ -303,9 +317,12 @@
     "keyword": "\"Triada\" \"BRAVO\"",
     "status": "review",
     "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",
-      "\"Triada\" \"BRAVO\""
+      "\"Triada\" \"BRAVO\"",
+      "\"Triada\" \"KILO\""
     ],
     "platform": "Media"
   },
