@@ -131,19 +131,23 @@ function sortNewestFirst(records) {
 /** Downloads mentions.json and returns every valid record, sorted. */
 async function fetchMentions(signal) {
   // The timestamp makes each request unique, so GitHub's 5-minute cache is skipped.
-  const response = await fetch(`${MENTIONS_URL}?t=${Date.now()}`, {
-    cache: "no-store",
-    signal,
-  });
-  if (!response.ok) {
-    throw new LoadError("http", `The data source answered with HTTP ${response.status}.`);
-  }
-
+  // GitHub's raw-content CDN can serve a stale JSON blob despite query cache busters.
+  // Read the current branch through the GitHub Contents API first, then fall back to raw.
   let json;
   try {
-    json = await response.json();
-  } catch {
-    throw new LoadError("format", "The data file is not valid JSON.");
+    const apiUrl = "https://api.github.com/repos/Maiiatriada/triada-media-intelligence/contents/mentions_public.json?ref=main&t=" + Date.now();
+    const apiResponse = await fetch(apiUrl, { cache: "no-store", signal, headers: { Accept: "application/vnd.github+json" } });
+    if (!apiResponse.ok) throw new Error("GitHub API returned " + apiResponse.status);
+    const file = await apiResponse.json();
+    if (!file.content || file.encoding !== "base64") throw new Error("Unexpected GitHub content encoding");
+    const bytes = Uint8Array.from(atob(file.content.replace(/\\s/g, "")), c => c.charCodeAt(0));
+    json = JSON.parse(new TextDecoder("utf-8").decode(bytes));
+  } catch (apiError) {
+    if (signal?.aborted) throw apiError;
+    const response = await fetch(`${MENTIONS_URL}?t=${Date.now()}`, { cache: "no-store", signal });
+    if (!response.ok) throw new LoadError("http", `The data source answered with HTTP ${response.status}.`);
+    try { json = await response.json(); }
+    catch { throw new LoadError("format", "The data file is not valid JSON."); }
   }
   if (!Array.isArray(json)) {
     throw new LoadError("format", "Unexpected data format: expected a list of mentions.");
