@@ -52,6 +52,40 @@
     "platform": "Media"
   },
   {
+    "id": "hist-10-omexpensivelegacysystems",
+    "title": "Artem Veselov interview (September 28)",
+    "source": "Militär Aktuell",
+    "url": "https://militaeraktuell.at/en/artem-veselov-triada-robotics-the-market-is-moving-away-from-expensive-legacy-systems/",
+    "published_at": "2026-09-28T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-11-dalangstreckenangriffssys",
+    "title": "Artem Veselov interview (German edition)",
+    "source": "Militär Aktuell",
+    "url": "https://militaeraktuell.at/artem-veselov-triada-langstrecken-angriffssys/",
+    "published_at": "2026-09-28T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
     "id": "8e5eec0c36038519afaf0b53107a0cc580b71ef974d9d265459ddb58ba570315",
     "title": "Artem Veselov, Triada Robotics: “The market is moving away from expensive legacy systems” - Militär Aktuell",
     "source": "Militär Aktuell",
@@ -114,6 +148,74 @@
     "platform": "Media"
   },
   {
+    "id": "hist-9-roboticsceoartemveselov",
+    "title": "Artem Veselov interview (September 14)",
+    "source": "Militär Aktuell",
+    "url": "https://militaeraktuell.at/en/5-questions-for-triada-robotics-ceo-artem-veselov/",
+    "published_at": "2026-09-14T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-13-ity7489669617783832576xxx",
+    "title": "Mohammad Alashkar mentions Triada Robotics Bravo",
+    "source": "LinkedIn",
+    "url": "https://www.linkedin.com/posts/mohammad-alashkar-md-mmsc-phd-036853103_looks-similar-doesnt-it-only-the-tail-activity-7489669617783832576-Mxxx",
+    "published_at": "2026-08-31T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "LinkedIn"
+  },
+  {
+    "id": "hist-14-ity749033964294954598411",
+    "title": "Fernando Figueiredo mentions Triada Robotics",
+    "source": "LinkedIn",
+    "url": "https://www.linkedin.com/posts/fernando-figueiredo-1b80433b_ukraine-has-deployed-the-new-jet-powered-activity-7490339642949545984-1-A1",
+    "published_at": "2026-08-31T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "LinkedIn"
+  },
+  {
+    "id": "hist-15-ity7490076854624702464fnv",
+    "title": "Runtime Bharat mentions Triada Robotics",
+    "source": "LinkedIn",
+    "url": "https://www.linkedin.com/posts/runtimebharat_hyderabad-based-apollyon-dynamics-has-activity-7490076854624702464-Rfnv",
+    "published_at": "2026-08-31T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "LinkedIn"
+  },
+  {
     "id": "0cb5c327f639b8cdf1c205d2d505d8299d8a7cd8ef3076fe5e4e673ddf6a5335",
     "title": "Drone Swarms: Where Tactics End and Strategy Begins - Мілітарний",
     "source": "Мілітарний",
@@ -130,6 +232,23 @@
     ],
     "verification_method": "manual_publisher_review",
     "platform": "Media"
+  },
+  {
+    "id": "hist-16-omwatchv2qsxt45s",
+    "title": "Nuevo mosquito de largo alcance UKR",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=2_LqVQsxMXU&t=45s",
+    "published_at": "2026-08-23T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
   },
   {
     "id": "manual-1-20260813",
@@ -165,6 +284,159 @@
     ]
   },
   {
+    "id": "hist-17-weekly10august2026part5",
+    "title": "Don's Weekly: Diplomacy and Equipment",
+    "source": "Substack",
+    "url": "https://xxtomcooperxx.substack.com/p/dons-weekly-10-august-2026-part-5",
+    "published_at": "2026-08-10T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-18-10dwimweeklyaug392026",
+    "title": "DWIM Weekly: Aug 3–9, 2026",
+    "source": "Drone Warfare",
+    "url": "https://drone-warfare.com/2026/08/10/dwim-weekly-aug-3-9-2026",
+    "published_at": "2026-08-10T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-19-kysocialpost3mso4iowzxs22",
+    "title": "Bluesky douglian mention",
+    "source": "Bluesky",
+    "url": "https://bsky.app/profile/douglian.bsky.social/post/3mso4iowzxs22",
+    "published_at": "2026-08-09T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Bluesky"
+  },
+  {
+    "id": "hist-20-esnewestattackdronelooks",
+    "title": "Ukraine's Newest Attack Drone Looks Like A Miniature Stealth Bomber",
+    "source": "Trench Art",
+    "url": "https://www.trenchart.us/p/ukraines-newest-attack-drone-looks",
+    "published_at": "2026-08-09T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-21-mwatchvm7o9rjt674s",
+    "title": "Semana 233: Nuevas Armas de Ataque Aéreo",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=m7oO9GUBrjE&t=674s",
+    "published_at": "2026-08-09T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-22-auxfrappesalongueportee",
+    "title": "L’Ukraine présente un nouveau drone à réaction",
+    "source": "Business AM",
+    "url": "https://fr.businessam.be/lukraine-presente-un-nouveau-drone-a-reaction-destine-aux-frappes-a-longue-portee",
+    "published_at": "2026-08-07T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-23-mwatchvhx9923yt278s",
+    "title": "Vietnamese-language Triada Robotics mention",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=hPMx9V923yQ&t=278s",
+    "published_at": "2026-08-06T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-24-watchvxhjwmct1073s",
+    "title": "Spanish-language Triada Robotics mention",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=xPUh_jP_wmc&t=1073s",
+    "published_at": "2026-08-06T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-26-treachesufainthreehours",
+    "title": "Ukraine’s new drone is a cousin to America’s stealth bombers",
+    "source": "Euromaidan Press",
+    "url": "https://euromaidanpress.com/2026/08/06/ukraines-new-drone-is-a-cousin-to-americas-stealth-bombers-it-reaches-ufa-in-three-hours",
+    "published_at": "2026-08-06T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
     "id": "8494f4e11e6a7c965d4930feacc0d9682c6493a749e610f5fc16699b33f92a6e",
     "title": "Ukraine’s new drone is a cousin to America’s stealth bombers. It reaches Ufa in three hours. - Euromaidan Press",
     "source": "Euromaidan Press",
@@ -184,6 +456,57 @@
     "categories": [
       "Company"
     ]
+  },
+  {
+    "id": "hist-25-20260805ukrainesdefiance",
+    "title": "Russia’s Coalition of Troubled Nations and Ukraine’s Defiance",
+    "source": "Kostelisevich",
+    "url": "https://kostelisevich.com/2026/08/05/ukraines-defiance",
+    "published_at": "2026-08-05T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-27-ladgeopolityczny05082026",
+    "title": "Przegląd Geopolityczny",
+    "source": "XTB",
+    "url": "https://www.xtb.com/pl/analizy-rynkowe/wiadomosci-rynkowe/przeglad-geopolityczny-05-08-2026",
+    "published_at": "2026-08-05T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-28-kysocialpost3msdgdyxgnt2i",
+    "title": "Bluesky osint-mirrors mention",
+    "source": "Bluesky",
+    "url": "https://bsky.app/profile/osint-mirrors.bsky.social/post/3msdgdyxgnt2i",
+    "published_at": "2026-08-05T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Bluesky"
   },
   {
     "id": "d8cb9e298459a3256c23c877abd0ba1d1efa60ec26e9fd8f757ac8f3b752e2a7",
@@ -227,6 +550,108 @@
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
+    "platform": "Media"
+  },
+  {
+    "id": "hist-29-orld202608041056427html",
+    "title": "Captan en video un dron ucraniano nunca antes visto",
+    "source": "News Pravda ES",
+    "url": "https://spanish.news-pravda.com/world/2026/08/04/1056427.html",
+    "published_at": "2026-08-04T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-30-ugeescomments1vffcf7bravo",
+    "title": "Reddit BRAVO discussion",
+    "source": "Reddit",
+    "url": "https://www.reddit.com/r/tjournal_refugees/comments/1vffcf7/bravo",
+    "published_at": "2026-08-04T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Reddit"
+  },
+  {
+    "id": "hist-31-kysocialpost3msbgpzwjkc2s",
+    "title": "Bluesky salsaconandrea mention",
+    "source": "Bluesky",
+    "url": "https://bsky.app/profile/salsaconandrea.bsky.social/post/3msbgpzwjkc2s",
+    "published_at": "2026-08-04T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Bluesky"
+  },
+  {
+    "id": "hist-32-omwatchv9lp1hcdnut91s",
+    "title": "Ucrania revela un nuevo dron de ataque pesado",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=H9lp1hcdnuQ&t=91s",
+    "published_at": "2026-08-04T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-33-watchvq9nfit1656s",
+    "title": "Marek Kozubel Polish-language mention",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=NDq9OnXfGiI&t=1656s",
+    "published_at": "2026-08-04T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-45-reaktyvnyjdronshhovidomo",
+    "title": "Unknown jet drone: Bravo comparison unconfirmed",
+    "source": "Parlament.ua",
+    "url": "https://parlament.ua/news/pid-chas-ataky-na-npz-v-ufi-pomityly-nevidomyj-reaktyvnyj-dron-shho-vidomo/",
+    "published_at": "2026-08-04T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
     "platform": "Media"
   },
   {
@@ -348,6 +773,176 @@
     "categories": [
       "Company"
     ]
+  },
+  {
+    "id": "hist-12-iatechnews20260803html",
+    "title": "Bravo Triada Robotics in military technology digest",
+    "source": "Асимметрия",
+    "url": "https://asymmetria.tech/news/2026-08-03.html",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-34-kysocialpost3msa7oelm3a2c",
+    "title": "Bluesky newsrealtime mention",
+    "source": "Bluesky",
+    "url": "https://bsky.app/profile/newsrealtime.bsky.social/post/3msa7oelm3a2c",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Bluesky"
+  },
+  {
+    "id": "hist-35-anskiyf1171785808582html",
+    "title": "Mystery drone resembling F-117: Triada reference",
+    "source": "РБК-Україна",
+    "url": "https://www.rbc.ua/rus/news/taemnichiy-dron-shozhiy-amerikanskiy-f-117-1785808582.html",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-36-ukraineupdateaugust42026",
+    "title": "Ukraine Update August 4",
+    "source": "Substack",
+    "url": "https://dailyukraineupdate.substack.com/p/ukraine-update-august-4-2026",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-37-tubecomwatchvjyhunk",
+    "title": "Is this Ukraine’s New Bravo Deep-Strike Drone?",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=KXjBDyIhunk",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-38-partdeux1475506page1234",
+    "title": "Ars Technica forum mention",
+    "source": "Ars Technica",
+    "url": "https://arstechnica.com/civis/threads/ukraine-is-game-to-you-part-deux.1475506/page-1234",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-39-mwatchvhculnpu4t868s",
+    "title": "Portuguese-language Triada Robotics mention",
+    "source": "YouTube",
+    "url": "https://www.youtube.com/watch?v=MhculnpTuM4&t=868s",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-40-kysocialpost3ms6lmwez722t",
+    "title": "Bluesky ownfeed mention",
+    "source": "Bluesky",
+    "url": "https://bsky.app/profile/ownfeed.bsky.social/post/3ms6lmwez722t",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Bluesky"
+  },
+  {
+    "id": "hist-41-kysocialpost3ms6cfzyiyg2t",
+    "title": "Bluesky worldimpactnews mention",
+    "source": "Bluesky",
+    "url": "https://bsky.app/profile/worldimpactnews.bsky.social/post/3ms6cfzyiyg2t",
+    "published_at": "2026-08-03T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Bluesky"
+  },
+  {
+    "id": "hist-42-orld202608032488632html",
+    "title": "Ukraine reportedly using a new drone",
+    "source": "News Pravda",
+    "url": "https://news-pravda.com/world/2026/08/03/2488632.html",
+    "published_at": "2026-08-02T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
   },
   {
     "id": "d417d971d2409f3282bb25c2c46669123397b8c38c6495d2f13f764d819e0aa3",
@@ -512,6 +1107,23 @@
     ]
   },
   {
+    "id": "hist-8-instagramcompade8qad",
+    "title": "about\\_ukraine\\_news: про Bravo",
+    "source": "Insagram about\\_ukraine\\_news",
+    "url": "https://www.instagram.com/p/DadeZ_8qRad/",
+    "published_at": "2026-07-07T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "Media"
+  },
+  {
     "id": "manual-6-20260706",
     "title": "Eurosatory 2026: коментар Артема Веселова",
     "source": "BankingNews.gr",
@@ -573,6 +1185,125 @@
     "matched_text": "Bravo: украинский дрон с дальностью полета 2000 км от Triada Robotics - Новини Донбасу",
     "verification_method": "title",
     "platform": "Media"
+  },
+  {
+    "id": "hist-1-tubecomwatchvropba",
+    "title": "YouTube (Militarnyi): враження від Eurosatory 2026 — коментар CEO",
+    "source": "YouTube — Militarnyi",
+    "url": "https://www.youtube.com/watch?v=STropB-bBaI",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "YouTube"
+  },
+  {
+    "id": "hist-3-astatus2071896832381198408",
+    "title": "X: репост novostidnua про Bravo",
+    "source": "X (Twitter) — @novostidnua",
+    "url": "https://x.com/novostidnua/status/2071896832381198408",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "X"
+  },
+  {
+    "id": "hist-4-9607122168776718702584",
+    "title": "Facebook: пост Defender Media про Bravo",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/DefenderMediaUA/photos/%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%B0-deftech-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D1%96%D1%8F-triada-robotics-%D0%BF%D1%80%D0%B0%D1%86%D1%8E%D1%94-%D0%BD%D0%B0%D0%B4-bravo-%D0%B4%D1%96%D0%BF%D1%81%D1%82%D1%80%D0%B0%D0%B9%D0%BA-%D0%B4%D1%80%D0%BE%D0%BD%D0%BE%D0%BC-%D1%96%D0%B7/122168776718702584/",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "Facebook"
+  },
+  {
+    "id": "hist-5-status2069425042400665817",
+    "title": "X (Twitter): пост Defender Media про Bravo",
+    "source": "X (Twitter)",
+    "url": "https://x.com/DefenderMediaUA/status/2069425042400665817",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "X"
+  },
+  {
+    "id": "hist-6-europereadyformodernwar",
+    "title": "Колонка CEO в Militarnyi: враження від Eurosatory 2026",
+    "source": "Militarnyi (авторська колонка)",
+    "url": "https://militarnyi.com/en/blogs/eurosatory-2026-is-europe-ready-for-modern-war/",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "Media"
+  },
+  {
+    "id": "hist-7-minartemveselova8276314",
+    "title": "LinkedIn CEO: активність та згадки Triada Robotics",
+    "source": "LinkedIn",
+    "url": "https://www.linkedin.com/in/artem-veselov-a8276314/",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "LinkedIn"
+  },
+  {
+    "id": "hist-47-ity7470466957587271680p8",
+    "title": "Defence Alliance announces Triada Robotics",
+    "source": "LinkedIn",
+    "url": "https://www.linkedin.com/posts/defenceallianceua_another-ukrainian-defence-tech-company-has-activity-7470466957587271680--Tp8",
+    "published_at": "2026-06-26T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "LinkedIn"
   },
   {
     "id": "manual-4-20260626",
@@ -660,6 +1391,23 @@
     ]
   },
   {
+    "id": "hist-43-tsyaskazhdympolyotomamp",
+    "title": "Bravo coverage Russian-language edition",
+    "source": "ITC.ua",
+    "url": "https://itc.ua/news/v-ukrayne-predstavyly-dron-dypstrajk-bravo-on-mozhet-proletet-2000-km-y-osnashhen-yy-kotoryj-obuchaetsya-s-kazhdym-polyotom/amp/",
+    "published_at": "2026-06-25T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
+  },
+  {
     "id": "c91749aed825587937b2192aa66f572a1cc9c8d892a11c27f72f6fa23cda701c",
     "title": "В Україні представили діпстрайк-дрон Bravo: летить на 2000 км та має ШІ, що вчиться з кожним польотом - ITC.ua",
     "source": "ITC.ua",
@@ -700,6 +1448,23 @@
     "categories": [
       "Company"
     ]
+  },
+  {
+    "id": "hist-46-ukrayinatestuienoviybpla",
+    "title": "Bravo drone report repost",
+    "source": "Рада Львів",
+    "url": "https://rada.lviv.ua/news/shi-na-bortu-i-dalnist-2000-km-ukrayina-testuie-noviy-bpla",
+    "published_at": "2026-06-24T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
   },
   {
     "id": "manual-3-20260624",
@@ -762,6 +1527,23 @@
     "categories": [
       "Company"
     ]
+  },
+  {
+    "id": "hist-44-ykzdatnyjdolatydo2000km",
+    "title": "Bravo jet-powered drone testing",
+    "source": "Головне в Україні",
+    "url": "https://glavnoe.in.ua/news/v-ukrayini-hotuyut-do-vyprobuvan-reaktyvnyj-bezpilotnyk-zdatnyj-dolaty-do-2000-km",
+    "published_at": "2026-06-23T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_brand24_or_research"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_brand24_or_research",
+    "platform": "Media"
   },
   {
     "id": "97f5088da6394688367c934425e83f821dbbe5d11893a09dae163f15f235cdc7",
@@ -1076,5 +1858,22 @@
     "first_seen_at": "2026-10-22T13:18:00+00:00",
     "matched_queries": [],
     "platform": "Media"
+  },
+  {
+    "id": "hist-2-1015989594412569",
+    "title": "Facebook NAUDI: Triada Robotics приєдналася до асоціації",
+    "source": "Facebook — NAUDI (Національна асоціація оборонної промисловості України)",
+    "url": "https://www.facebook.com/naudiUA/photos/до-naudi-приєдналася-компанія-triada-robotics-розробник-автономних-систем-озброє/1015989594412569/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "historical_notion_import"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "historical_notion_import",
+    "platform": "Facebook"
   }
 ]
