@@ -302,12 +302,7 @@ const MENTION_COLUMNS = [
     key: "title",
     label: "Article Title",
     className: "tmi-col-title",
-    render: (m) => (
-      <>
-        <span>{m.title || "Untitled"}</span>
-        <StatusBadge status={m.status} />
-      </>
-    ),
+    render: (m) => <span>{m.title || "Untitled"}</span>,
   },
   {
     key: "url",
