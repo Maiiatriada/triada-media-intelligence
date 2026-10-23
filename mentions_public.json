@@ -2178,5 +2178,887 @@
     "verification_method": "user_confirmed_relevance_x_snowflake_date_text_unavailable",
     "platform": "X",
     "description": "Публікація про Triada Robotics. Повний текст допису наразі недоступний для автоматичного зчитування; опис не верифіковано."
+  },
+  {
+    "id": "facebook-user-%D0%BD%D0%B0%D0%B4-%D1%83%D1%84%D0%BE%D1%8E-%D0%BF%D0%BE%D0%BC%D1%96%D1%87%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B4%D0%B0%D0%BB%D0%B5%D0%BA%D0%BE%D0%B1%D1%96%D0%B9%D0%BD%D0%B8%D0%B9-%D0%B4%D1%80%D0%BE%D0%BD-%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%B0-%D0%BF%D1%96%D0%B4-%D0%BD%D0%B0%D0%B7%D0%B2%D0%BE%D1%8E-bravo%D0%BC%D0%BE",
+    "title": "Facebook — Anastasiya Lobkivska: допис про дрон Bravo",
+    "source": "Anastasiya Lobkivska",
+    "url": "https://www.facebook.com/anastasiya.lobkivska/posts/%D0%BD%D0%B0%D0%B4-%D1%83%D1%84%D0%BE%D1%8E-%D0%BF%D0%BE%D0%BC%D1%96%D1%87%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B4%D0%B0%D0%BB%D0%B5%D0%BA%D0%BE%D0%B1%D1%96%D0%B9%D0%BD%D0%B8%D0%B9-%D0%B4%D1%80%D0%BE%D0%BD-%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%B0-%D0%BF%D1%96%D0%B4-%D0%BD%D0%B0%D0%B7%D0%B2%D0%BE%D1%8E-bravo%D0%BC%D0%BE/27974198335556347/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Згадка про далекобійний дрон Bravo над Уфою; авторство та твердження потребують перевірки."
+  },
+  {
+    "id": "facebook-user-4284203888506064",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook group",
+    "url": "https://www.facebook.com/groups/3364653217127807/posts/4284203888506064/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-3318384338348905",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook group",
+    "url": "https://www.facebook.com/groups/2724662661054412/posts/3318384338348905/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19o9ZxD44i",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19o9ZxD44i/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1E3hRuTZR1",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1E3hRuTZR1/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-14vsaph8Skd",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/14vsaph8Skd/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1E5fQpuZ94",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1E5fQpuZ94/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1HV8pxcPkY",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1HV8pxcPkY/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1EfiUmr6RS",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1EfiUmr6RS/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1GAgK5ipf2",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1GAgK5ipf2/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1Cnw6bBiom",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1Cnw6bBiom/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19gggYgHAK",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19gggYgHAK/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1EuGFfiYWx",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1EuGFfiYWx/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1KZvE995z3",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1KZvE995z3/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1GnWuC8Z2r",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1GnWuC8Z2r/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1EqbNsakAv",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1EqbNsakAv/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1CvpyFa2rR",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1CvpyFa2rR/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1FDHN2yo7G",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1FDHN2yo7G/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19oWC9AKPp",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19oWC9AKPp/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-18SiMvSknQ",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/18SiMvSknQ/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19J8vEMRt1",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19J8vEMRt1/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1JJ82QDAVf",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1JJ82QDAVf/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1DyeM81C3o",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1DyeM81C3o/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19tAVYBtXk",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19tAVYBtXk/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1AMTLisTRu",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1AMTLisTRu/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19YHCnWNw5",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19YHCnWNw5/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-14zh4RBLTmE",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/14zh4RBLTmE/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19UkqHRRLV",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19UkqHRRLV/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19wJvyNJDG",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19wJvyNJDG/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1LzP8Rcghf",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1LzP8Rcghf/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1CbGZ2zXVY",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1CbGZ2zXVY/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1DstBKuvEL",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1DstBKuvEL/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19A1Xe7o8T",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19A1Xe7o8T/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19pCX7CvsQ",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19pCX7CvsQ/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-14xPbDo6tVF",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/14xPbDo6tVF/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1C91aVtrFm",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1C91aVtrFm/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1HvaNFvMUq",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1HvaNFvMUq/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1FLDLzzXTW",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1FLDLzzXTW/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1DmLchPYJJ",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/r/1DmLchPYJJ/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19VsW5XqNS",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/19VsW5XqNS/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1BUEd8eCi1",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1BUEd8eCi1/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1JoSzqnQX3",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/r/1JoSzqnQX3/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1CLwwTTZa7",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/r/1CLwwTTZa7/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1A24bTNyZ5",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/v/1A24bTNyZ5/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-19sQcDDKVG",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/v/19sQcDDKVG/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1J76Fb1M5Q",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1J76Fb1M5Q/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1LJveG4wyh",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/r/1LJveG4wyh/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1DqNz22wXx",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/r/1DqNz22wXx/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
+  },
+  {
+    "id": "facebook-user-1GqcgUfPFz",
+    "title": "Facebook: згадка TRIADA Robotics (текст очікує зчитування)",
+    "source": "Facebook",
+    "url": "https://www.facebook.com/share/p/1GqcgUfPFz/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "review",
+    "matched_queries": [
+      "User-submitted Facebook mention"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "user_submitted_facebook_link_content_unavailable",
+    "platform": "Facebook",
+    "description": "Текст і дата Facebook-публікації поки не отримані автоматично."
   }
 ]
