@@ -1841,26 +1841,9 @@
   },
   {
     "id": "instagram-Dbk6LCOicJ2",
-    "title": "Militarnyi: відеоінтерв’ю з Артемом Веселовим",
-    "source": "mil.in.ua",
-    "url": "https://www.instagram.com/reels/Dbk6LCOicJ2/",
-    "published_at": null,
-    "keyword": "Triada Robotics / Artem Veselov",
-    "status": "relevant",
-    "matched_queries": [
-      "User-submitted Instagram mention"
-    ],
-    "categories": [
-      "CEO"
-    ],
-    "verification_method": "user_screenshot_verified",
-    "platform": "Instagram"
-  },
-  {
-    "id": "instagram-DPE13usjMMz",
     "title": "Eurasian Editorial: відео про реактивний дрон Bravo від Triada Robotics",
     "source": "eurasianeditorial",
-    "url": "https://www.instagram.com/reels/DPE13usjMMz/",
+    "url": "https://www.instagram.com/reels/Dbk6LCOicJ2/",
     "published_at": null,
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
@@ -1870,7 +1853,24 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "user_screenshot_verified",
+    "verification_method": "user_confirmed_reel_content",
+    "platform": "Instagram"
+  },
+  {
+    "id": "instagram-DPE13usjMMz",
+    "title": "Militarnyi: відеоінтерв’ю з Артемом Веселовим",
+    "source": "mil.in.ua",
+    "url": "https://www.instagram.com/reels/DPE13usjMMz/",
+    "published_at": null,
+    "keyword": "Triada Robotics / Artem Veselov",
+    "status": "relevant",
+    "matched_queries": [
+      "User-submitted Instagram mention"
+    ],
+    "categories": [
+      "CEO"
+    ],
+    "verification_method": "user_confirmed_reel_content",
     "platform": "Instagram"
   }
 ]
