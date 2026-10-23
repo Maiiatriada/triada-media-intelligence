@@ -1,0 +1,246 @@
+--- frontend/App.jsx (current main)
++++ frontend/App.jsx (this pull request)
+@@ -7,6 +7,8 @@
+    Step 3: Live data from the collector's mentions.json (auto-refresh + status filters)
+    Step 4: Filter bar UI (Subject / Date Range / Sort By: selection only, no filtering yet)
+    Step 5: Custom Range calendar popup in the Date Range filter
++   Audit fixes: Platform spellings (Twitter -> X), Subject from categories, Date Range by calendar day,
++                status chips and badges restored, "Show all mentions" resets every filter
+ 
+    Structure (easy to extend in later steps):
+    - NAV_ITEMS         -> add a tab here to add a section
+@@ -41,9 +43,10 @@
+ const KNOWN_STATUSES = ["relevant", "review", "irrelevant"];
+ 
+ /**
+- * A record as stored in mentions.json:
+- * { id, title, source, published_at, url, keyword, first_seen_at, status,
+- *   source_type, subject?, keywords?, urls?, legacy_ids? }
++ * A record as stored in mentions_public.json:
++ * { id, title, source, published_at, url, keyword, first_seen_at?, status,
++ *   categories, platform?, subject?, source_type?, keywords?, urls?, legacy_ids? }
++ * `platform` is missing on records written before it existed; those are Media.
+  */
+ 
+ class LoadError extends Error {
+@@ -67,6 +70,32 @@
+   return Number.isNaN(time) ? null : time;
+ }
+ 
++// The platforms the Platform filter offers, in display order. The dropdown is built from this
++// list only: it is strictly these entries. `value` is the name stored in the data; `aliases` are
++// other spellings that mean the same platform (lower case), e.g. Twitter and "X / Twitter" are X.
++const PLATFORMS = [
++  { value: "Media", label: "Media", aliases: ["media"] },
++  { value: "Facebook", label: "Facebook", aliases: ["facebook"] },
++  { value: "Instagram", label: "Instagram", aliases: ["instagram"] },
++  { value: "X", label: "X", aliases: ["x", "twitter", "x / twitter", "x/twitter"] },
++  { value: "LinkedIn", label: "LinkedIn", aliases: ["linkedin"] },
++  { value: "YouTube", label: "YouTube", aliases: ["youtube"] },
++];
++const DEFAULT_PLATFORM = "Media";
++
++/**
++ * The platform of a record. Records with no platform value are Media. Known spellings are
++ * mapped to the official name; an unrecognised value is kept as written, so it is never
++ * mistaken for Media (it is simply not selectable in the dropdown).
++ */
++function normalizePlatform(value) {
++  const text = value === null || value === undefined ? "" : String(value).trim();
++  if (!text) return DEFAULT_PLATFORM;
++  const key = text.toLowerCase();
++  const known = PLATFORMS.find((p) => p.value.toLowerCase() === key || p.aliases.includes(key));
++  return known ? known.value : text;
++}
++
+ /** Maps one raw record to the shape the UI uses. Returns null if unusable. */
+ function normalizeRecord(raw) {
+   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+@@ -80,9 +109,9 @@
+     status: raw.status ? String(raw.status).trim().toLowerCase() : "unknown",
+     subject: raw.subject ?? null,
+     sourceType: raw.source_type ?? "",
+-    platform: typeof raw.platform === "string" && raw.platform.trim() ? raw.platform.trim() : "Media",
++    platform: normalizePlatform(raw.platform),
+     keyword: raw.keyword ?? "",
+-    categories: Array.isArray(raw.categories) ? raw.categories : [],
++    categories: Array.isArray(raw.categories) ? raw.categories.map(String) : [],
+     firstSeenAt: typeof raw.first_seen_at === "string" ? raw.first_seen_at : "",
+   };
+ }
+@@ -276,6 +305,7 @@
+     render: (m) => (
+       <>
+         <span>{m.title || "Untitled"}</span>
++        <StatusBadge status={m.status} />
+       </>
+     ),
+   },
+@@ -337,7 +367,7 @@
+   );
+ }
+ 
+-/* Filter bar (UI only for now: selections are stored but nothing is filtered yet) */
++/* Filter bar: Subject / Platform / Date Range / Sort By (applied by applyFilters below) */
+ 
+ // The first option of each list is the default.
+ const SUBJECT_OPTIONS = [
+@@ -346,14 +376,10 @@
+   { value: "artem-veselov", label: "Artem Veselov" },
+ ];
+ 
++// Strictly "All Platforms" plus the PLATFORMS list; nothing is added from the data.
+ const PLATFORM_OPTIONS = [
+   { value: "all", label: "All Platforms" },
+-  { value: "Media", label: "Media" },
+-  { value: "LinkedIn", label: "LinkedIn" },
+-  { value: "Facebook", label: "Facebook" },
+-  { value: "Instagram", label: "Instagram" },
+-  { value: "X", label: "X" },
+-  { value: "YouTube", label: "YouTube" },
++  ...PLATFORMS.map((p) => ({ value: p.value, label: p.label })),
+ ];
+ 
+ const DATE_RANGE_OPTIONS = [
+@@ -836,40 +862,80 @@
+   );
+ }
+ 
++/* Filtering: every control in the Mentions Library is applied together (AND). */
++
++// "YYYY-MM-DD" of a publication time in UTC, the same day the table shows.
++function publicationDay(record) {
++  const time = toTime(record.publishedAt);
++  return time === null ? null : new Date(time).toISOString().slice(0, 10);
++}
++
++// Inclusive { from, to } day limits for the Date Range filter, or null for no limit.
++// "Last 7 Days" is today plus the six days before it (UTC); "Last 30 Days" likewise.
++// Whole days are compared, so a mention published today counts whatever its time of day.
++function dateBounds(dateRange, customRange, now) {
++  const today = now.toISOString().slice(0, 10);
++  if (dateRange === "last-7-days") return { from: addDaysIso(today, -6), to: null };
++  if (dateRange === "last-30-days") return { from: addDaysIso(today, -29), to: null };
++  if (dateRange === "custom" && customRange) return { from: customRange.start, to: customRange.end };
++  return null; // All Time, or a custom range that has not been applied yet
++}
++
++// Subject reads the record's categories (Company / CEO). A record tagged with both
++// appears under both subjects.
++const SUBJECT_CATEGORY = { "triada-robotics": "company", "artem-veselov": "ceo" };
++
++function matchesSubject(record, subject) {
++  const category = SUBJECT_CATEGORY[subject];
++  if (!category) return true; // All Mentions
++  return record.categories.some((c) => c.toLowerCase() === category);
++}
++
++function applyFilters(
++  records,
++  { status, subject, platform, dateRange, customRange, sortBy },
++  now = new Date()
++) {
++  const bounds = dateBounds(dateRange, customRange, now);
++  const kept = records.filter((record) => {
++    if (status !== "all" && record.status !== status) return false;
++    if (platform !== "all" && record.platform !== platform) return false;
++    if (!matchesSubject(record, subject)) return false;
++    if (bounds) {
++      const day = publicationDay(record);
++      if (day === null) return false; // an undated record cannot be placed in a range
++      if (bounds.from && day < bounds.from) return false;
++      if (bounds.to && day > bounds.to) return false;
++    }
++    return true;
++  });
++  const sorted = sortNewestFirst(kept);
++  return sortBy === "oldest" ? sorted.reverse() : sorted;
++}
++
+ function MentionsLibrary({ data }) {
+   const { phase, records, skipped, error, lastUpdated, refreshing, refresh } = data;
++  const [filter, setFilter] = useState("all");
+   const [subject, setSubject] = useState(SUBJECT_OPTIONS[0].value);
+   const [platform, setPlatform] = useState(PLATFORM_OPTIONS[0].value);
+   const [dateRange, setDateRange] = useState(DATE_RANGE_OPTIONS[0].value);
+   const [sortBy, setSortBy] = useState(SORT_OPTIONS[0].value);
+-  // { start, end } as "YYYY-MM-DD", set when a custom range is applied (not used for filtering yet)
++  // { start, end } as "YYYY-MM-DD", set when a custom range is applied
+   const [customRange, setCustomRange] = useState(null);
+ 
+-  const visible = useMemo(() => {
+-    const now = Date.now();
+-    const days = dateRange === "last-7-days" ? 7 : dateRange === "last-30-days" ? 30 : null;
+-    const filtered = records.filter((record) => {
+-      // Review candidates use provisional subject labels, not verified article text.
+-      const text = [record.title, record.keyword, record.subject].filter(Boolean).join(" ");
+-      const isCEO = record.categories.includes("CEO") || /artem\s+veselov|артем\s+веселов/i.test(text);
+-      const isCompany = record.categories.includes("Company") || record.categories.includes("Products") || /triada\s+robotics|тріада\s+роботікс|триада\s+роботикс/i.test(text);
+-      if (platform !== "all" && record.platform.toLowerCase() !== platform.toLowerCase()) return false;
+-      if (subject === "artem-veselov" && !isCEO) return false;
+-      if (subject === "triada-robotics" && !isCompany) return false;
+-      if (dateRange !== "all-time") {
+-        const published = toTime(record.publishedAt);
+-        if (published === null) return false;
+-        if (days !== null && (published > now || published < now - days * 86400000)) return false;
+-        if (dateRange === "custom" && customRange?.start && customRange?.end) {
+-          const day = new Date(published).toISOString().slice(0, 10);
+-          if (day < customRange.start || day > customRange.end) return false;
+-        }
+-      }
+-      return true;
+-    });
+-    const sorted = sortNewestFirst(filtered);
+-    return sortBy === "oldest" ? sorted.reverse() : sorted;
+-  }, [records, subject, platform, dateRange, customRange, sortBy]);
++  const options = useMemo(() => buildFilterOptions(records), [records]);
++  const visible = useMemo(
++    () => applyFilters(records, { status: filter, subject, platform, dateRange, customRange, sortBy }),
++    [records, filter, subject, platform, dateRange, customRange, sortBy]
++  );
++  // Clears every filter (the sort order is not a filter and is kept).
++  const resetFilters = () => {
++    setFilter("all");
++    setSubject(SUBJECT_OPTIONS[0].value);
++    setPlatform(PLATFORM_OPTIONS[0].value);
++    setDateRange(DATE_RANGE_OPTIONS[0].value);
++    setCustomRange(null);
++  };
+   const discovered = useMemo(() => latestDiscovery(records), [records]);
+ 
+   const isLoading = phase === "loading";
+@@ -919,6 +985,25 @@
+         />
+       </div>
+ 
++      {isReady && (
++        <div className="tmi-toolbar">
++          <div className="tmi-filters" role="group" aria-label="Filter by relevance status">
++            {options.map((option) => (
++              <button
++                key={option.value}
++                type="button"
++                className="tmi-chip"
++                aria-pressed={filter === option.value}
++                onClick={() => setFilter(option.value)}
++              >
++                {option.label}
++                <span className="tmi-chip-count">{option.count}</span>
++              </button>
++            ))}
++          </div>
++        </div>
++      )}
++
+       <div className="tmi-card" aria-busy={refreshing}>
+         {refreshing && <div className="tmi-progress" aria-hidden="true" />}
+ 
+@@ -992,7 +1077,7 @@
+ 
+         {isReady && records.length > 0 && visible.length === 0 && (
+           <StateBlock title="No mentions match this filter.">
+-            <button type="button" className="tmi-text-button" onClick={() => { setSubject("all"); setDateRange("all-time"); setSortBy("newest"); setCustomRange(null); }}>
++            <button type="button" className="tmi-text-button" onClick={resetFilters}>
+               Show all mentions
+             </button>
+           </StateBlock>
