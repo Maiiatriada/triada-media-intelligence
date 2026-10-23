@@ -2184,7 +2184,7 @@
     "title": "Reports a Bravo drone allegedly spotted over Ufa; cites reported range and payload",
     "source": "Anastasiia Lobkivska",
     "url": "https://www.facebook.com/anastasiya.lobkivska/posts/%D0%BD%D0%B0%D0%B4-%D1%83%D1%84%D0%BE%D1%8E-%D0%BF%D0%BE%D0%BC%D1%96%D1%87%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B4%D0%B0%D0%BB%D0%B5%D0%BA%D0%BE%D0%B1%D1%96%D0%B9%D0%BD%D0%B8%D0%B9-%D0%B4%D1%80%D0%BE%D0%BD-%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%B0-%D0%BF%D1%96%D0%B4-%D0%BD%D0%B0%D0%B7%D0%B2%D0%BE%D1%8E-bravo%D0%BC%D0%BE/27974198335556347/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2195,14 +2195,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports a Bravo drone allegedly spotted over Ufa; cites reported range and payload."
+    "description": "Reports a Bravo drone allegedly spotted over Ufa; cites reported range and payload.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-4284203888506064",
     "title": "Shares an article on Bravo design, range and payload; notes aircraft in Ufa footage is unidentified",
     "source": "Flu Mon Tuw",
     "url": "https://www.facebook.com/groups/3364653217127807/posts/4284203888506064/",
-    "published_at": null,
+    "published_at": "2026-08-06T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2213,14 +2215,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares an article on Bravo design, range and payload; notes aircraft in Ufa footage is unidentified."
+    "description": "Shares an article on Bravo design, range and payload; notes aircraft in Ufa footage is unidentified.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-3318384338348905",
     "title": "Relays reports of a Triada Robotics drone sighting and claimed speed, range and payload",
     "source": "Sander Regter",
     "url": "https://www.facebook.com/groups/2724662661054412/posts/3318384338348905/",
-    "published_at": null,
+    "published_at": "2026-08-04T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2231,14 +2235,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Relays reports of a Triada Robotics drone sighting and claimed speed, range and payload."
+    "description": "Relays reports of a Triada Robotics drone sighting and claimed speed, range and payload.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19o9ZxD44i",
     "title": "Overview of Bravo specifications, planned pre-series batch and co-founder Artem Veselov",
     "source": "Oleksandr Rudyachenko",
     "url": "https://www.facebook.com/share/p/19o9ZxD44i/",
-    "published_at": null,
+    "published_at": "2026-08-08T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2249,14 +2255,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Overview of Bravo specifications, planned pre-series batch and co-founder Artem Veselov."
+    "description": "Overview of Bravo specifications, planned pre-series batch and co-founder Artem Veselov.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1E3hRuTZR1",
     "title": "Reports development and testing plans for the jet-powered Bravo drone",
     "source": "More Liudei",
     "url": "https://www.facebook.com/share/p/1E3hRuTZR1/",
-    "published_at": null,
+    "published_at": "2026-06-23T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2267,14 +2275,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports development and testing plans for the jet-powered Bravo drone."
+    "description": "Reports development and testing plans for the jet-powered Bravo drone.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-14vsaph8Skd",
     "title": "Reports Triada Robotics' Bravo drone announcement and claimed performance",
     "source": "Volodymyr Booth",
     "url": "https://www.facebook.com/share/p/14vsaph8Skd/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2285,14 +2295,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Triada Robotics' Bravo drone announcement and claimed performance."
+    "description": "Reports Triada Robotics' Bravo drone announcement and claimed performance.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1E5fQpuZ94",
     "title": "Describes Bravo range, speed, payload, radar visibility and route-planning features",
     "source": "Ihor Petrenko",
     "url": "https://www.facebook.com/share/p/1E5fQpuZ94/",
-    "published_at": null,
+    "published_at": "2026-06-25T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2303,14 +2315,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Describes Bravo range, speed, payload, radar visibility and route-planning features."
+    "description": "Describes Bravo range, speed, payload, radar visibility and route-planning features.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1HV8pxcPkY",
     "title": "Reports Triada Robotics' long-range drone and its claimed payload and route optimization",
     "source": "Vitaliy Kairov",
     "url": "https://www.facebook.com/share/p/1HV8pxcPkY/",
-    "published_at": null,
+    "published_at": "2026-06-24T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2321,14 +2335,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Triada Robotics' long-range drone and its claimed payload and route optimization."
+    "description": "Reports Triada Robotics' long-range drone and its claimed payload and route optimization.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1EfiUmr6RS",
     "title": "Reports Triada Robotics' long-range jet-powered drone concept and planned pre-production",
     "source": "Dainius Dainius",
     "url": "https://www.facebook.com/share/p/1EfiUmr6RS/",
-    "published_at": null,
+    "published_at": "2026-07-01T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2339,14 +2355,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Triada Robotics' long-range jet-powered drone concept and planned pre-production."
+    "description": "Reports Triada Robotics' long-range jet-powered drone concept and planned pre-production.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1GAgK5ipf2",
     "title": "Shares Artem Veselov's commentary on European defense technology after Eurosatory 2026",
     "source": "Мілітарний (Militarnyi)",
     "url": "https://www.facebook.com/share/p/1GAgK5ipf2/",
-    "published_at": null,
+    "published_at": "2026-06-26T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2357,14 +2375,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares Artem Veselov's commentary on European defense technology after Eurosatory 2026."
+    "description": "Shares Artem Veselov's commentary on European defense technology after Eurosatory 2026.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1Cnw6bBiom",
     "title": "Reports Bravo drone preparations for testing and its reported specifications",
     "source": "Головне в Україні (Holovne v Ukraini)",
     "url": "https://www.facebook.com/share/p/1Cnw6bBiom/",
-    "published_at": null,
+    "published_at": "2026-06-23T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2375,14 +2395,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Bravo drone preparations for testing and its reported specifications."
+    "description": "Reports Bravo drone preparations for testing and its reported specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19gggYgHAK",
     "title": "Shares coverage of Triada Robotics' jet-powered drone concept",
     "source": "Onafhankelijke Defensiebond",
     "url": "https://www.facebook.com/share/p/19gggYgHAK/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2393,14 +2415,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares coverage of Triada Robotics' jet-powered drone concept."
+    "description": "Shares coverage of Triada Robotics' jet-powered drone concept.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1EuGFfiYWx",
     "title": "Discusses unidentified strike footage that may show Bravo, citing claimed specifications",
     "source": "Tech Vision yt",
     "url": "https://www.facebook.com/share/p/1EuGFfiYWx/",
-    "published_at": null,
+    "published_at": "2026-09-14T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2411,14 +2435,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unidentified strike footage that may show Bravo, citing claimed specifications."
+    "description": "Discusses unidentified strike footage that may show Bravo, citing claimed specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1KZvE995z3",
     "title": "Shares a report on Bravo's concept, specifications and production plans",
     "source": "Tore Wilken Nitter Walaker",
     "url": "https://www.facebook.com/share/p/1KZvE995z3/",
-    "published_at": null,
+    "published_at": "2026-07-01T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2429,14 +2455,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares a report on Bravo's concept, specifications and production plans."
+    "description": "Shares a report on Bravo's concept, specifications and production plans.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1GnWuC8Z2r",
     "title": "Shares Defender Media coverage of a Ukrainian deep-strike drone",
     "source": "Christer Åström",
     "url": "https://www.facebook.com/share/p/1GnWuC8Z2r/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2447,14 +2475,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares Defender Media coverage of a Ukrainian deep-strike drone."
+    "description": "Shares Defender Media coverage of a Ukrainian deep-strike drone.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1EqbNsakAv",
     "title": "Quotes reporting on Triada Robotics' jet-powered Bravo drone concept",
     "source": "Saint Javelin",
     "url": "https://www.facebook.com/share/p/1EqbNsakAv/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2465,14 +2495,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Quotes reporting on Triada Robotics' jet-powered Bravo drone concept."
+    "description": "Quotes reporting on Triada Robotics' jet-powered Bravo drone concept.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1CvpyFa2rR",
     "title": "Reports the Bravo concept and its claimed range, payload and speed",
     "source": "Sebastian Duma",
     "url": "https://www.facebook.com/share/p/1CvpyFa2rR/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2483,14 +2515,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports the Bravo concept and its claimed range, payload and speed."
+    "description": "Reports the Bravo concept and its claimed range, payload and speed.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1FDHN2yo7G",
     "title": "Discusses unidentified jet drone footage and possible Bravo identification",
     "source": "Olena Tyapka",
     "url": "https://www.facebook.com/share/p/1FDHN2yo7G/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2501,14 +2535,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unidentified jet drone footage and possible Bravo identification."
+    "description": "Discusses unidentified jet drone footage and possible Bravo identification.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19oWC9AKPp",
     "title": "Discusses footage of an unidentified Ukrainian drone that may be Bravo",
     "source": "Operation Iraqi Freedom",
     "url": "https://www.facebook.com/share/p/19oWC9AKPp/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2519,14 +2555,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses footage of an unidentified Ukrainian drone that may be Bravo."
+    "description": "Discusses footage of an unidentified Ukrainian drone that may be Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-18SiMvSknQ",
     "title": "Suggests deep-strike operations involved Bravo and lists claimed specifications",
     "source": "Haris Times",
     "url": "https://www.facebook.com/share/p/18SiMvSknQ/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2537,14 +2575,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Suggests deep-strike operations involved Bravo and lists claimed specifications."
+    "description": "Suggests deep-strike operations involved Bravo and lists claimed specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19J8vEMRt1",
     "title": "Explains Bravo's reported blended-wing-body design and radar-signature benefits",
     "source": "Defense Romania",
     "url": "https://www.facebook.com/share/p/19J8vEMRt1/",
-    "published_at": null,
+    "published_at": "2026-08-07T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2555,14 +2595,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Explains Bravo's reported blended-wing-body design and radar-signature benefits."
+    "description": "Explains Bravo's reported blended-wing-body design and radar-signature benefits.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1JJ82QDAVf",
     "title": "Quotes Artem Veselov on Bravo range, autonomy, navigation and testing",
     "source": "Militär Aktuell",
     "url": "https://www.facebook.com/share/p/1JJ82QDAVf/",
-    "published_at": null,
+    "published_at": "2026-09-29T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2573,14 +2615,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Quotes Artem Veselov on Bravo range, autonomy, navigation and testing."
+    "description": "Quotes Artem Veselov on Bravo range, autonomy, navigation and testing.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1DyeM81C3o",
     "title": "Reports Triada Robotics' development of a long-range jet-powered drone",
     "source": "Inside Ucrania 2022",
     "url": "https://www.facebook.com/share/p/1DyeM81C3o/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2591,14 +2635,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Triada Robotics' development of a long-range jet-powered drone."
+    "description": "Reports Triada Robotics' development of a long-range jet-powered drone.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19tAVYBtXk",
     "title": "Reports Ufa strike footage of an unidentified drone resembling Bravo renders",
     "source": "Euromaidan Press",
     "url": "https://www.facebook.com/share/p/19tAVYBtXk/",
-    "published_at": null,
+    "published_at": "2026-08-06T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2609,14 +2655,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Ufa strike footage of an unidentified drone resembling Bravo renders."
+    "description": "Reports Ufa strike footage of an unidentified drone resembling Bravo renders.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1AMTLisTRu",
     "title": "Discusses unconfirmed Bravo identification near Ufa and claimed specifications",
     "source": "The Saigon Post",
     "url": "https://www.facebook.com/share/p/1AMTLisTRu/",
-    "published_at": null,
+    "published_at": "2026-08-09T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2627,14 +2675,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unconfirmed Bravo identification near Ufa and claimed specifications."
+    "description": "Discusses unconfirmed Bravo identification near Ufa and claimed specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19YHCnWNw5",
     "title": "Summarizes claims about Bravo's range, payload and AI capabilities",
     "source": "Alecqs de Nulleparte",
     "url": "https://www.facebook.com/share/p/19YHCnWNw5/",
-    "published_at": null,
+    "published_at": "2026-08-04T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2645,14 +2695,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Summarizes claims about Bravo's range, payload and AI capabilities."
+    "description": "Summarizes claims about Bravo's range, payload and AI capabilities.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-14zh4RBLTmE",
     "title": "Discusses unconfirmed possible Bravo sighting near Ufa",
     "source": "Stefan Kraev",
     "url": "https://www.facebook.com/share/p/14zh4RBLTmE/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2663,14 +2715,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unconfirmed possible Bravo sighting near Ufa."
+    "description": "Discusses unconfirmed possible Bravo sighting near Ufa.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19UkqHRRLV",
     "title": "Reports alleged Triada Robotics drone sightings and claimed specifications",
     "source": "Andrea Salsa",
     "url": "https://www.facebook.com/share/p/19UkqHRRLV/",
-    "published_at": null,
+    "published_at": "2026-08-04T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2681,14 +2735,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports alleged Triada Robotics drone sightings and claimed specifications."
+    "description": "Reports alleged Triada Robotics drone sightings and claimed specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19wJvyNJDG",
     "title": "Describes Bravo's reported jet engine, AI features, range and speed",
     "source": "Militär Aktuell",
     "url": "https://www.facebook.com/share/p/19wJvyNJDG/",
-    "published_at": null,
+    "published_at": "2026-08-05T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2699,14 +2755,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Describes Bravo's reported jet engine, AI features, range and speed."
+    "description": "Describes Bravo's reported jet engine, AI features, range and speed.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1LzP8Rcghf",
     "title": "Discusses unidentified Ufa drone footage possibly depicting Bravo",
     "source": "Gina Montanari",
     "url": "https://www.facebook.com/share/p/1LzP8Rcghf/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2717,14 +2775,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unidentified Ufa drone footage possibly depicting Bravo."
+    "description": "Discusses unidentified Ufa drone footage possibly depicting Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1CbGZ2zXVY",
     "title": "Discusses unidentified kamikaze drone footage possibly depicting Bravo",
     "source": "Krzysztof Podgorski",
     "url": "https://www.facebook.com/share/p/1CbGZ2zXVY/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2735,14 +2795,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unidentified kamikaze drone footage possibly depicting Bravo."
+    "description": "Discusses unidentified kamikaze drone footage possibly depicting Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1DstBKuvEL",
     "title": "Shares coverage of Bravo and Triada Robotics' Topaz drone-management module",
     "source": "Stitch Stitch",
     "url": "https://www.facebook.com/share/p/1DstBKuvEL/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2753,14 +2815,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares coverage of Bravo and Triada Robotics' Topaz drone-management module."
+    "description": "Shares coverage of Bravo and Triada Robotics' Topaz drone-management module.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19A1Xe7o8T",
     "title": "Discusses unconfirmed Bravo identification in footage near Ufa",
     "source": "Ivan Babich",
     "url": "https://www.facebook.com/share/p/19A1Xe7o8T/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2771,14 +2835,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unconfirmed Bravo identification in footage near Ufa."
+    "description": "Discusses unconfirmed Bravo identification in footage near Ufa.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19pCX7CvsQ",
     "title": "Relays speculation about unidentified UAV footage possibly showing Bravo",
     "source": "Lee Mendoza",
     "url": "https://www.facebook.com/share/p/19pCX7CvsQ/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2789,14 +2855,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Relays speculation about unidentified UAV footage possibly showing Bravo."
+    "description": "Relays speculation about unidentified UAV footage possibly showing Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-14xPbDo6tVF",
     "title": "Reports Bravo's claimed specifications and plans for testing and pre-production",
     "source": "Olga Olina",
     "url": "https://www.facebook.com/share/p/14xPbDo6tVF/",
-    "published_at": null,
+    "published_at": "2026-06-26T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2807,14 +2875,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports Bravo's claimed specifications and plans for testing and pre-production."
+    "description": "Reports Bravo's claimed specifications and plans for testing and pre-production.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1C91aVtrFm",
     "title": "Shares coverage of Triada Robotics' AI-assisted long-range Bravo drone",
     "source": "UkrHaber - Ukrayna'dan Türkçe Haberler",
     "url": "https://www.facebook.com/share/p/1C91aVtrFm/",
-    "published_at": null,
+    "published_at": "2026-06-25T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2825,14 +2895,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares coverage of Triada Robotics' AI-assisted long-range Bravo drone."
+    "description": "Shares coverage of Triada Robotics' AI-assisted long-range Bravo drone.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1HvaNFvMUq",
     "title": "Shares footage of an unidentified aircraft possibly resembling Bravo",
     "source": "Mindaugas Nartautas",
     "url": "https://www.facebook.com/share/p/1HvaNFvMUq/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2843,14 +2915,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares footage of an unidentified aircraft possibly resembling Bravo."
+    "description": "Shares footage of an unidentified aircraft possibly resembling Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1FLDLzzXTW",
     "title": "Compares unidentified drone footage with Bravo and summarizes specifications",
     "source": "Genoveva Geneva",
     "url": "https://www.facebook.com/share/p/1FLDLzzXTW/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2861,14 +2935,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Compares unidentified drone footage with Bravo and summarizes specifications."
+    "description": "Compares unidentified drone footage with Bravo and summarizes specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1DmLchPYJJ",
     "title": "Discusses unverified claims of Bravo's first combat use",
     "source": "Eurasian Editorial",
     "url": "https://www.facebook.com/share/r/1DmLchPYJJ/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2879,14 +2955,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unverified claims of Bravo's first combat use."
+    "description": "Discusses unverified claims of Bravo's first combat use.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19VsW5XqNS",
     "title": "Reports footage possibly showing Bravo, citing Militär Aktuell",
     "source": "CNC News",
     "url": "https://www.facebook.com/share/p/19VsW5XqNS/",
-    "published_at": null,
+    "published_at": "2026-09-14T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2897,14 +2975,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Reports footage possibly showing Bravo, citing Militär Aktuell."
+    "description": "Reports footage possibly showing Bravo, citing Militär Aktuell.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1BUEd8eCi1",
     "title": "Shares footage of an unidentified UAV believed by the author to be Bravo",
     "source": "Z-Frontier",
     "url": "https://www.facebook.com/share/p/1BUEd8eCi1/",
-    "published_at": "2026-08-03T00:00:00Z",
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2915,14 +2995,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Shares footage of an unidentified UAV believed by the author to be Bravo."
+    "description": "Shares footage of an unidentified UAV believed by the author to be Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1JoSzqnQX3",
     "title": "Discusses unidentified jet drone footage possibly depicting Bravo",
     "source": "OSINTWarfare",
     "url": "https://www.facebook.com/share/r/1JoSzqnQX3/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2933,14 +3015,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unidentified jet drone footage possibly depicting Bravo."
+    "description": "Discusses unidentified jet drone footage possibly depicting Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1CLwwTTZa7",
     "title": "Humorous comparison with F-117 and summary of Bravo specifications",
     "source": "UkrainianTimes",
     "url": "https://www.facebook.com/share/r/1CLwwTTZa7/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2951,14 +3035,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Humorous comparison with F-117 and summary of Bravo specifications."
+    "description": "Humorous comparison with F-117 and summary of Bravo specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1A24bTNyZ5",
     "title": "Discusses unverified first-use claims and Bravo specifications",
     "source": "Tin quân sự Việt Nam và Thế giới - Mr. Triumf",
     "url": "https://www.facebook.com/share/v/1A24bTNyZ5/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2969,14 +3055,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unverified first-use claims and Bravo specifications."
+    "description": "Discusses unverified first-use claims and Bravo specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-19sQcDDKVG",
     "title": "Compares an unidentified drone with Bravo and notes design differences",
     "source": "Serge Pego",
     "url": "https://www.facebook.com/share/v/19sQcDDKVG/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -2987,14 +3075,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Compares an unidentified drone with Bravo and notes design differences."
+    "description": "Compares an unidentified drone with Bravo and notes design differences.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1J76Fb1M5Q",
     "title": "Discusses alleged Bravo footage and preliminary OSINT identification",
     "source": "Noticias hoy",
     "url": "https://www.facebook.com/share/p/1J76Fb1M5Q/",
-    "published_at": null,
+    "published_at": "2026-08-05T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -3005,14 +3095,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses alleged Bravo footage and preliminary OSINT identification."
+    "description": "Discusses alleged Bravo footage and preliminary OSINT identification.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1LJveG4wyh",
     "title": "Suggests deep-strike operations involved Bravo and lists specifications",
     "source": "Haris Times",
     "url": "https://www.facebook.com/share/r/1LJveG4wyh/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -3023,14 +3115,16 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Suggests deep-strike operations involved Bravo and lists specifications."
+    "description": "Suggests deep-strike operations involved Bravo and lists specifications.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1DqNz22wXx",
     "title": "Discusses unidentified turbine-powered drone possibly depicting Bravo",
     "source": "Martel Ediciones",
     "url": "https://www.facebook.com/share/r/1DqNz22wXx/",
-    "published_at": null,
+    "published_at": "2026-08-03T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -3041,7 +3135,9 @@
     ],
     "verification_method": "user_supplied_browser_extraction_csv",
     "platform": "Facebook",
-    "description": "Discusses unidentified turbine-powered drone possibly depicting Bravo."
+    "description": "Discusses unidentified turbine-powered drone possibly depicting Bravo.",
+    "date_precision": "day",
+    "date_source": "user_supplied_browser_extraction_csv"
   },
   {
     "id": "facebook-user-1GqcgUfPFz",
