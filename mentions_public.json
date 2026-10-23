@@ -1002,10 +1002,10 @@
   },
   {
     "id": "hist-8-instagramcompade8qad",
-    "title": "about\\_ukraine\\_news: про Bravo",
-    "source": "Insagram about\\_ukraine\\_news",
+    "title": "About Ukraine News: Triada Robotics розробляє реактивний дрон Bravo",
+    "source": "about_ukraine_news",
     "url": "https://www.instagram.com/p/DadeZ_8qRad/",
-    "published_at": "2026-07-07T12:00:00Z",
+    "published_at": "2026-07-06T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
     "matched_queries": [
@@ -1014,8 +1014,8 @@
     "categories": [
       "Company"
     ],
-    "verification_method": "historical_notion_import",
-    "platform": "Media"
+    "verification_method": "user_screenshot_verified",
+    "platform": "Instagram"
   },
   {
     "id": "manual-6-20260706",
@@ -1773,87 +1773,87 @@
   },
   {
     "id": "instagram-DadeDpjqsoI",
-    "title": "Instagram post — TRIADA Robotics (потребує перевірки змісту)",
-    "source": "Instagram",
+    "title": "Головне в Україні: Triada Robotics готує Bravo до випробувань",
+    "source": "glavnoe.in.ua",
     "url": "https://www.instagram.com/p/DadeDpjqsoI/",
-    "published_at": null,
+    "published_at": "2026-06-23T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
-    "status": "review",
+    "status": "relevant",
     "matched_queries": [
       "User-submitted Instagram mention"
     ],
     "categories": [
       "Company"
     ],
-    "verification_method": "user_submitted_link_unverified_content",
+    "verification_method": "user_screenshot_verified",
     "platform": "Instagram"
   },
   {
     "id": "instagram-DZ765EInLHo",
-    "title": "Instagram post — TRIADA Robotics (потребує перевірки змісту)",
-    "source": "Instagram",
+    "title": "Будні: над Уфою помітили дрон Bravo — згадка Triada Robotics",
+    "source": "budni_ua",
     "url": "https://www.instagram.com/p/DZ765EInLHo/",
-    "published_at": null,
+    "published_at": "2026-08-02T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
-    "status": "review",
+    "status": "relevant",
     "matched_queries": [
       "User-submitted Instagram mention"
     ],
     "categories": [
       "Company"
     ],
-    "verification_method": "user_submitted_link_unverified_content",
+    "verification_method": "user_screenshot_verified",
     "platform": "Instagram"
   },
   {
     "id": "instagram-Dbik3V5CAhL",
-    "title": "Instagram post — TRIADA Robotics (потребує перевірки змісту)",
-    "source": "Instagram",
+    "title": "Saint Javelin: Triada Robotics представила концепт ударного дрона Bravo",
+    "source": "saintjavelin",
     "url": "https://www.instagram.com/p/Dbik3V5CAhL/",
-    "published_at": null,
+    "published_at": "2026-06-30T12:00:00Z",
     "keyword": "Triada Robotics / Artem Veselov",
-    "status": "review",
+    "status": "relevant",
     "matched_queries": [
       "User-submitted Instagram mention"
     ],
     "categories": [
       "Company"
     ],
-    "verification_method": "user_submitted_link_unverified_content",
+    "verification_method": "user_screenshot_verified",
     "platform": "Instagram"
   },
   {
     "id": "instagram-DaNK8FEuUnY",
-    "title": "Instagram post — TRIADA Robotics (потребує перевірки змісту)",
-    "source": "Instagram",
+    "title": "Eurasian Editorial: повідомлення про Bravo від Triada Robotics",
+    "source": "eurasianeditorial",
     "url": "https://www.instagram.com/p/DaNK8FEuUnY/",
     "published_at": null,
     "keyword": "Triada Robotics / Artem Veselov",
-    "status": "review",
+    "status": "relevant",
     "matched_queries": [
       "User-submitted Instagram mention"
     ],
     "categories": [
       "Company"
     ],
-    "verification_method": "user_submitted_link_unverified_content",
+    "verification_method": "user_screenshot_verified",
     "platform": "Instagram"
   },
   {
     "id": "instagram-Dbk6LCOicJ2",
-    "title": "Instagram Reel — TRIADA Robotics (потребує перевірки змісту)",
-    "source": "Instagram",
+    "title": "Militarnyi: відеоінтерв’ю з Артемом Веселовим",
+    "source": "mil.in.ua",
     "url": "https://www.instagram.com/reels/Dbk6LCOicJ2/",
     "published_at": null,
     "keyword": "Triada Robotics / Artem Veselov",
-    "status": "review",
+    "status": "relevant",
     "matched_queries": [
       "User-submitted Instagram mention"
     ],
     "categories": [
-      "Company"
+      "CEO"
     ],
-    "verification_method": "user_submitted_link_unverified_content",
+    "verification_method": "user_screenshot_verified",
     "platform": "Instagram"
   },
   {
