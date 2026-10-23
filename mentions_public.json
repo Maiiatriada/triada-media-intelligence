@@ -1858,8 +1858,8 @@
   },
   {
     "id": "instagram-DPE13usjMMz",
-    "title": "Мілітарний: інтерв’ю з Артемом Веселовим",
-    "source": "mil.in.ua",
+    "title": "Eurasian Editorial: відео про реактивний дрон Bravo від Triada Robotics",
+    "source": "eurasianeditorial",
     "url": "https://www.instagram.com/reels/DPE13usjMMz/",
     "published_at": null,
     "keyword": "Triada Robotics / Artem Veselov",
@@ -1868,9 +1868,9 @@
       "User-submitted Instagram mention"
     ],
     "categories": [
-      "CEO"
+      "Company"
     ],
-    "verification_method": "user_confirmed_ceo_interview",
+    "verification_method": "user_screenshot_verified",
     "platform": "Instagram"
   }
 ]
