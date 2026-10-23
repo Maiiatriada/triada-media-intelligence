@@ -985,25 +985,6 @@ function MentionsLibrary({ data }) {
         />
       </div>
 
-      {isReady && (
-        <div className="tmi-toolbar">
-          <div className="tmi-filters" role="group" aria-label="Filter by relevance status">
-            {options.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className="tmi-chip"
-                aria-pressed={filter === option.value}
-                onClick={() => setFilter(option.value)}
-              >
-                {option.label}
-                <span className="tmi-chip-count">{option.count}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
       <div className="tmi-card" aria-busy={refreshing}>
         {refreshing && <div className="tmi-progress" aria-hidden="true" />}
 
