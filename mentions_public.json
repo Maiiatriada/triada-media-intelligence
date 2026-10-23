@@ -52,23 +52,6 @@
     "platform": "Media"
   },
   {
-    "id": "hist-10-omexpensivelegacysystems",
-    "title": "Artem Veselov interview (September 28)",
-    "source": "Militär Aktuell",
-    "url": "https://militaeraktuell.at/en/artem-veselov-triada-robotics-the-market-is-moving-away-from-expensive-legacy-systems/",
-    "published_at": "2026-09-28T12:00:00Z",
-    "keyword": "Triada Robotics / Artem Veselov",
-    "status": "relevant",
-    "matched_queries": [
-      "historical_brand24_or_research"
-    ],
-    "categories": [
-      "CEO"
-    ],
-    "verification_method": "historical_brand24_or_research",
-    "platform": "Media"
-  },
-  {
     "id": "hist-11-dalangstreckenangriffssys",
     "title": "Artem Veselov interview (German edition)",
     "source": "Militär Aktuell",
@@ -86,48 +69,20 @@
     "platform": "Media"
   },
   {
-    "id": "8e5eec0c36038519afaf0b53107a0cc580b71ef974d9d265459ddb58ba570315",
-    "title": "Artem Veselov, Triada Robotics: “The market is moving away from expensive legacy systems” - Militär Aktuell",
+    "id": "hist-10-omexpensivelegacysystems",
+    "title": "Artem Veselov interview (September 28)",
     "source": "Militär Aktuell",
-    "published_at": "2026-09-28T07:00:00+00:00",
-    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNnRRMlBBZ1JhNV9kZlBsMGxBaFVJQUpjTlptaE9MNDl1emYxMXZQZV9QN1lpaXdnTThkT1BxSjdlRGtQdFVSZVNGbGo1dUlBdlRKY242YVZUak1fTG45cDUtSk5HLXNZSFdUVFJBVjVFNHQtUHpqWDZxa0U5bDJkNzYxTFM1Z3RyVE1Dak9uMjd1b1dKWlF2cml6QnB5TXN4Uk90ekkyRHV4MXVEQndiYVpsdzNOaEk?oc=5",
-    "keyword": "\"Triada Robotics\"",
-    "first_seen_at": "2026-10-21T12:48:06.905440+00:00",
+    "url": "https://militaeraktuell.at/en/artem-veselov-triada-robotics-the-market-is-moving-away-from-expensive-legacy-systems/",
+    "published_at": "2026-09-28T12:00:00Z",
+    "keyword": "Triada Robotics / Artem Veselov",
     "status": "relevant",
-    "subject": "Both",
-    "source_type": "Online Media",
-    "legacy_ids": [
-      "CBMitwFBVV95cUxPNnRRMlBBZ1JhNV9kZlBsMGxBaFVJQUpjTlptaE9MNDl1emYxMXZQZV9QN1lpaXdnTThkT1BxSjdlRGtQdFVSZVNGbGo1dUlBdlRKY242YVZUak1fTG45cDUtSk5HLXNZSFdUVFJBVjVFNHQtUHpqWDZxa0U5bDJkNzYxTFM1Z3RyVE1Dak9uMjd1b1dKWlF2cml6QnB5TXN4Uk90ekkyRHV4MXVEQndiYVpsdzNOaEk",
-      "8e5eec0c36038519afaf0b53107a0cc580b71ef974d9d265459ddb58ba570315"
-    ],
-    "urls": [
-      "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNnRRMlBBZ1JhNV9kZlBsMGxBaFVJQUpjTlptaE9MNDl1emYxMXZQZV9QN1lpaXdnTThkT1BxSjdlRGtQdFVSZVNGbGo1dUlBdlRKY242YVZUak1fTG45cDUtSk5HLXNZSFdUVFJBVjVFNHQtUHpqWDZxa0U5bDJkNzYxTFM1Z3RyVE1Dak9uMjd1b1dKWlF2cml6QnB5TXN4Uk90ekkyRHV4MXVEQndiYVpsdzNOaEk?oc=5"
-    ],
-    "keywords": [
-      "\"Triada Robotics\"",
-      "\"Triada Robotics\" \"BRAVO\"",
-      "\"Triada\" \"BRAVO\" drone",
-      "\"Artem Veselov\"",
-      "\"Artem Veselov\" \"Triada\"",
-      "\"Artem Veselov\" \"BRAVO\"",
-      "\"Triada\" \"BRAVO\""
+    "matched_queries": [
+      "historical_brand24_or_research"
     ],
     "categories": [
-      "Company",
       "CEO"
     ],
-    "products": [],
-    "matched_text": "Artem Veselov, Triada Robotics: “The market is moving away from expensive legacy systems” - Militär Aktuell",
-    "verification_method": "title",
-    "matched_queries": [
-      "\"Artem Veselov\"",
-      "\"Artem Veselov\" \"drone\"",
-      "\"BRAVO\" \"Triada Robotics\"",
-      "\"TRIADA ROBOTICS\" BRAVO",
-      "\"Triada Robotics\"",
-      "\"Triada\" \"BRAVO\"",
-      "\"Veselov\" \"Triada Robotics\""
-    ],
+    "verification_method": "historical_brand24_or_research",
     "platform": "Media"
   },
   {
@@ -145,23 +100,6 @@
       "CEO"
     ],
     "verification_method": "manual_publisher_review",
-    "platform": "Media"
-  },
-  {
-    "id": "hist-9-roboticsceoartemveselov",
-    "title": "Artem Veselov interview (September 14)",
-    "source": "Militär Aktuell",
-    "url": "https://militaeraktuell.at/en/5-questions-for-triada-robotics-ceo-artem-veselov/",
-    "published_at": "2026-09-14T12:00:00Z",
-    "keyword": "Triada Robotics / Artem Veselov",
-    "status": "relevant",
-    "matched_queries": [
-      "historical_brand24_or_research"
-    ],
-    "categories": [
-      "CEO"
-    ],
-    "verification_method": "historical_brand24_or_research",
     "platform": "Media"
   },
   {
@@ -507,50 +445,6 @@
     ],
     "verification_method": "historical_brand24_or_research",
     "platform": "Bluesky"
-  },
-  {
-    "id": "d8cb9e298459a3256c23c877abd0ba1d1efa60ec26e9fd8f757ac8f3b752e2a7",
-    "title": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia? - Militär Aktuell",
-    "source": "Militär Aktuell",
-    "published_at": "2026-08-05T07:00:00+00:00",
-    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ZWkNvbDVZODkzTDNQVnMtRmV0ZGltX3hDTTlDaDVpTHY5bVBMeXJZelVCelQ2elEtUGt2REJXLWsxb3JXODk3WmlHSHYyNElnZ1RvTzBFRVgtWGdUN0RmUm5nSWZ4ODB1TG1SZnBkSUZ5MXFfd2VIYnZKMFBkXzQ?oc=5",
-    "keyword": "\"Triada Robotics\"",
-    "first_seen_at": "2026-10-21T12:48:06.905522+00:00",
-    "status": "relevant",
-    "subject": "Triada Robotics",
-    "source_type": "Online Media",
-    "legacy_ids": [
-      "CBMif0FVX3lxTE5ZWkNvbDVZODkzTDNQVnMtRmV0ZGltX3hDTTlDaDVpTHY5bVBMeXJZelVCelQ2elEtUGt2REJXLWsxb3JXODk3WmlHSHYyNElnZ1RvTzBFRVgtWGdUN0RmUm5nSWZ4ODB1TG1SZnBkSUZ5MXFfd2VIYnZKMFBkXzQ",
-      "d8cb9e298459a3256c23c877abd0ba1d1efa60ec26e9fd8f757ac8f3b752e2a7"
-    ],
-    "urls": [
-      "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ZWkNvbDVZODkzTDNQVnMtRmV0ZGltX3hDTTlDaDVpTHY5bVBMeXJZelVCelQ2elEtUGt2REJXLWsxb3JXODk3WmlHSHYyNElnZ1RvTzBFRVgtWGdUN0RmUm5nSWZ4ODB1TG1SZnBkSUZ5MXFfd2VIYnZKMFBkXzQ?oc=5"
-    ],
-    "keywords": [
-      "\"Triada Robotics\"",
-      "\"Triada Robotics\" \"BRAVO\"",
-      "\"Triada\" \"BRAVO\" drone",
-      "\"Triada\" \"BRAVO\" UAV",
-      "\"BRAVO\" \"UAV\" \"Triada\"",
-      "\"Triada\" \"BRAVO\""
-    ],
-    "categories": [
-      "Company",
-      "Products"
-    ],
-    "products": [
-      "BRAVO"
-    ],
-    "matched_text": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia? - Militär Aktuell",
-    "verification_method": "title",
-    "matched_queries": [
-      "\"BRAVO\" \"Triada Robotics\"",
-      "\"TRIADA ROBOTICS\" BRAVO",
-      "\"TRIADA ROBOTICS\" KILO",
-      "\"Triada Robotics\"",
-      "\"Triada\" \"BRAVO\""
-    ],
-    "platform": "Media"
   },
   {
     "id": "hist-29-orld202608041056427html",
@@ -1824,22 +1718,6 @@
     "platform": "Media"
   },
   {
-    "id": "516290dcf8801304a4d6118d2af6550d6e1d22da2bb7a9de2d450d9b3183dbb8",
-    "title": "F-35 & combat drones: Lockheed Martin relies on the \"digital squadron\" - Militär Aktuell",
-    "source": "Militär Aktuell",
-    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOME1leTNFNWl2U1I1ZW53T0NEenB5MEFJckphbWE5STFfUmxsbDdua25JQ2dRWkpqUUF2OUpfVi1UeVlwNmNZUnZWNWlXVXJ1OTJUY1hjXzhCQ1V0ZVhhZmFEeURENWNvX1RjM29GTVJESEhoZmd3eDRpZy1rR25UMFp1amZhU1lQRnBfaUlnU1VHZDZzQ2FqUmtOZk4?oc=5",
-    "published_at": "2026-06-03T07:00:00+00:00",
-    "keyword": "\"Triada Robotics\"",
-    "status": "review",
-    "matched_queries": [
-      "\"Triada Robotics\""
-    ],
-    "platform": "Media",
-    "categories": [
-      "Company"
-    ]
-  },
-  {
     "id": "manual-how-can-europe-rearm-by-scaling-ukrainian-innovation-18164",
     "title": "How Can Europe Rearm? By Scaling Ukrainian Innovation",
     "source": "UNITED24 Media",
@@ -1875,5 +1753,22 @@
     ],
     "verification_method": "historical_notion_import",
     "platform": "Facebook"
+  },
+  {
+    "id": "militaer-bravo-original",
+    "title": "Triada Robotics’ “Bravo”: Can It Catch Up to Russia?",
+    "source": "Militär Aktuell",
+    "url": "https://militaeraktuell.at/en/triada-robotics-bravo-can-russia-counter-it/",
+    "published_at": null,
+    "keyword": "Triada Robotics",
+    "status": "relevant",
+    "matched_queries": [
+      "Triada Robotics Bravo"
+    ],
+    "categories": [
+      "Company"
+    ],
+    "verification_method": "editorial_selected_direct_url",
+    "platform": "Media"
   }
 ]
