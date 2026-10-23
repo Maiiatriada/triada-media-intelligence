@@ -1858,19 +1858,19 @@
   },
   {
     "id": "instagram-DPE13usjMMz",
-    "title": "Instagram Reel — TRIADA Robotics (потребує перевірки змісту)",
-    "source": "Instagram",
+    "title": "Мілітарний: інтерв’ю з Артемом Веселовим",
+    "source": "mil.in.ua",
     "url": "https://www.instagram.com/reels/DPE13usjMMz/",
     "published_at": null,
     "keyword": "Triada Robotics / Artem Veselov",
-    "status": "review",
+    "status": "relevant",
     "matched_queries": [
       "User-submitted Instagram mention"
     ],
     "categories": [
-      "Company"
+      "CEO"
     ],
-    "verification_method": "user_submitted_link_unverified_content",
+    "verification_method": "user_confirmed_ceo_interview",
     "platform": "Instagram"
   }
 ]
