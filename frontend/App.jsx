@@ -35,7 +35,7 @@ const NAV_ITEMS = [
 // Public database written by the Python collector (GitHub Actions).
 const MENTIONS_URL =
   "https://raw.githubusercontent.com/Maiiatriada/triada-media-intelligence/main/mentions_public.json";
-const REFRESH_INTERVAL_MS = 5 * 60 * 1000;
+const REFRESH_INTERVAL_MS = 60 * 1000; // Refresh updated Instagram records within one minute.
 const REQUEST_TIMEOUT_MS = 20 * 1000;
 
 // Relevance statuses the collector uses today, in display order.
