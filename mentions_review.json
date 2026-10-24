@@ -318,6 +318,7 @@
     "status": "review",
     "matched_queries": [
       "\"BRAVO\" \"Triada Robotics\"",
+      "\"KILO\" \"Triada Robotics\"",
       "\"TRIADA ROBOTICS\" BRAVO",
       "\"TRIADA ROBOTICS\" KILO",
       "\"Triada Robotics\"",

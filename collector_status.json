@@ -1,5 +1,5 @@
 {
-  "last_run_utc": "2026-10-23T07:41:42.789186+00:00",
+  "last_run_utc": "2026-10-24T07:34:53.644065+00:00",
   "confirmed_total": 27,
   "pending_internal": 24,
   "google_news_added": 0,
@@ -16,44 +16,44 @@
     "not_run": "The connector made no requests in this run."
   },
   "run": {
-    "started_utc": "2026-10-23T07:39:05.690035+00:00",
-    "finished_utc": "2026-10-23T07:41:42.789322+00:00",
-    "duration_seconds": 157.1,
-    "github_run_url": "https://github.com/Maiiatriada/triada-media-intelligence/actions/runs/39919168179"
+    "started_utc": "2026-10-24T07:31:37.574671+00:00",
+    "finished_utc": "2026-10-24T07:34:53.644168+00:00",
+    "duration_seconds": 196.1,
+    "github_run_url": "https://github.com/Maiiatriada/triada-media-intelligence/actions/runs/40074478831"
   },
   "connectors": {
     "google_news": {
       "label": "Google News",
       "status": "ok",
-      "last_attempt_utc": "2026-10-23T07:40:06.699073+00:00",
-      "last_success_utc": "2026-10-23T07:40:06.699073+00:00",
+      "last_attempt_utc": "2026-10-24T07:32:46.134509+00:00",
+      "last_success_utc": "2026-10-24T07:32:46.134509+00:00",
       "consecutive_failures": 0,
       "requests": 42,
       "failed_requests": 0,
-      "items_fetched": 131,
+      "items_fetched": 135,
       "new_confirmed": 0,
       "last_error": null
     },
     "bing": {
       "label": "Bing",
       "status": "ok",
-      "last_attempt_utc": "2026-10-23T07:41:35.439004+00:00",
-      "last_success_utc": "2026-10-23T07:41:35.439004+00:00",
+      "last_attempt_utc": "2026-10-24T07:34:19.968137+00:00",
+      "last_success_utc": "2026-10-24T07:34:19.968137+00:00",
       "consecutive_failures": 0,
       "requests": 4,
       "failed_requests": 0,
-      "items_fetched": 31,
+      "items_fetched": 40,
       "new_confirmed": 0,
       "last_error": null
     },
     "gdelt": {
       "label": "GDELT",
-      "status": "error",
-      "last_attempt_utc": "2026-10-23T07:41:25.403814+00:00",
-      "last_success_utc": "2026-10-22T20:26:17.019709+00:00",
-      "consecutive_failures": 1,
+      "status": "partial",
+      "last_attempt_utc": "2026-10-24T07:34:07.764381+00:00",
+      "last_success_utc": "2026-10-24T07:34:07.764381+00:00",
+      "consecutive_failures": 0,
       "requests": 3,
-      "failed_requests": 3,
+      "failed_requests": 2,
       "items_fetched": 0,
       "new_confirmed": 0,
       "last_error": "HTTPError: HTTP Error 429: Too Many Requests"
@@ -61,8 +61,8 @@
     "publisher_rss": {
       "label": "Publisher RSS",
       "status": "partial",
-      "last_attempt_utc": "2026-10-23T07:41:02.043472+00:00",
-      "last_success_utc": "2026-10-23T07:41:02.043472+00:00",
+      "last_attempt_utc": "2026-10-24T07:33:31.578498+00:00",
+      "last_success_utc": "2026-10-24T07:33:31.578498+00:00",
       "consecutive_failures": 0,
       "requests": 8,
       "failed_requests": 3,
@@ -142,11 +142,11 @@
     }
   },
   "google_news_verification": {
-    "candidates_checked": 1,
+    "candidates_checked": 0,
     "publisher_opened": 0,
-    "publisher_unavailable": 1,
+    "publisher_unavailable": 0,
     "mention_absent": 0,
     "confirmed": 0,
-    "already_known": 130
+    "already_known": 135
   }
 }
