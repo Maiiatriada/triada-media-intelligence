@@ -323,6 +323,8 @@
     "keyword": "\"Triada Robotics\"",
     "status": "review",
     "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
       "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
@@ -453,6 +455,7 @@
     "keyword": "\"Triada Robotics\"",
     "status": "review",
     "matched_queries": [
+      "\"Artem Veselov\"",
       "\"Triada Robotics\""
     ],
     "platform": "Media",
@@ -999,6 +1002,7 @@
     "keyword": "\"Artem Veselov\" \"drone\"",
     "status": "review",
     "matched_queries": [
+      "\"Artem Veselov\"",
       "\"Artem Veselov\" \"drone\""
     ],
     "platform": "Media",
