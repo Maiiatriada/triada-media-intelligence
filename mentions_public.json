@@ -32,6 +32,22 @@
     ]
   },
   {
+    "id": "eebeb85e5fbb2ce6b571ab6b605e2f1d0828ad46b7e623f9bc95ca905312d41a",
+    "title": "Baghdad Suspects Israel of Striking Warehouses Storing Air Defense Systems - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVjZsa0VQLXpyOFdSUVZpMTE4UjRDaEI1WHlXbUF6d1ZFNTVlZ09SbTNzSXM3RHpmOHVhMERLUmxySXVTcHB5STZMV2RucnFUdjJTQ2Q4TzlHYVcwZmI3ZkVSc25ySzVWQU1XY1hqa2RyXzBBQ2VZelpOSkhJLVVsODJMTWM2Z1pGV1lXZHNTd1JRZ01YMjJqcHhBSEd0eVpDN0RtUTNPdndFcFE?oc=5",
+    "published_at": "2026-10-25T20:13:05+00:00",
+    "keyword": "\"Artem Veselov\"",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ],
+    "status": "review",
+    "platform": "Media",
+    "categories": [
+      "CEO"
+    ]
+  },
+  {
     "id": "520aab1d83f4721483cfe4c13b96bfab47e2634f98380bb9750f91f22bc21247",
     "title": "Unknown Drones Used in Attack on Russia’s Lipetsk - Мілітарний",
     "source": "Мілітарний",
@@ -643,6 +659,25 @@
     "matched_text": "Bravo: украинский дрон с дальностью полета 2000 км от Triada Robotics - Новини Донбасу",
     "verification_method": "title",
     "platform": "Media"
+  },
+  {
+    "id": "1328d343a7251e89b9e63da91b4d46ff75a46f05f1461ab110e54dc2263d3895",
+    "title": "Bravo: український дрон на 2000 км від Triada Robotics - Новини Донбасу",
+    "source": "Новини Донбасу",
+    "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRk9XWmF1dmJhT3RpTmdZSkpfbEcyM0xpczNtOHlQR3JnQ0NRaTVBZlJ3OXd5Y0NnZC0tMXNWVDNXekVwVXRnM1RDbk14TzBKck14YXBxczVjVEZJTGMybTZKNWJrdDlqSmJYbTU0UkEtZFhiUzU0S2VUSUtCUGFka3FyYUhYbzVMNmZvUGtsa1hFWFprSlk1OA?oc=5",
+    "published_at": "2026-06-30T07:00:00+00:00",
+    "keyword": "\"Triada Robotics\"",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
+    ],
+    "status": "review",
+    "platform": "Media",
+    "categories": [
+      "Company"
+    ]
   },
   {
     "id": "manual-4-20260626",
