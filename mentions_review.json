@@ -1,5 +1,18 @@
 [
   {
+    "id": "b0ca9e7e19e3b235e1a9e94dc4fddc17abb4a5c0d4a258cabaf41b4c198bae55",
+    "title": "US Strikes Iran’s Qeshm Island - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9XaWhfRXhXYnFfQmt2SFF1Y0xjMlpFWUlHVkJtc3pKQW5mY2pXRUNGUk04OWZYbEh1RXBCS0xmclJUNG9BTU0wUlRmaVZISlE1c1NYSDNKRTlTLUFzUVp6SklCeGo4ZDhMTlB1MUVqdzk?oc=5",
+    "published_at": "2026-11-03T10:02:03+00:00",
+    "keyword": "\"Artem Veselov\"",
+    "matched_queries": [
+      "\"Artem Veselov\""
+    ],
+    "status": "review",
+    "platform": "Media"
+  },
+  {
     "id": "3417be1c7de635b65403e09d5a218e3fc66f6e66acc10667cb0515a9db341267",
     "title": "Jamming that even satellites can hear - Мілітарний",
     "source": "Мілітарний",
@@ -101,6 +114,7 @@
     "matched_queries": [
       "\"KILO\" \"Triada Robotics\"",
       "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
       "\"Triada\" \"KILO\""
     ],
     "status": "review",
