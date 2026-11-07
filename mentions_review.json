@@ -92,6 +92,19 @@
     "platform": "Media"
   },
   {
+    "id": "5c3d3c03ab9a44a8a19150b4f2339cf7630de5e669ebd1ac648a7eae35ddd7e3",
+    "title": "Iran Strikes U.S. Bases in the Region in New Escalation Cycle - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPNllKdnJJV21pTTNQMXI1cXRTVm1sMGhYXzJWbEN0aG5yblNKQVRzTGVLeXFiTUpfUlEyajd6SnVYN050OGdXbHJ6UmoyX2pOQzh5YlZWT2J0RDlEZGNMcmFibzJNRzhBMlR1NWZneWVydDlrMUJvcnBnUHgtdHNzMzkzVVQyMTZuNllzUzE3emtKUzFwNjFqTw?oc=5",
+    "published_at": "2026-09-02T07:00:00+00:00",
+    "keyword": "\"Artem Veselov\" \"drone\"",
+    "matched_queries": [
+      "\"Artem Veselov\" \"drone\""
+    ],
+    "status": "review",
+    "platform": "Media"
+  },
+  {
     "id": "6d90a540881cec32fec4db07dc508ecf7906a7051cc7a5a7a94cdaec24874b24",
     "title": "Global Changes to Roaming Availability for Starlink Users - Мілітарний",
     "source": "Мілітарний",
@@ -385,6 +398,19 @@
       "\"Triada\" \"BRAVO\"",
       "\"Triada\" \"KILO\""
     ],
+    "platform": "Media"
+  },
+  {
+    "id": "f3b21e5b748424a89a3567a349820bd2d85bfb95359985fe652a9024ff9a37bb",
+    "title": "В Україні розробляють новий далекобійний безпілотник Bravo - Mind.ua",
+    "source": "Mind.ua",
+    "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPVmNtWjVIRko3OXh3U2FQLU1GaGpfaXZ0bDdOa2VPSVlzc2F0T0w3clgwb0NhMk9VNElzQ0JjYXFWRlhBeWF3REN1X2NOcWRfejZHaXRIcEZvbnRMa2c2U01kOERWQkJxWDYwRF9QYkJQV3ZNWVowWVl3TWZIVU50NTZRS0NvSWFPcDBSZXpiVmVEeWNI0gGaAUFVX3lxTE84cVAtU25JaV9kYTBOMW1sc0E3WVhUUjNhT3dMc2t1WkRpSTVhVVNjaVJjYmdVOFhqblJSTk1EMGZXU2l1Mzk4SUJET2VNX3ZmbmttWXZISTFBcXB5NUNtYnZybUlqWnpaV3BOMGlnZjRzWHZrUC1iRFhuZGs3RU5qX1lVZVFyYmtLak5FcFVINmtyOExsNEhpX1E?oc=5",
+    "published_at": "2026-06-24T07:00:00+00:00",
+    "keyword": "\"BRAVO\" \"Triada Robotics\"",
+    "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\""
+    ],
+    "status": "review",
     "platform": "Media"
   },
   {
