@@ -241,6 +241,7 @@
     "matched_queries": [
       "\"BRAVO\" \"Triada Robotics\"",
       "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada Robotics\"",
       "\"Triada\" \"BRAVO\""
     ],
     "platform": "Media"
@@ -253,7 +254,10 @@
     "published_at": "2026-08-04T07:00:00+00:00",
     "keyword": "\"Triada Robotics\"",
     "matched_queries": [
-      "\"Triada Robotics\""
+      "\"BRAVO\" \"Triada Robotics\"",
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\""
     ],
     "status": "review",
     "platform": "Media"
