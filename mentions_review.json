@@ -79,6 +79,20 @@
     "platform": "Media"
   },
   {
+    "id": "8b80b21b011c3f94fec3e74a1ef26300141aa3a95ec8ea07628e1a8f65936ea2",
+    "title": "Cheap Is Not a Strategy - Militarnyi",
+    "source": "Militarnyi",
+    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1mNkFuZmp1MmNCZTBFSTdYRVhnb2ZBQnZ6YTdFampmTTd2NDJVa0FHcV94M3JTYV9acmJiZkZQUUNKZlV3bFNBYk9ZaXcxOHNhdzgyMmZhU2pPT21PbWxPcm85SkdNSk0?oc=5",
+    "published_at": "2026-10-21T07:00:00+00:00",
+    "keyword": "\"Artem Veselov\"",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\""
+    ],
+    "status": "review",
+    "platform": "Media"
+  },
+  {
     "id": "b21f63962f3fe9ee89f8c5e8e35ecab1daf95c68b96326c7e6abefe8981b5b38",
     "title": "How Can MANET Reduce Dependence on Starlink? - Мілітарний",
     "source": "Мілітарний",
@@ -92,6 +106,20 @@
     "platform": "Media"
   },
   {
+    "id": "c7af7ffff75fc3a4d2b9094e4384bef4337daafa6bc55045883ca9e2e912a5db",
+    "title": "Build there, not only ship there - Militarnyi",
+    "source": "Militarnyi",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE8yejlHVGNUWjRmdmZoUm9NQUlSQlNzeHE3ZlV6MlBrVXcyRHloci1pTmtfazEyMkxSZGNmdWhFOTVscDdFc3lqeTExem5aU0VKRGUwSG9mRzE2LWxmSVp2ZFYwQzIwNWRudjJfRzVIWWNlQQ?oc=5",
+    "published_at": "2026-10-05T07:00:00+00:00",
+    "keyword": "\"Artem Veselov\"",
+    "matched_queries": [
+      "\"Artem Veselov\"",
+      "\"Artem Veselov\" \"drone\""
+    ],
+    "status": "review",
+    "platform": "Media"
+  },
+  {
     "id": "5c3d3c03ab9a44a8a19150b4f2339cf7630de5e669ebd1ac648a7eae35ddd7e3",
     "title": "Iran Strikes U.S. Bases in the Region in New Escalation Cycle - Мілітарний",
     "source": "Мілітарний",
@@ -99,6 +127,7 @@
     "published_at": "2026-09-02T07:00:00+00:00",
     "keyword": "\"Artem Veselov\" \"drone\"",
     "matched_queries": [
+      "\"Artem Veselov\"",
       "\"Artem Veselov\" \"drone\""
     ],
     "status": "review",
