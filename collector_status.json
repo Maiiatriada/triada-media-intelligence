@@ -1,12 +1,12 @@
 {
-  "last_run_utc": "2026-11-22T15:09:33.901607+00:00",
+  "last_run_utc": "2026-11-23T19:06:47.357881+00:00",
   "confirmed_total": 27,
-  "pending_internal": 39,
+  "pending_internal": 40,
   "google_news_added": 0,
   "publisher_feeds_added": 0,
   "gdelt_added": 0,
   "bing_and_alerts_added": 0,
-  "google_news_query_errors": 1,
+  "google_news_query_errors": 0,
   "schema_version": 2,
   "status_legend": {
     "ok": "Every request completed without a technical error. This does not guarantee complete monitoring coverage.",
@@ -16,29 +16,29 @@
     "not_run": "The connector made no requests in this run."
   },
   "run": {
-    "started_utc": "2026-11-22T15:07:14.690886+00:00",
-    "finished_utc": "2026-11-22T15:09:33.901714+00:00",
-    "duration_seconds": 139.2,
-    "github_run_url": "https://github.com/Maiiatriada/triada-media-intelligence/actions/runs/45036509070"
+    "started_utc": "2026-11-23T19:03:24.027312+00:00",
+    "finished_utc": "2026-11-23T19:06:47.358001+00:00",
+    "duration_seconds": 203.3,
+    "github_run_url": "https://github.com/Maiiatriada/triada-media-intelligence/actions/runs/45244843881"
   },
   "connectors": {
     "google_news": {
       "label": "Google News",
-      "status": "partial",
-      "last_attempt_utc": "2026-11-22T15:08:18.684317+00:00",
-      "last_success_utc": "2026-11-22T15:08:18.684317+00:00",
+      "status": "ok",
+      "last_attempt_utc": "2026-11-23T19:04:34.557772+00:00",
+      "last_success_utc": "2026-11-23T19:04:34.557772+00:00",
       "consecutive_failures": 0,
       "requests": 42,
-      "failed_requests": 1,
-      "items_fetched": 125,
+      "failed_requests": 0,
+      "items_fetched": 117,
       "new_confirmed": 0,
-      "last_error": "HTTPError: HTTP Error 429: Too Many Requests"
+      "last_error": null
     },
     "bing": {
       "label": "Bing",
       "status": "ok",
-      "last_attempt_utc": "2026-11-22T15:09:21.856696+00:00",
-      "last_success_utc": "2026-11-22T15:09:21.856696+00:00",
+      "last_attempt_utc": "2026-11-23T19:06:07.423574+00:00",
+      "last_success_utc": "2026-11-23T19:06:07.423574+00:00",
       "consecutive_failures": 0,
       "requests": 4,
       "failed_requests": 0,
@@ -48,12 +48,12 @@
     },
     "gdelt": {
       "label": "GDELT",
-      "status": "error",
-      "last_attempt_utc": "2026-11-22T15:09:09.683135+00:00",
-      "last_success_utc": "2026-11-21T08:08:17.668111+00:00",
-      "consecutive_failures": 1,
+      "status": "partial",
+      "last_attempt_utc": "2026-11-23T19:05:54.913780+00:00",
+      "last_success_utc": "2026-11-23T19:05:54.913780+00:00",
+      "consecutive_failures": 0,
       "requests": 3,
-      "failed_requests": 3,
+      "failed_requests": 2,
       "items_fetched": 0,
       "new_confirmed": 0,
       "last_error": "HTTPError: HTTP Error 429: Too Many Requests"
@@ -61,19 +61,19 @@
     "publisher_rss": {
       "label": "Publisher RSS",
       "status": "partial",
-      "last_attempt_utc": "2026-11-22T15:08:45.750419+00:00",
-      "last_success_utc": "2026-11-22T15:08:45.750419+00:00",
+      "last_attempt_utc": "2026-11-23T19:05:27.943187+00:00",
+      "last_success_utc": "2026-11-23T19:05:27.943187+00:00",
       "consecutive_failures": 0,
       "requests": 8,
       "failed_requests": 3,
-      "items_fetched": 112,
+      "items_fetched": 113,
       "new_confirmed": 0,
       "last_error": "ParseError: not well-formed (invalid token): line 1, column 2583",
       "feeds": [
         {
           "name": "Мілітарний",
           "status": "ok",
-          "items_fetched": 3,
+          "items_fetched": 4,
           "new_confirmed": 0,
           "last_error": null
         },
@@ -142,11 +142,11 @@
     }
   },
   "google_news_verification": {
-    "candidates_checked": 2,
+    "candidates_checked": 1,
     "publisher_opened": 0,
-    "publisher_unavailable": 2,
+    "publisher_unavailable": 1,
     "mention_absent": 0,
     "confirmed": 0,
-    "already_known": 123
+    "already_known": 116
   }
 }
