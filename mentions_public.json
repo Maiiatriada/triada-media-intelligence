@@ -148,6 +148,22 @@
     ]
   },
   {
+    "id": "0587bcecc7ec8c927a1bbfb7ff8b79c80f16ae2d1ad7e95ff227b6bc950465d5",
+    "title": "Exhibition Appeal Does Not Equal Combat Effectiveness: Mercedes-Benz-Based Mobile UAV Command Post - Мілітарний",
+    "source": "Мілітарний",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNeXUtTHlRYjdCenlPbE1HbnkzUHJGRXBCNklGS01hNFk0bGpDM0F3WlNXYnVfaEFpVEZpemZvamdaR3lJLTlGYXZMX0JabmQwYkg5a1NZbk9Nem1HekFFN3NkOExnYkxlMlF0S1ZQMFNLWl82MDFCWUdFNEQ3SGYxMXV3d0tLSUFkd1ZwQ3J0ZE9kcGdSQ0VZSEZpeTJaMUNWZ2NYQnhNQ3lYN2ZHc2FmQTgxdE5ZNUxFbHZOamhHNmttSVdORzlSNExB?oc=5",
+    "published_at": "2026-10-08T07:00:00+00:00",
+    "keyword": "\"Artem Veselov\" \"drone\"",
+    "matched_queries": [
+      "\"Artem Veselov\" \"drone\""
+    ],
+    "status": "review",
+    "platform": "Media",
+    "categories": [
+      "CEO"
+    ]
+  },
+  {
     "id": "6e04e0de4717fa057f2f0e74cb5253fae492cbee42fec217251ccbb334dd266a",
     "title": "Build there, not only ship there - Мілітарний",
     "source": "Мілітарний",
@@ -1031,8 +1047,13 @@
     "published_at": "2026-06-24T07:00:00+00:00",
     "keyword": "\"TRIADA ROBOTICS\" BRAVO",
     "matched_queries": [
+      "\"BRAVO\" \"Triada Robotics\"",
       "\"KILO\" \"Triada Robotics\"",
-      "\"TRIADA ROBOTICS\" BRAVO"
+      "\"TRIADA ROBOTICS\" BRAVO",
+      "\"TRIADA ROBOTICS\" KILO",
+      "\"Triada Robotics\"",
+      "\"Triada\" \"BRAVO\"",
+      "\"Triada\" \"KILO\""
     ],
     "status": "review",
     "platform": "Media",
